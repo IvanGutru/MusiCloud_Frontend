@@ -1,0 +1,67 @@
+﻿<Window x:Class="Cliente_MusiCloud.RegistrarCuenta"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Cliente_MusiCloud"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        
+        mc:Ignorable="d"
+        Title="RegistrarCuenta" Height="450" Width="800" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="4*"/>
+            <RowDefinition Height="1.5*"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <TextBlock Text="CREAR CUENTA" HorizontalAlignment="Center" FontSize="30" FontWeight="Heavy" FontFamily="Comic Sans MS" />
+            <Button Background="#262626" Padding="0" Margin="-700,0,0,0"
+                    x:Name="Btn_Regresar" Foreground="White" BorderBrush="#FF5C99D6"
+                    ToolTip="Regresar" Width="30" Height="30" Click="Btn_Regresar_Click" >
+                <materialDesign:PackIcon Kind="ArrowLeft"  Width="30" Height="30"/>
+            </Button>
+        </Grid>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="1*" />
+            </Grid.ColumnDefinitions>
+            <Grid Grid.Column="0">
+                <TextBox x:Name="txt_usuario" materialDesign:HintAssist.Foreground="#262626"
+                Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                materialDesign:TextFieldAssist.UnderlineBrush="#262626" MaxLength="100" Margin="20,5,10,200" FontSize="17"
+                materialDesign:HintAssist.Hint="Usuario" FontWeight="Normal"/>
+                <TextBox x:Name="txt_correo" materialDesign:HintAssist.Foreground="#262626"
+                Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                materialDesign:TextFieldAssist.UnderlineBrush="#262626" MaxLength="100" Margin="20,90,10,110" FontSize="17"
+                materialDesign:HintAssist.Hint="Correo" FontWeight="Normal"/>
+                <TextBox x:Name="txt_nombre" materialDesign:HintAssist.Foreground="#262626"
+                Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                materialDesign:TextFieldAssist.UnderlineBrush="#262626" MaxLength="100" Margin="20,180,10,20" FontSize="17"
+                materialDesign:HintAssist.Hint="Nombre" FontWeight="Normal"/>
+            </Grid>
+            <Grid Grid.Column="1">
+                <TextBox x:Name="txt_Apellidos" materialDesign:HintAssist.Foreground="#262626"
+                Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                materialDesign:TextFieldAssist.UnderlineBrush="#262626" MaxLength="100" Margin="20,5,10,200" FontSize="17"
+                materialDesign:HintAssist.Hint="Apellidos" FontWeight="Normal"/>
+                <PasswordBox x:Name="txt_Contraseña" materialDesign:HintAssist.Foreground="#262626"
+                         Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" materialDesign:TextFieldAssist.UnderlineBrush="#262626"
+                         MaxLength="100" Margin="20,90,10,110" FontSize="17" materialDesign:HintAssist.Hint="Contraseña" FontWeight="Normal"/>
+                <PasswordBox x:Name="txt_ConfirmarContraseña" materialDesign:HintAssist.Foreground="#262626"
+                         Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" materialDesign:TextFieldAssist.UnderlineBrush="#262626"
+                         MaxLength="100" Margin="20,180,10,20" FontSize="17" materialDesign:HintAssist.Hint="Confirmar contraseña" FontWeight="Normal"/>
+            </Grid>
+        </Grid>
+        <Grid Grid.Row="2">
+            <Button x:Name="Btn_Registrarse"
+             FontWeight="DemiBold"
+             Style="{StaticResource MaterialDesignRaisedAccentButton}"
+             Width="120" Margin="184,40,204,25" HorizontalAlignment="Center" VerticalAlignment="Center"
+             Background="#262626" BorderBrush="#262626" Foreground="#DDFFFFFF" Click="Btn_Registrarse_Click" >
+                Registrarse
+            </Button>
+        </Grid>
+    </Grid>
+</Window>

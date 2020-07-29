@@ -1,5 +1,7 @@
-﻿using Cliente_MusiCloud.cuenta.LoginRR;
+﻿using Cliente_MusiCloud.cuenta.Dominio;
+using Cliente_MusiCloud.cuenta.LoginRR;
 using Cliente_MusiCloud.Cuenta;
+using Cliente_MusiCloud.utilidades;
 using System;
 using System.Windows;
 
@@ -10,6 +12,7 @@ namespace Cliente_MusiCloud
     /// </summary>
     public partial class MainWindow : Window
     {
+        private LoginResponse cuenta;
         public MainWindow()
         {
             InitializeComponent();
@@ -24,6 +27,7 @@ namespace Cliente_MusiCloud
                 {
                     LoginRequest loginRequest = GetLoginRequest();
                     var loginResponse = await Aplicacion.Login(loginRequest);
+                    SingletonCuenta.SetCuenta(loginResponse);
                     PaginaPrincipal paginaPrincipal = new PaginaPrincipal();
                     paginaPrincipal.Show();
                     this.Close();
@@ -55,6 +59,13 @@ namespace Cliente_MusiCloud
                 return false;
             }
             return true;
+        }
+
+        private void btn_registro_Click(object sender, RoutedEventArgs e)
+        {
+            RegistrarCuenta registrarCuenta = new RegistrarCuenta();
+            registrarCuenta.Show();
+            this.Close();
         }
     }
 }

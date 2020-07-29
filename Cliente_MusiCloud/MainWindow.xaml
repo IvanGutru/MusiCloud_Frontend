@@ -44,11 +44,11 @@
              ToolTip="Iniciar Sesión"  Background="#262626" BorderBrush="#262626" Foreground="#DDFFFFFF" Click="btn_iniciarSesion_Click" >
                 Iniciar Sesión
             </Button>
-            <Button  x:Name="btn_register"
+            <Button  x:Name="btn_registro"
                 FontWeight="Normal"
                 Style="{StaticResource MaterialDesignRaisedAccentButton}"
                 Width="100" 
-                ToolTip="Registrarse"  Background="Transparent" BorderBrush="#262626" Foreground="Black" Margin="368,40,22,10"  >
+                ToolTip="Registrarse"  Background="Transparent" BorderBrush="#262626" Foreground="Black" Margin="368,40,22,10" Click="btn_registro_Click"  >
                 Registrarse
             </Button>
         </Grid>

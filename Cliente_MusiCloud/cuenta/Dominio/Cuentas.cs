@@ -10,7 +10,7 @@ namespace Cliente_MusiCloud.cuenta.Dominio
     {
         public string idCuenta { get; set; }
         public string correo { get; set; }
-        public string contrasenia { get; set; }
+        public string contraseña { get; set; }
         public string apellidos { get; set; }
         public string nombreUsuario { get; set; }
         public string nombre { get; set; }

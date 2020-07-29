@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using Cliente_MusiCloud.utilidades;
+using System.Windows;
 using System.Windows.Controls;
 
 namespace Cliente_MusiCloud
@@ -11,6 +12,7 @@ namespace Cliente_MusiCloud
         public PaginaPrincipal()
         {
             InitializeComponent();
+            txt_UserName.Text = SingletonCuenta.GetSingletonCuenta().cuenta.nombreUsuario;
         }
 
         private void ButtonCloseMenu_Click(object sender, RoutedEventArgs e)
@@ -32,7 +34,10 @@ namespace Cliente_MusiCloud
 
         private void Button_signout_Click(object sender, RoutedEventArgs e)
         {
-
+            SingletonCuenta.SetCuenta(null);
+            MainWindow main = new MainWindow();
+            main.Show();
+            this.Close();
         }
 
         private void ListViewMenu_SelectionChanged(object sender, SelectionChangedEventArgs e)
