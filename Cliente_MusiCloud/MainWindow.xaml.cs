@@ -24,8 +24,6 @@ namespace Cliente_MusiCloud
                 {
                     LoginRequest loginRequest = GetLoginRequest();
                     var loginResponse = await Aplicacion.Login(loginRequest);
-                    Console.WriteLine("La respuesta es");
-                    MessageBox.Show(loginResponse.cuenta.correo);
                     PaginaPrincipal paginaPrincipal = new PaginaPrincipal();
                     paginaPrincipal.Show();
                     this.Close();
