@@ -6,29 +6,51 @@
         xmlns:local="clr-namespace:Cliente_MusiCloud"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
-        Title="Iniciar sesión" Height="312.766" Width="515.957">
-    <Grid>
+        Title="Iniciar sesión" Height="312.766" Width="515.957" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
+    <Grid >
         <Grid.RowDefinitions>
-            <RowDefinition Height="1.5*"/>
+            <RowDefinition Height="1.8*"/>
             <RowDefinition Height="2.5*"/>
             <RowDefinition Height="2*"/>
         </Grid.RowDefinitions>
         <Grid Grid.Row="0">
-            
+            <Image Source="Resources/musicloudLogo.png" Height="100"></Image>
         </Grid>
         <Grid Grid.Row="1">
-            <StackPanel>
-                <TextBox
-                    Style="{StaticResource MaterialDesignFilledTextFieldTextBox}"
-                    VerticalAlignment="Top"
-                    AcceptsReturn="True"
-                    TextWrapping="Wrap" MaxWidth="400"
-                    materialDesign:HintAssist.Hint="Floating hint in a box"
-                    IsEnabled="{Binding Path=IsChecked, ElementName=MaterialDesignFilledTextFieldTextBoxEnabledComboBox}" />        
-            </StackPanel>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0">
+                <TextBox Margin="100,16,100,0"
+             x:Name="txt_email" HorizontalAlignment="Center" VerticalAlignment="Center"
+             materialDesign:HintAssist.Foreground="#FF5C99D6" materialDesign:TextFieldAssist.UnderlineBrush="#FF5C99D6"
+             materialDesign:HintAssist.Hint="Correo" Height="33" Width="267"/>
+            </Grid>
+            <Grid Grid.Row="1">
+                <PasswordBox Margin="100,16,100,0"
+             materialDesign:HintAssist.Foreground="#FF5C99D6" materialDesign:TextFieldAssist.UnderlineBrush="#FF5C99D6"
+             x:Name="txt_password" HorizontalAlignment="Center" VerticalAlignment="Center"
+             materialDesign:HintAssist.Hint="Contraseña"
+             materialDesign:TextFieldAssist.HasClearButton="True" Height="33" Width="267"/>
+            </Grid>
+
         </Grid>
         <Grid Grid.Row="2">
-            
+            <Button x:Name="btn_iniciarSesion"
+             FontWeight="DemiBold"
+             Style="{StaticResource MaterialDesignRaisedAccentButton}"
+             Width="120" Margin="184,10,204,52" HorizontalAlignment="Center" VerticalAlignment="Center"
+             ToolTip="Iniciar Sesión"  Background="#262626" BorderBrush="#262626" Foreground="#DDFFFFFF" Click="btn_iniciarSesion_Click" >
+                Iniciar Sesión
+            </Button>
+            <Button  x:Name="btn_register"
+                FontWeight="Normal"
+                Style="{StaticResource MaterialDesignRaisedAccentButton}"
+                Width="100" 
+                ToolTip="Registrarse"  Background="Transparent" BorderBrush="#262626" Foreground="Black" Margin="368,40,22,10"  >
+                Registrarse
+            </Button>
         </Grid>
     </Grid>
 </Window>
