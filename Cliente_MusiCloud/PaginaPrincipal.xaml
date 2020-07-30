@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Cliente_MusiCloud"
          xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
-        Title="PaginaPrincipal" Height="700" Width="1080" WindowStartupLocation="CenterScreen">
+        Title="PaginaPrincipal" Height="700" Width="1080" WindowStartupLocation="CenterScreen" Background="#454545">
     <Window.Resources>
         <Storyboard x:Key="OpenMenu">
             <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Width)" Storyboard.TargetName="GridMenu">
@@ -31,7 +31,7 @@
     </Window.Triggers>
     <Grid>
         <Frame x:Name="centralFrame" Margin="70,60,0,0" />
-        <Grid Height="60" VerticalAlignment="Top" Background="#FF2D3945" >
+        <Grid Height="60" VerticalAlignment="Top" Background="#1a1a1a">
             <Grid.Effect>
                 <DropShadowEffect BlurRadius="1" ShadowDepth="1" Color="#FFACACAC"/>
             </Grid.Effect>
@@ -49,12 +49,12 @@
         </Grid>
 
 
-        <Grid x:Name="GridMenu" Width="70" HorizontalAlignment="Left" Background="#FF2D3945">
+        <Grid x:Name="GridMenu" Width="70" HorizontalAlignment="Left" Background="#1a1a1a">
             <Grid.Effect>
                 <DropShadowEffect BlurRadius="2" ShadowDepth="1" Color="#FFAEAEAE"/>
             </Grid.Effect>
             <StackPanel>
-                <Grid Height="60" Background="White" RenderTransformOrigin="0.5,0.5">
+                <Grid Height="60" Background="#1a1a1a" RenderTransformOrigin="0.5,0.5">
                     <Grid.RenderTransform>
                         <TransformGroup>
                             <ScaleTransform/>
@@ -63,69 +63,57 @@
                             <TranslateTransform/>
                         </TransformGroup>
                     </Grid.RenderTransform>
-                    <Button x:Name="ButtonOpenMenu" Height="50" Width="50" Margin="5" HorizontalAlignment="Right" VerticalAlignment="Top" Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FF31577E" Click="ButtonOpenMenu_Click">
+                    <Button x:Name="ButtonOpenMenu" IsEnabled="False" Height="60" Width="50" Margin="5" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#34f7c3">
                         <materialDesign:PackIcon Kind="Menu" Width="25" Height="25"/>
                     </Button>
-                    <Button x:Name="ButtonCloseMenu" Visibility="Collapsed" Height="50" Width="50" Margin="5" HorizontalAlignment="Right" VerticalAlignment="Top" Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FF31577E" Click="ButtonCloseMenu_Click">
+                    <Button x:Name="ButtonCloseMenu" Visibility="Collapsed" Height="50" Width="50" Margin="5" HorizontalAlignment="Right" VerticalAlignment="Top" Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FF31577E" >
                         <materialDesign:PackIcon Kind="ArrowLeft" Width="25" Height="25"/>
                     </Button>
 
                 </Grid>
 
-                <ListView x:Name="ListViewMenu" Foreground="#FF5C99D6" ScrollViewer.HorizontalScrollBarVisibility="Disabled" SelectionChanged="ListViewMenu_SelectionChanged"  >
+                <ListView x:Name="ListViewMenu" Foreground="#34f7c3" ScrollViewer.HorizontalScrollBarVisibility="Disabled" SelectionChanged="ListViewMenu_SelectionChanged"  >
                     <ListViewItem x:Name="ItemHome" Height="60" Background="{x:Null}">
                         <StackPanel Orientation="Horizontal">
-                            <materialDesign:PackIcon Kind="Home" Height="25" Width="25" Margin="10"/>
+                            <materialDesign:PackIcon Kind="Home" Height="25" Width="25" Margin="10" ToolTip="Inicio"/>
                             <TextBlock Text="Inicio" VerticalAlignment="Center" Margin="20 10"/>
                         </StackPanel>
                     </ListViewItem>
-                    <ListViewItem x:Name="ItemPersonal" Height="60">
-                        <StackPanel Orientation="Horizontal">
-                            <materialDesign:PackIcon Kind="UserGroup"  Height="25" Width="25" Margin="10"/>
-                            <TextBlock Text="Personal" VerticalAlignment="Center" Margin="20 10"/>
+                    <ListViewItem x:Name="ItemAlbum" Height="60">
+                        <StackPanel Orientation="Horizontal" ToolTip="Album">
+                            <materialDesign:PackIcon Kind="ImageAlbum"  Height="25" Width="25" Margin="10"/>
+                            <TextBlock Text="Album" VerticalAlignment="Center" Margin="20 10"/>
                         </StackPanel>
                     </ListViewItem>
-                    <ListViewItem x:Name="ItemCommittee" Height="60">
-                        <StackPanel Orientation="Horizontal">
-                            <materialDesign:PackIcon Kind="AssignmentInd" Height="25" Width="25" Margin="10"/>
-                            <TextBlock Text="Comité" VerticalAlignment="Center"  Margin="20 10"/>
+                    <ListViewItem x:Name="ItemArtista" Height="60">
+                        <StackPanel Orientation="Horizontal" ToolTip="Artista">
+                            <materialDesign:PackIcon Kind="Artist" Height="25" Width="25" Margin="10"/>
+                            <TextBlock Text="Artista" VerticalAlignment="Center"  Margin="20 10"/>
                         </StackPanel>
                     </ListViewItem>
-                    <ListViewItem x:Name="ItemActivities" Height="60">
+                    <ListViewItem x:Name="ItemBiblioteca" Height="60" ToolTip="Biblioteca">
                         <StackPanel Orientation="Horizontal">
-                            <materialDesign:PackIcon Kind="Assignment" Height="25" Width="25" Margin="10"/>
-                            <TextBlock Text="Actividades" VerticalAlignment="Center"  Margin="20 10"/>
+                            <materialDesign:PackIcon Kind="LibraryMusic" Height="25" Width="25" Margin="10"/>
+                            <TextBlock Text="Biblioteca" VerticalAlignment="Center"  Margin="20 10"/>
                         </StackPanel>
                     </ListViewItem>
-                    <ListViewItem x:Name="ItemTasks" Height="60">
+                    <ListViewItem x:Name="ItemGeneros" Height="60" ToolTip="Géneros">
                         <StackPanel Orientation="Horizontal">
-                            <materialDesign:PackIcon Kind="Notebook" Height="25" Width="25" Margin="10"/>
-                            <TextBlock Text="Tareas" VerticalAlignment="Center"  Margin="20 10"/>
+                            <materialDesign:PackIcon Kind="FlowerOutline" Height="25" Width="25" Margin="10"/>
+                            <TextBlock Text="Géneros" VerticalAlignment="Center"  Margin="20 10"/>
                         </StackPanel>
                     </ListViewItem>
                     <ListViewItem x:Name="ItemAssistants" Height="60">
-                        <StackPanel Orientation="Horizontal">
-                            <materialDesign:PackIcon Kind="GroupAddOutline" Height="25" Width="25" Margin="10"/>
-                            <TextBlock Text="Asistentes" VerticalAlignment="Center"  Margin="20 10"/>
-                        </StackPanel>
+                      
                     </ListViewItem>
                     <ListViewItem x:Name="ItemBudget" Height="60">
-                        <StackPanel Orientation="Horizontal">
-                            <materialDesign:PackIcon Kind="AttachMoney" Height="25" Width="25" Margin="10"/>
-                            <TextBlock Text="Presupuesto" VerticalAlignment="Center"  Margin="20 10"/>
-                        </StackPanel>
+                    
                     </ListViewItem>
                     <ListViewItem x:Name="ItemMaterials" Height="60">
-                        <StackPanel Orientation="Horizontal">
-                            <materialDesign:PackIcon Kind="LaptopWindows" Height="25" Width="25" Margin="10"/>
-                            <TextBlock Text="Materiales" VerticalAlignment="Center"  Margin="20 10"/>
-                        </StackPanel>
+                        
                     </ListViewItem>
                     <ListViewItem x:Name="ItemArticles" Height="60">
-                        <StackPanel Orientation="Horizontal">
-                            <materialDesign:PackIcon Kind="FileDocumentBoxTickOutline" Height="25" Width="25" Margin="10"/>
-                            <TextBlock Text="Artículos" VerticalAlignment="Center"  Margin="20 10"/>
-                        </StackPanel>
+                       
                     </ListViewItem>
                     <ListViewItem x:Name="ItemExit" Height="60">
                         <StackPanel Orientation="Horizontal">

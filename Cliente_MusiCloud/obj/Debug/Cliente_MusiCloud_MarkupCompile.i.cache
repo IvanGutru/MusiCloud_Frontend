@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 C:\Users\IvanGutru\Documents\0.-IngenieriaSoftware\SextoSemestre\1.-DesarrolloSistemasRed\MusiCloud_Frontend\Cliente_MusiCloud\App.xaml
-3776785857
+5-1737734554
 
-141934450535
+16215050133
 25-495156478
-MainWindow.xaml;PaginaPrincipal.xaml;RegistrarCuenta.xaml;
+MainWindow.xaml;pages\Home.xaml;pages\MostrarArtistas.xaml;PaginaPrincipal.xaml;RegistrarCuenta.xaml;
 
 True
 
