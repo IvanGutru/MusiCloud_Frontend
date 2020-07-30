@@ -38,7 +38,7 @@ C:\Users\IvanGutru\Documents\0.-IngenieriaSoftware\SextoSemestre\1.-DesarrolloSi
 C:\Users\IvanGutru\Documents\0.-IngenieriaSoftware\SextoSemestre\1.-DesarrolloSistemasRed\MusiCloud_Frontend\Cliente_MusiCloud\obj\Debug\Cliente_MusiCloud.pdb
 C:\Users\IvanGutru\Documents\0.-IngenieriaSoftware\SextoSemestre\1.-DesarrolloSistemasRed\MusiCloud_Frontend\Cliente_MusiCloud\obj\Debug\RegistrarCuenta.g.cs
 C:\Users\IvanGutru\Documents\0.-IngenieriaSoftware\SextoSemestre\1.-DesarrolloSistemasRed\MusiCloud_Frontend\Cliente_MusiCloud\obj\Debug\RegistrarCuenta.baml
-C:\Users\IvanGutru\Documents\0.-IngenieriaSoftware\SextoSemestre\1.-DesarrolloSistemasRed\MusiCloud_Frontend\Cliente_MusiCloud\obj\Debug\Inicio.g.cs
 C:\Users\IvanGutru\Documents\0.-IngenieriaSoftware\SextoSemestre\1.-DesarrolloSistemasRed\MusiCloud_Frontend\Cliente_MusiCloud\obj\Debug\pages\Home.g.cs
-C:\Users\IvanGutru\Documents\0.-IngenieriaSoftware\SextoSemestre\1.-DesarrolloSistemasRed\MusiCloud_Frontend\Cliente_MusiCloud\obj\Debug\Inicio.baml
 C:\Users\IvanGutru\Documents\0.-IngenieriaSoftware\SextoSemestre\1.-DesarrolloSistemasRed\MusiCloud_Frontend\Cliente_MusiCloud\obj\Debug\pages\Home.baml
+C:\Users\IvanGutru\Documents\0.-IngenieriaSoftware\SextoSemestre\1.-DesarrolloSistemasRed\MusiCloud_Frontend\Cliente_MusiCloud\obj\Debug\pages\MostrarArtistas.g.cs
+C:\Users\IvanGutru\Documents\0.-IngenieriaSoftware\SextoSemestre\1.-DesarrolloSistemasRed\MusiCloud_Frontend\Cliente_MusiCloud\obj\Debug\pages\MostrarArtistas.baml

@@ -6,7 +6,7 @@
       xmlns:local="clr-namespace:Cliente_MusiCloud.pages"
       mc:Ignorable="d" 
       d:DesignHeight="500" d:DesignWidth="990"
-      Title="MostrarArtistas">
+      Title="MostrarArtistas" Background="#1a1a1a">
 
     <Grid>
         
