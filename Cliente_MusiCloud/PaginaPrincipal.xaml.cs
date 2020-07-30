@@ -1,4 +1,5 @@
-﻿using Cliente_MusiCloud.utilidades;
+﻿using Cliente_MusiCloud.pages;
+using Cliente_MusiCloud.utilidades;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -13,6 +14,8 @@ namespace Cliente_MusiCloud
         {
             InitializeComponent();
             txt_UserName.Text = SingletonCuenta.GetSingletonCuenta().cuenta.nombreUsuario;
+            centralFrame.Navigate(new Home());
+            centralFrame.NavigationUIVisibility = System.Windows.Navigation.NavigationUIVisibility.Hidden;
         }
 
         private void ButtonCloseMenu_Click(object sender, RoutedEventArgs e)
@@ -42,7 +45,34 @@ namespace Cliente_MusiCloud
 
         private void ListViewMenu_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-
+            switch (((ListViewItem)((ListView)sender).SelectedItem).Name)
+            {
+                case "ItemHome":
+                    centralFrame.Navigate(new Home());
+                    break;
+                case "ItemAlbum":
+                    break;
+                case "ItemArtista":
+                    break;
+                case "ItemBiblioteca":
+                    break;
+                case "ItemGeneros":
+                    break;
+                case "ItemExit":
+                    Salir();
+                    break;
+                default:
+                    break;
+            }
         }
+
+        private void Salir()
+        {
+            SingletonCuenta.SetCuenta(null);
+            MainWindow main = new MainWindow();
+            main.Show();
+            this.Close();
+        }
+
     }
 }
