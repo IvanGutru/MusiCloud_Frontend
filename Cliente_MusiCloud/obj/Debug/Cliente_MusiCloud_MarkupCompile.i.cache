@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 C:\Users\Luis Manuel\Documents\GitHub\MusiCloud_Frontend\Cliente_MusiCloud\App.xaml
-81969807619
+9528254209
 
-19-1394970447
+20-1516183961
 25968513532
-MainWindow.xaml;pages\Busqueda.xaml;pages\Home.xaml;pages\ListaDeReproduccion.xaml;pages\MostrarArtistas.xaml;pages\ReproduccionActual.xaml;PaginaPrincipal.xaml;RegistrarCuenta.xaml;
+MainWindow.xaml;pages\Biblioteca.xaml;pages\Busqueda.xaml;pages\Home.xaml;pages\ListaReproduccion.xaml;pages\MostrarArtistas.xaml;pages\RepActual.xaml;PaginaPrincipal.xaml;RegistrarCuenta.xaml;
 
 True
 

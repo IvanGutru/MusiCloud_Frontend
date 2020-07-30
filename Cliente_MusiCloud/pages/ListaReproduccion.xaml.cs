@@ -13,12 +13,12 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Cliente_MusiCloud.Paginas {
+namespace Cliente_MusiCloud.pages {
     /// <summary>
-    /// Lógica de interacción para ListaDeReproduccion.xaml
+    /// Lógica de interacción para ListaReproduccion.xaml
     /// </summary>
-    public partial class ListaDeReproduccion : Page {
-        public ListaDeReproduccion() {
+    public partial class ListaReproduccion : Page {
+        public ListaReproduccion() {
             InitializeComponent();
         }
 

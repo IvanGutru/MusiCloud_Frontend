@@ -1,4 +1,5 @@
 ﻿using Cliente_MusiCloud.pages;
+
 using Cliente_MusiCloud.utilidades;
 using System.Windows;
 using System.Windows.Controls;
@@ -80,18 +81,15 @@ namespace Cliente_MusiCloud
             centralFrame.NavigationUIVisibility = System.Windows.Navigation.NavigationUIVisibility.Hidden;
         }
 
-        private void btnPrevious_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e) {
-            var fadeAnimation = new DoubleAnimation();
-            fadeAnimation.From = 1;
-            fadeAnimation.To = 0.5;
-            btnPrevious.BeginAnimation(Image.OpacityProperty, fadeAnimation);
+        private void btnMostrarRA_Click(object sender, RoutedEventArgs e) {
+            gReproduciendo.Visibility = Visibility.Hidden;
+            centralFrame.Navigate(new RepActual());
+            centralFrame.NavigationUIVisibility = System.Windows.Navigation.NavigationUIVisibility.Hidden;
         }
 
-        private void btnPrevious_MouseLeave(object sender, System.Windows.Input.MouseEventArgs e) {
-            var fadeAnimation = new DoubleAnimation();
-            fadeAnimation.From = 0.5;
-            fadeAnimation.To = 1;
-            btnPrevious.BeginAnimation(Image.OpacityProperty, fadeAnimation);
+        private void ItemBiblioteca_Selected(object sender, RoutedEventArgs e) {
+            centralFrame.Navigate(new Biblioteca());
+            centralFrame.NavigationUIVisibility = System.Windows.Navigation.NavigationUIVisibility.Hidden;
         }
     }
 }

@@ -30,7 +30,7 @@
         </EventTrigger>
     </Window.Triggers>
     <Grid>
-        <Frame x:Name="centralFrame" Margin="70,60,272,0" />
+        <Frame x:Name="centralFrame" Margin="70,60,10,0" />
         <Grid Height="60" VerticalAlignment="Top" Background="#1a1a1a">
             <Grid.Effect>
                 <DropShadowEffect BlurRadius="1" ShadowDepth="1" Color="#FFACACAC"/>
@@ -91,7 +91,7 @@
                             <TextBlock Text="Artista" VerticalAlignment="Center"  Margin="20 10"/>
                         </StackPanel>
                     </ListViewItem>
-                    <ListViewItem x:Name="ItemBiblioteca" Height="60" ToolTip="Biblioteca">
+                    <ListViewItem x:Name="ItemBiblioteca" Height="60" ToolTip="Biblioteca" Selected="ItemBiblioteca_Selected">
                         <StackPanel Orientation="Horizontal">
                             <materialDesign:PackIcon Kind="LibraryMusic" Height="25" Width="25" Margin="10"/>
                             <TextBlock Text="Biblioteca" VerticalAlignment="Center"  Margin="20 10"/>
@@ -155,15 +155,21 @@
                     </Button.Background>
                 </Button>
             </StackPanel>
+
             <Image Name="imgCover" Source="Resources\musicloudLogo.png" HorizontalAlignment="Left" Height="200" Margin="42,54,0,0" VerticalAlignment="Top" Width="200"/>
-            <TextBlock HorizontalAlignment="Left" Margin="33,10,0,0" TextWrapping="Wrap" Text="ESTÁS ESCUCHANDO" VerticalAlignment="Top" FontSize="22" FontWeight="Bold"/>
-            <TextBlock HorizontalAlignment="Left" Margin="42,264,0,0" TextWrapping="Wrap" Text="Nombre" VerticalAlignment="Top"/>
-            <TextBlock HorizontalAlignment="Left" Margin="42,285,0,0" TextWrapping="Wrap" Text="Album" VerticalAlignment="Top"/>
+            <TextBlock HorizontalAlignment="Left" Margin="33,10,0,0" TextWrapping="Wrap" Text="ESTÁS ESCUCHANDO" VerticalAlignment="Top" FontSize="22" FontWeight="Bold" Foreground="#FF00F7FF"/>
+            <TextBlock HorizontalAlignment="Left" Margin="42,264,0,0" TextWrapping="Wrap" Text="Nombre" VerticalAlignment="Top" Foreground="#FF00F7FF"/>
+            <TextBlock HorizontalAlignment="Left" Margin="42,285,0,0" TextWrapping="Wrap" Text="Album" VerticalAlignment="Top" Foreground="#FF00F7FF"/>
             <Slider HorizontalAlignment="Left" Margin="42,332,0,0" VerticalAlignment="Top" Width="200" Foreground="#FF00F7E6"/>
-            <TextBlock HorizontalAlignment="Left" Margin="42,306,0,0" TextWrapping="Wrap" Text="Artista" VerticalAlignment="Top"/>
+            <TextBlock HorizontalAlignment="Left" Margin="42,306,0,0" TextWrapping="Wrap" Text="Artista" VerticalAlignment="Top" Foreground="#FF00F7FF"/>
+            <TextBlock HorizontalAlignment="Left" Margin="214,309,0,0" TextWrapping="Wrap" Text="00:00" VerticalAlignment="Top" Background="#FF00F7FF"/>
+            <Button x:Name="btnMostrarRA" Style="{DynamicResource MaterialDesignFloatingActionLightButton}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="26" Height="25" BorderBrush="{x:Null}" Foreground="{x:Null}" RenderTransformOrigin="0.5,0.5" Margin="214,56,0,0" Click="btnMostrarRA_Click">
+                <Button.Background>
+                    <ImageBrush ImageSource="Resources/Up.png"/>
+                </Button.Background>
+            </Button>
 
 
         </Grid>
-        <Separator HorizontalAlignment="Left" Height="604" Margin="800,65,0,0" VerticalAlignment="Top" Width="0" BorderBrush="White" Foreground="White" Background="White"/>
-    </Grid>
+        </Grid>
 </Window>

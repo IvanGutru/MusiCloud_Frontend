@@ -46,9 +46,7 @@ C:\Users\Luis Manuel\Documents\GitHub\MusiCloud_Frontend\Cliente_MusiCloud\obj\D
 C:\Users\Luis Manuel\Documents\GitHub\MusiCloud_Frontend\Cliente_MusiCloud\obj\Debug\MainWindow.g.cs
 C:\Users\Luis Manuel\Documents\GitHub\MusiCloud_Frontend\Cliente_MusiCloud\obj\Debug\pages\Busqueda.g.cs
 C:\Users\Luis Manuel\Documents\GitHub\MusiCloud_Frontend\Cliente_MusiCloud\obj\Debug\pages\Home.g.cs
-C:\Users\Luis Manuel\Documents\GitHub\MusiCloud_Frontend\Cliente_MusiCloud\obj\Debug\pages\ListaDeReproduccion.g.cs
 C:\Users\Luis Manuel\Documents\GitHub\MusiCloud_Frontend\Cliente_MusiCloud\obj\Debug\pages\MostrarArtistas.g.cs
-C:\Users\Luis Manuel\Documents\GitHub\MusiCloud_Frontend\Cliente_MusiCloud\obj\Debug\pages\ReproduccionActual.g.cs
 C:\Users\Luis Manuel\Documents\GitHub\MusiCloud_Frontend\Cliente_MusiCloud\obj\Debug\PaginaPrincipal.g.cs
 C:\Users\Luis Manuel\Documents\GitHub\MusiCloud_Frontend\Cliente_MusiCloud\obj\Debug\RegistrarCuenta.g.cs
 C:\Users\Luis Manuel\Documents\GitHub\MusiCloud_Frontend\Cliente_MusiCloud\obj\Debug\App.g.cs
@@ -86,9 +84,13 @@ C:\Users\Luis Manuel\Documents\GitHub\MusiCloud_Frontend\Cliente_MusiCloud\obj\D
 C:\Users\Luis Manuel\Documents\GitHub\MusiCloud_Frontend\Cliente_MusiCloud\obj\Debug\PaginaPrincipal.baml
 C:\Users\Luis Manuel\Documents\GitHub\MusiCloud_Frontend\Cliente_MusiCloud\obj\Debug\RegistrarCuenta.baml
 C:\Users\Luis Manuel\Documents\GitHub\MusiCloud_Frontend\Cliente_MusiCloud\obj\Debug\pages\Busqueda.baml
-C:\Users\Luis Manuel\Documents\GitHub\MusiCloud_Frontend\Cliente_MusiCloud\obj\Debug\pages\ListaDeReproduccion.baml
-C:\Users\Luis Manuel\Documents\GitHub\MusiCloud_Frontend\Cliente_MusiCloud\obj\Debug\pages\ReproduccionActual.baml
 C:\Users\Luis Manuel\Documents\GitHub\MusiCloud_Frontend\Cliente_MusiCloud\obj\Debug\Cliente_MusiCloud.g.resources
 C:\Users\Luis Manuel\Documents\GitHub\MusiCloud_Frontend\Cliente_MusiCloud\obj\Debug\Cliente_MusiCloud.Properties.Resources.resources
 C:\Users\Luis Manuel\Documents\GitHub\MusiCloud_Frontend\Cliente_MusiCloud\obj\Debug\Cliente_MusiCloud.csproj.GenerateResource.cache
 C:\Users\Luis Manuel\Documents\GitHub\MusiCloud_Frontend\Cliente_MusiCloud\obj\Debug\Cliente_MusiCloud.csproj.CopyComplete
+C:\Users\Luis Manuel\Documents\GitHub\MusiCloud_Frontend\Cliente_MusiCloud\obj\Debug\pages\RepActual.g.cs
+C:\Users\Luis Manuel\Documents\GitHub\MusiCloud_Frontend\Cliente_MusiCloud\obj\Debug\pages\RepActual.baml
+C:\Users\Luis Manuel\Documents\GitHub\MusiCloud_Frontend\Cliente_MusiCloud\obj\Debug\pages\ListaReproduccion.g.cs
+C:\Users\Luis Manuel\Documents\GitHub\MusiCloud_Frontend\Cliente_MusiCloud\obj\Debug\pages\ListaReproduccion.baml
+C:\Users\Luis Manuel\Documents\GitHub\MusiCloud_Frontend\Cliente_MusiCloud\obj\Debug\pages\Biblioteca.g.cs
+C:\Users\Luis Manuel\Documents\GitHub\MusiCloud_Frontend\Cliente_MusiCloud\obj\Debug\pages\Biblioteca.baml
