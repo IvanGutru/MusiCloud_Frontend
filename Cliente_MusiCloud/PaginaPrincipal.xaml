@@ -30,7 +30,7 @@
         </EventTrigger>
     </Window.Triggers>
     <Grid>
-        <Frame x:Name="centralFrame" Margin="70,60,0,0" />
+        <Frame x:Name="centralFrame" Margin="70,60,272,0" />
         <Grid Height="60" VerticalAlignment="Top" Background="#1a1a1a">
             <Grid.Effect>
                 <DropShadowEffect BlurRadius="1" ShadowDepth="1" Color="#FFACACAC"/>
@@ -73,7 +73,7 @@
                 </Grid>
 
                 <ListView x:Name="ListViewMenu" Foreground="#34f7c3" ScrollViewer.HorizontalScrollBarVisibility="Disabled" SelectionChanged="ListViewMenu_SelectionChanged"  >
-                    <ListViewItem x:Name="ItemHome" Height="60" Background="{x:Null}">
+                    <ListViewItem x:Name="ItemHome" Height="60" Background="{x:Null}" Selected="ItemHome_Selected">
                         <StackPanel Orientation="Horizontal">
                             <materialDesign:PackIcon Kind="Home" Height="25" Width="25" Margin="10" ToolTip="Inicio"/>
                             <TextBlock Text="Inicio" VerticalAlignment="Center" Margin="20 10"/>
@@ -104,16 +104,16 @@
                         </StackPanel>
                     </ListViewItem>
                     <ListViewItem x:Name="ItemAssistants" Height="60">
-                      
+
                     </ListViewItem>
                     <ListViewItem x:Name="ItemBudget" Height="60">
-                    
+
                     </ListViewItem>
                     <ListViewItem x:Name="ItemMaterials" Height="60">
-                        
+
                     </ListViewItem>
                     <ListViewItem x:Name="ItemArticles" Height="60">
-                       
+
                     </ListViewItem>
                     <ListViewItem x:Name="ItemExit" Height="60">
                         <StackPanel Orientation="Horizontal">
@@ -124,5 +124,46 @@
                 </ListView>
             </StackPanel>
         </Grid>
+        <Grid Name="gReproduciendo" HorizontalAlignment="Left" Height="422" Margin="800,237,0,0" VerticalAlignment="Top" Width="272">
+            <StackPanel  Orientation="Horizontal" Margin="42,361,29,10" >
+                <Button Name="btnPrevious" Style="{DynamicResource MaterialDesignFloatingActionLightButton}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="50" Height="50" BorderBrush="#FF00F7E6" Foreground="#FF00F7E6" RenderTransformOrigin="0.5,0.5">
+                    <Button.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform/>
+                            <SkewTransform/>
+                            <RotateTransform Angle="180"/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </Button.RenderTransform>
+                    <Button.Background>
+                        <ImageBrush ImageSource="Resources/Fast_Fordward.png"/>
+                    </Button.Background>
+                </Button>
+                <Button Name="btnPlay" Style="{DynamicResource MaterialDesignFloatingActionLightButton}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="50" Height="50" BorderBrush="#FF00F7E6" Foreground="{x:Null}">
+                    <Button.Background>
+                        <ImageBrush ImageSource="Resources/PlayIcono.png"/>
+                    </Button.Background>
+                </Button>
+                <Button Name="btnPause" Style="{DynamicResource MaterialDesignFloatingActionLightButton}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="50" Height="50" BorderBrush="#FF00F7E6" Foreground="{x:Null}">
+                    <Button.Background>
+                        <ImageBrush ImageSource="Resources/PauseIcono.png"/>
+                    </Button.Background>
+                </Button>
+                <Button Name="btnNext" Style="{DynamicResource MaterialDesignFloatingActionLightButton}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="50" Height="50" BorderBrush="#FF00F7E6" Foreground="{x:Null}">
+                    <Button.Background>
+                        <ImageBrush ImageSource="Resources/Fast_Fordward.png"/>
+                    </Button.Background>
+                </Button>
+            </StackPanel>
+            <Image Name="imgCover" Source="Resources\musicloudLogo.png" HorizontalAlignment="Left" Height="200" Margin="42,54,0,0" VerticalAlignment="Top" Width="200"/>
+            <TextBlock HorizontalAlignment="Left" Margin="33,10,0,0" TextWrapping="Wrap" Text="ESTÁS ESCUCHANDO" VerticalAlignment="Top" FontSize="22" FontWeight="Bold"/>
+            <TextBlock HorizontalAlignment="Left" Margin="42,264,0,0" TextWrapping="Wrap" Text="Nombre" VerticalAlignment="Top"/>
+            <TextBlock HorizontalAlignment="Left" Margin="42,285,0,0" TextWrapping="Wrap" Text="Album" VerticalAlignment="Top"/>
+            <Slider HorizontalAlignment="Left" Margin="42,332,0,0" VerticalAlignment="Top" Width="200" Foreground="#FF00F7E6"/>
+            <TextBlock HorizontalAlignment="Left" Margin="42,306,0,0" TextWrapping="Wrap" Text="Artista" VerticalAlignment="Top"/>
+
+
+        </Grid>
+        <Separator HorizontalAlignment="Left" Height="604" Margin="800,65,0,0" VerticalAlignment="Top" Width="0" BorderBrush="White" Foreground="White" Background="White"/>
     </Grid>
 </Window>

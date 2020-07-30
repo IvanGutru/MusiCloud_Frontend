@@ -2,6 +2,7 @@
 using Cliente_MusiCloud.utilidades;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media.Animation;
 
 namespace Cliente_MusiCloud
 {
@@ -13,7 +14,7 @@ namespace Cliente_MusiCloud
         public PaginaPrincipal()
         {
             InitializeComponent();
-            txt_UserName.Text = SingletonCuenta.GetSingletonCuenta().cuenta.nombreUsuario;
+            //txt_UserName.Text = SingletonCuenta.GetSingletonCuenta().cuenta.nombreUsuario;
             centralFrame.Navigate(new Home());
             centralFrame.NavigationUIVisibility = System.Windows.Navigation.NavigationUIVisibility.Hidden;
         }
@@ -74,5 +75,23 @@ namespace Cliente_MusiCloud
             this.Close();
         }
 
+        private void ItemHome_Selected(object sender, RoutedEventArgs e) {
+            centralFrame.Navigate(new Home());
+            centralFrame.NavigationUIVisibility = System.Windows.Navigation.NavigationUIVisibility.Hidden;
+        }
+
+        private void btnPrevious_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e) {
+            var fadeAnimation = new DoubleAnimation();
+            fadeAnimation.From = 1;
+            fadeAnimation.To = 0.5;
+            btnPrevious.BeginAnimation(Image.OpacityProperty, fadeAnimation);
+        }
+
+        private void btnPrevious_MouseLeave(object sender, System.Windows.Input.MouseEventArgs e) {
+            var fadeAnimation = new DoubleAnimation();
+            fadeAnimation.From = 0.5;
+            fadeAnimation.To = 1;
+            btnPrevious.BeginAnimation(Image.OpacityProperty, fadeAnimation);
+        }
     }
 }

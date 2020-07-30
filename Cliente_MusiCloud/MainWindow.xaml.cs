@@ -23,7 +23,7 @@ namespace Cliente_MusiCloud
 
         private async void btn_iniciarSesion_Click(object sender, RoutedEventArgs e)
         {
-            try
+            /*try
             {
                 if (ValidarCampos())
                 {
@@ -42,7 +42,10 @@ namespace Cliente_MusiCloud
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
-            }
+            }*/
+            PaginaPrincipal paginaInicio = new PaginaPrincipal();
+            paginaInicio.Show();
+            this.Close();
 
         }
 
