@@ -9,7 +9,7 @@
       Title="Busqueda">
 
     <Grid>
-        <Grid Name = "gBuscar" Visibility="Visible" HorizontalAlignment="Left" Height="440" VerticalAlignment="Top" Width="800" Background="{DynamicResource AzulVentanas}">
+        <Grid Name = "gBuscar" Visibility="Visible" HorizontalAlignment="Left" Height="440" VerticalAlignment="Top" Width="800">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="779*"/>
                 <ColumnDefinition Width="0*"/>

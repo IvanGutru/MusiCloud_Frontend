@@ -209,60 +209,10 @@
                         </StackPanel>
                     </ListViewItem>
                     <ListViewItem x:Name="ItemM" Height="60">
-                       
+
                     </ListViewItem>
                 </ListView>
             </StackPanel>
         </Grid>
-        <Grid Name="gReproduciendo" HorizontalAlignment="Left" Height="422" Margin="800,237,0,0" VerticalAlignment="Top" Width="272">
-            <StackPanel  Orientation="Horizontal" Margin="42,361,29,10" >
-                <Button Name="btnPrevious" Style="{DynamicResource MaterialDesignFloatingActionLightButton}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="50" Height="50" BorderBrush="#FF00F7E6" Foreground="#FF00F7E6" RenderTransformOrigin="0.5,0.5">
-                    <Button.RenderTransform>
-                        <TransformGroup>
-                            <ScaleTransform/>
-                            <SkewTransform/>
-                            <RotateTransform Angle="180"/>
-                            <TranslateTransform/>
-                        </TransformGroup>
-                    </Button.RenderTransform>
-                    <Button.Background>
-                        <ImageBrush ImageSource="Resources/Fast_Fordward.png"/>
-                    </Button.Background>
-                </Button>
-                <Button Name="btnPlay" Style="{DynamicResource MaterialDesignFloatingActionLightButton}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="50" Height="50" BorderBrush="#FF00F7E6" Foreground="{x:Null}">
-                    <Button.Background>
-                        <ImageBrush ImageSource="Resources/PlayIcono.png"/>
-                    </Button.Background>
-                </Button>
-                <Button Name="btnPause" Style="{DynamicResource MaterialDesignFloatingActionLightButton}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="50" Height="50" BorderBrush="#FF00F7E6" Foreground="{x:Null}">
-                    <Button.Background>
-                        <ImageBrush ImageSource="Resources/PauseIcono.png"/>
-                    </Button.Background>
-                </Button>
-                <Button Name="btnNext" Style="{DynamicResource MaterialDesignFloatingActionLightButton}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="50" Height="50" BorderBrush="#FF00F7E6" Foreground="{x:Null}">
-                    <Button.Background>
-                        <ImageBrush ImageSource="Resources/Fast_Fordward.png"/>
-                    </Button.Background>
-                </Button>
-            </StackPanel>
-
-            <Image Name="imgCover" Source="Resources\musicloudLogo.png" HorizontalAlignment="Left" Height="200" Margin="42,54,0,0" VerticalAlignment="Top" Width="200"/>
-            <TextBlock HorizontalAlignment="Left" Margin="33,10,0,0" TextWrapping="Wrap" Text="ESTÁS ESCUCHANDO" VerticalAlignment="Top" FontSize="22" FontWeight="Bold" Foreground="#FF00F7FF"/>
-            <TextBlock HorizontalAlignment="Left" Margin="42,264,0,0" TextWrapping="Wrap" Text="Nombre" VerticalAlignment="Top" Foreground="#FF00F7FF"/>
-            <TextBlock HorizontalAlignment="Left" Margin="42,285,0,0" TextWrapping="Wrap" Text="Album" VerticalAlignment="Top" Foreground="#FF00F7FF"/>
-            <Slider HorizontalAlignment="Left" Margin="42,332,0,0" VerticalAlignment="Top" Width="200" Foreground="#FF00F7E6"/>
-            <TextBlock HorizontalAlignment="Left" Margin="42,306,0,0" TextWrapping="Wrap" Text="Artista" VerticalAlignment="Top" Foreground="#FF00F7FF"/>
-            <TextBlock HorizontalAlignment="Left" Margin="214,309,0,0" TextWrapping="Wrap" Text="00:00" VerticalAlignment="Top" Background="#FF00F7FF"/>
-            <Button x:Name="btnMostrarRA" Style="{DynamicResource MaterialDesignFloatingActionLightButton}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="26" Height="25" BorderBrush="{x:Null}" Foreground="{x:Null}" RenderTransformOrigin="0.5,0.5" Margin="214,56,0,0" Click="btnMostrarRA_Click">
-                <Button.Background>
-                    <ImageBrush ImageSource="Resources/Up.png"/>
-                </Button.Background>
-            </Button>
-
-
-        </Grid>
-        </Grid>
-        
-
     </Grid>
 </Window>

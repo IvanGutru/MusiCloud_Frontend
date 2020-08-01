@@ -82,12 +82,6 @@ namespace Cliente_MusiCloud
             centralFrame.NavigationUIVisibility = System.Windows.Navigation.NavigationUIVisibility.Hidden;
         }
 
-        private void btnMostrarRA_Click(object sender, RoutedEventArgs e) {
-            gReproduciendo.Visibility = Visibility.Hidden;
-            centralFrame.Navigate(new RepActual());
-            centralFrame.NavigationUIVisibility = System.Windows.Navigation.NavigationUIVisibility.Hidden;
-        }
-
         private void ItemBiblioteca_Selected(object sender, RoutedEventArgs e) {
             centralFrame.Navigate(new Biblioteca());
             centralFrame.NavigationUIVisibility = System.Windows.Navigation.NavigationUIVisibility.Hidden;

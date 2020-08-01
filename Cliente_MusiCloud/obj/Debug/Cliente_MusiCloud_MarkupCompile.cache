@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-C:\Users\Luis Manuel\Documents\GitHub\MusiCloud_Frontend\Cliente_MusiCloud\obj\Debug\
+C:\Users\IvanGutru\Documents\0.-IngenieriaSoftware\SextoSemestre\1.-DesarrolloSistemasRed\MusiCloud_Frontend\Cliente_MusiCloud\obj\Debug\
 Cliente_MusiCloud
 none
 false
 DEBUG;TRACE
 C:\Users\IvanGutru\Documents\0.-IngenieriaSoftware\SextoSemestre\1.-DesarrolloSistemasRed\MusiCloud_Frontend\Cliente_MusiCloud\App.xaml
-9-1796362482
+1023046986
 
-23705922460
+241503187896
 25-495156478
-MainWindow.xaml;pages\CrearPlaylist.xaml;pages\Home.xaml;pages\MostrarArtistas.xaml;PaginaPrincipal.xaml;paginas\Busqueda.xaml;paginas\ListaDeReproduccion.xaml;paginas\ReproduccionActual.xaml;RegistrarCuenta.xaml;
+MainWindow.xaml;pages\Biblioteca.xaml;pages\Busqueda.xaml;pages\CrearPlaylist.xaml;pages\Home.xaml;pages\ListaReproduccion.xaml;pages\MostrarArtistas.xaml;pages\RepActual.xaml;PaginaPrincipal.xaml;RegistrarCuenta.xaml;
 
 False
 

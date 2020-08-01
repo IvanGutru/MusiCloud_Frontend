@@ -95,6 +95,7 @@
     </Compile>
     <Compile Include="pages\Busqueda.xaml.cs">
       <DependentUpon>Busqueda.xaml</DependentUpon>
+    </Compile>
     <Compile Include="pages\CrearPlaylist.xaml.cs">
       <DependentUpon>CrearPlaylist.xaml</DependentUpon>
     </Compile>
@@ -109,14 +110,6 @@
     </Compile>
     <Compile Include="pages\RepActual.xaml.cs">
       <DependentUpon>RepActual.xaml</DependentUpon>
-    <Compile Include="paginas\Busqueda.xaml.cs">
-      <DependentUpon>Busqueda.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="paginas\ListaDeReproduccion.xaml.cs">
-      <DependentUpon>ListaDeReproduccion.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="paginas\ReproduccionActual.xaml.cs">
-      <DependentUpon>ReproduccionActual.xaml</DependentUpon>
     </Compile>
     <Compile Include="RegistrarCuenta.xaml.cs">
       <DependentUpon>RegistrarCuenta.xaml</DependentUpon>
@@ -170,18 +163,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="paginas\Busqueda.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="paginas\ListaDeReproduccion.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="paginas\ReproduccionActual.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Page Include="RegistrarCuenta.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -217,7 +198,9 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="paginas\" />
+  </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\musicloudLogo.png" />
     <Resource Include="Resources\PauseIcono.png" />
