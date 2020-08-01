@@ -1,4 +1,8 @@
-﻿using System;
+﻿using Cliente_MusiCloud.album.aplicacion;
+using Cliente_MusiCloud.album.dominio;
+using Cliente_MusiCloud.artista.aplicacion;
+using Cliente_MusiCloud.artista.Dominio;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +27,65 @@ namespace Cliente_MusiCloud.pages
         public MostrarArtistas()
         {
             InitializeComponent();
+            txt_textoAlbumes.Visibility = Visibility.Hidden; 
+            txt_nombreArtista.Visibility = Visibility.Hidden; 
+        }
+
+
+
+        private async void Btn_Buscar_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                if (ValidateField())
+                {
+                    List<Artista> listaArtistas;
+                    String nombre = txt_Nombre.Text;
+                    listaArtistas= await Aplicacion.ObtenerArtistaPorNombre(nombre);
+                    listViewArtistas.ItemsSource = listaArtistas;
+                }
+                else
+                {
+                    MessageBox.Show("Favor de ingresar un nombre de artista");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            
+        }
+
+        private bool ValidateField()
+        {
+            if (String.IsNullOrEmpty(txt_Nombre.Text))
+            {
+                return false;
+            }
+            return true;
+        }
+
+        private async void listViewArtistas_MouseDoubleClick_1(object sender, MouseButtonEventArgs e)
+        {
+            List<Album> listaAlbumes;
+            Artista artista = (Artista)listViewArtistas.SelectedItem;
+            Console.WriteLine(artista.nombre);
+            if (artista != null)
+            {
+                try
+                {
+                    listaAlbumes = await AplicacionAlbum.ObtenerAlbumesArtistaPorId(artista.idArtista);
+                    listView_Albumes.ItemsSource = listaAlbumes;
+                    txt_nombreArtista.Text = artista.nombre;
+                    txt_textoAlbumes.Visibility = Visibility.Visible;
+                    txt_nombreArtista.Visibility = Visibility.Visible;
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+
+            }
         }
     }
 }

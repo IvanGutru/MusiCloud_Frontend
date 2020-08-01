@@ -30,8 +30,8 @@
         </EventTrigger>
     </Window.Triggers>
     <Grid>
-        <Frame x:Name="centralFrame" Margin="70,60,10,0" />
-        <Grid Height="60" VerticalAlignment="Top" Background="#1a1a1a">
+        <Frame x:Name="centralFrame" Margin="70,40,0,80" />
+        <Grid Height="40" VerticalAlignment="Top" Background="#1a1a1a">
             <Grid.Effect>
                 <DropShadowEffect BlurRadius="1" ShadowDepth="1" Color="#FFACACAC"/>
             </Grid.Effect>
@@ -48,6 +48,102 @@
             <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="22" Foreground="White">MUSICLOUD</TextBlock>
         </Grid>
 
+        <Grid x:Name="GridReproductor" Height="80" VerticalAlignment="Bottom" Background="#363636">
+            <Grid.Effect>
+                <DropShadowEffect BlurRadius="2" ShadowDepth="1" Color="#FFAEAEAE"/>
+            </Grid.Effect>
+            <StackPanel>
+                <Grid >
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width=".55*"/>
+                        <ColumnDefinition Width="3*"/>
+                        <ColumnDefinition Width="3*"/>
+                        <ColumnDefinition Width="2*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid Grid.Column="1" Height="80">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width=".8*"/>
+                            <ColumnDefinition Width="2*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid Grid.Column="0">
+                            <Image x:Name="PortadaCancion" Source="/Resources/portadaCancionDefault.png" Height="100" />
+                        </Grid>
+                        <Grid Grid.Column="1">
+                            <TextBlock Text="Nombre cancion" VerticalAlignment="Top" Margin="0,20,0,0" FontSize="16" Foreground="White"/>
+                            <TextBlock Text="Duracion" VerticalAlignment="Bottom" FontSize="16" Foreground="White"/>
+                        </Grid>
+
+                    </Grid>
+                    <Grid Grid.Column="2">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="2*"/>
+                            <RowDefinition Height="1*"/>
+                        </Grid.RowDefinitions>
+                        <Grid Grid.Row="0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="1*"/>
+                                <ColumnDefinition Width="1*"/>
+                                <ColumnDefinition Width="1*"/>
+                                <ColumnDefinition Width="1*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid Grid.Column="0">
+                                <Button Margin="0,2,0,0"
+                                Style="{StaticResource MaterialDesignIconButton}"
+                                ToolTip="Anterior"
+                                Background="#1a1a1a">
+                                    <materialDesign:PackIcon Kind="SkipPrevious" />
+                                </Button>
+                            </Grid>
+                            <Grid Grid.Column="1">
+                                <Button Margin="0,2,0,0"
+                                Style="{StaticResource MaterialDesignIconButton}"
+                                ToolTip="Reproducir"
+                                Background="#1a1a1a">
+                                    <materialDesign:PackIcon Kind="Play" />
+                                </Button>
+                            </Grid>
+                            <Grid Grid.Column="2">
+                                <Button Margin="0,2,0,0"
+                                Style="{StaticResource MaterialDesignIconButton}"
+                                ToolTip="Pausa"
+                                Background="#1a1a1a">
+                                    <materialDesign:PackIcon Kind="Pause" />
+                                </Button>
+                            </Grid>
+                            <Grid Grid.Column="3">
+                                <Button Margin="0,2,0,0"
+                                Style="{StaticResource MaterialDesignIconButton}"
+                                ToolTip="Siguiente"
+                                Background="#1a1a1a">
+                                    <materialDesign:PackIcon Kind="SkipNext" />
+                                </Button>
+                            </Grid>
+                        </Grid>
+                        <Grid Grid.Row="1">
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                <TextBlock x:Name="TextBlock_initial_duration" Text="0:00" Foreground="White"/>
+                                <Slider x:Name="Slider_track_duration" Orientation="Horizontal" Maximum="100" Minimum="0" Value="0"
+                            Width="300" Foreground="AliceBlue"
+                            VerticalAlignment="Center" Margin="10,0,10,0" />
+                                <TextBlock  x:Name="TextBlock_final_duration" Text="00:00" Foreground="White"/>
+                            </StackPanel>
+                        </Grid>
+
+                    </Grid>
+                    <Grid Grid.Column="4">
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="20,0,0,0">
+                            <Button x:Name="Buttom_volume" Height="25" Width="25" Padding="0" Foreground="White" Background="#1a1a1a">
+                                <materialDesign:PackIcon Kind="VolumeMedium" Width="20" Height="20" Background="#1a1a1a" Foreground="#34f7c3"/>
+                            </Button>
+                            <Slider x:Name="Slider_volume" Orientation="Horizontal" Maximum="100" Minimum="0" Value="50"
+                            Width="180" Foreground="White"
+                            VerticalAlignment="Center" />
+                        </StackPanel>
+                    </Grid>
+                </Grid>
+
+            </StackPanel>
+        </Grid>
 
         <Grid x:Name="GridMenu" Width="70" HorizontalAlignment="Left" Background="#1a1a1a">
             <Grid.Effect>
@@ -103,16 +199,7 @@
                             <TextBlock Text="Géneros" VerticalAlignment="Center"  Margin="20 10"/>
                         </StackPanel>
                     </ListViewItem>
-                    <ListViewItem x:Name="ItemAssistants" Height="60">
-
-                    </ListViewItem>
-                    <ListViewItem x:Name="ItemBudget" Height="60">
-
-                    </ListViewItem>
-                    <ListViewItem x:Name="ItemMaterials" Height="60">
-
-                    </ListViewItem>
-                    <ListViewItem x:Name="ItemArticles" Height="60">
+                    <ListViewItem x:Name="ItemA" Height="60">
 
                     </ListViewItem>
                     <ListViewItem x:Name="ItemExit" Height="60">
@@ -120,6 +207,9 @@
                             <materialDesign:PackIcon Kind="ExitToApp" Height="25" Width="25" Margin="10"/>
                             <TextBlock Text="Salir" VerticalAlignment="Center"  Margin="20 10"/>
                         </StackPanel>
+                    </ListViewItem>
+                    <ListViewItem x:Name="ItemM" Height="60">
+                       
                     </ListViewItem>
                 </ListView>
             </StackPanel>
@@ -172,4 +262,7 @@
 
         </Grid>
         </Grid>
+        
+
+    </Grid>
 </Window>

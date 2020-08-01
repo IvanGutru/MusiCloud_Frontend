@@ -21,5 +21,10 @@ namespace Cliente_MusiCloud.pages {
         public RepActual() {
             InitializeComponent();
         }
+
+        private void btnCloseLisRep_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

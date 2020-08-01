@@ -4,11 +4,31 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Cliente_MusiCloud.pages"
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
-      Title="Home" Background="#1a1a1a">
+   d:DesignHeight="500" d:DesignWidth="990"
+      Title="Home" Background="#454545">
 
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="6*"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="4*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+            <Button Grid.Column="1"
+                Style="{StaticResource MaterialDesignIconButton}" ToolTip="Reproducir" Background="#1a1a1a"
+                 HorizontalAlignment="Right" Margin="0,0,10,0" Click="Button_Click">
+                <materialDesign:PackIcon Kind="Add"/>
+            </Button>
+            <TextBlock Grid.Column="2" Text="Crear playlist" VerticalAlignment="Center" FontSize="16" Foreground="White"/>
+        </Grid>
+        <Grid Grid.Row="1">
+            
+        </Grid>
     </Grid>
 </Page>
