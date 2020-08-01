@@ -28,6 +28,7 @@ namespace Cliente_MusiCloud.pages
         {
             InitializeComponent();
             txt_textoAlbumes.Visibility = Visibility.Hidden; 
+            txt_nombreArtista.Visibility = Visibility.Hidden; 
         }
 
 
@@ -64,23 +65,26 @@ namespace Cliente_MusiCloud.pages
             return true;
         }
 
-        private async void listViewArtistas_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        private async void listViewArtistas_MouseDoubleClick_1(object sender, MouseButtonEventArgs e)
         {
             List<Album> listaAlbumes;
-            Artista artista = (Artista)listViewArtistas.SelectedValue;
+            Artista artista = (Artista)listViewArtistas.SelectedItem;
+            Console.WriteLine(artista.nombre);
             if (artista != null)
             {
                 try
                 {
                     listaAlbumes = await AplicacionAlbum.ObtenerAlbumesArtistaPorId(artista.idArtista);
                     listView_Albumes.ItemsSource = listaAlbumes;
+                    txt_nombreArtista.Text = artista.nombre;
                     txt_textoAlbumes.Visibility = Visibility.Visible;
+                    txt_nombreArtista.Visibility = Visibility.Visible;
                 }
                 catch (Exception ex)
                 {
                     MessageBox.Show(ex.Message);
                 }
-              
+
             }
         }
     }
