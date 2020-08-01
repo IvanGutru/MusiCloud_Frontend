@@ -21,5 +21,10 @@ namespace Cliente_MusiCloud.Paginas {
         public ListaDeReproduccion() {
             InitializeComponent();
         }
+
+        private void btnCloseLisRep_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

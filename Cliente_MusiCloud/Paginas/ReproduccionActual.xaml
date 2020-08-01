@@ -23,9 +23,9 @@
                     </TransformGroup>
                 </Image.RenderTransform>
             </Image>
-            <Image x:Name = "btnPlayRA" Source = "Resources/PlayIcono.png" HorizontalAlignment="Left" Height="50" VerticalAlignment="Top" Width="50" MouseEnter="btnPlayRA_MouseEnter" MouseLeave="btnPlayRA_MouseLeave" Margin="113,133,0,0"/>
-            <Image x:Name = "btnPauseRA"  Source = "Resources/PauseIcono.png"  HorizontalAlignment="Left" Height="50" VerticalAlignment="Top" Width="50" Margin="164,133,0,0"/>
-            <Image x:Name = "btnSiguienteRA"  Source = "Resources/Fast_Fordward.png"  HorizontalAlignment="Left" Height="50" VerticalAlignment="Top" Width="50" Margin="215,133,0,0"/>
+            <Image x:Name = "btnPlayRA" Source = "Resources/PlayIcono.png" HorizontalAlignment="Left" Height="50" VerticalAlignment="Top" Width="50" MouseEnter="btnPlayRA_MouseEnter" MouseLeave="btnPlayRA_MouseLeave" Margin="113,133,0,0" TouchEnter="btnPlayRA_TouchEnter" TouchLeave="btnPlayRA_TouchLeave"/>
+            <Image x:Name = "btnPauseRA"  Source = "Resources/PauseIcono.png"  HorizontalAlignment="Left" Height="50" VerticalAlignment="Top" Width="50" Margin="164,133,0,0" MouseEnter="btnPauseRA_MouseEnter"/>
+            <Image x:Name = "btnSiguienteRA"  Source = "Resources/Fast_Fordward.png"  HorizontalAlignment="Left" Height="50" VerticalAlignment="Top" Width="50" Margin="215,133,0,0" MouseEnter="btnSiguienteRA_MouseEnter"/>
             <Image Name = "iCaratulaRA"  HorizontalAlignment="Left" Height="200" Margin="334,76,0,0" VerticalAlignment="Top" Width="200"/>
             <Image Name = "btnRepAct" Source = "Icons\Up.png" MouseDown="btnRepAct_MouseDown" HorizontalAlignment="Left" Height="25" Margin="253,76,0,0" VerticalAlignment="Top" Width="26" MouseEnter="btnRepAct_MouseEnter" MouseLeave="btnRepAct_MouseLeave"/>
         </Grid>

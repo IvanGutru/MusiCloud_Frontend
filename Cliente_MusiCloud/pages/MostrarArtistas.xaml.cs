@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Cliente_MusiCloud.artista.aplicacion;
+using Cliente_MusiCloud.artista.Dominio;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +25,40 @@ namespace Cliente_MusiCloud.pages
         public MostrarArtistas()
         {
             InitializeComponent();
+        }
+
+
+
+        private async void Btn_Buscar_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                if (ValidateField())
+                {
+                    List<Artista> listaArtistas;
+                    String nombre = txt_Nombre.Text;
+                    listaArtistas= await Aplicacion.ObtenerArtistaPorNombre(nombre);
+                    listViewArtistas.ItemsSource = listaArtistas;
+                }
+                else
+                {
+                    MessageBox.Show("Favor de ingresar un nombre de artista");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            
+        }
+
+        private bool ValidateField()
+        {
+            if (String.IsNullOrEmpty(txt_Nombre.Text))
+            {
+                return false;
+            }
+            return true;
         }
     }
 }

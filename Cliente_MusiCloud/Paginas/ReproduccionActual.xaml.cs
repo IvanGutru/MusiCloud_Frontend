@@ -21,5 +21,50 @@ namespace Cliente_MusiCloud.Paginas {
         public ReproduccionActual() {
             InitializeComponent();
         }
+
+        private void btnSiguienteRA_MouseEnter(object sender, MouseEventArgs e)
+        {
+
+        }
+
+        private void btnPauseRA_MouseEnter(object sender, MouseEventArgs e)
+        {
+
+        }
+
+        private void btnPlayRA_MouseEnter(object sender, MouseEventArgs e)
+        {
+
+        }
+
+        private void btnPlayRA_MouseLeave(object sender, MouseEventArgs e)
+        {
+
+        }
+
+        private void btnPlayRA_TouchEnter(object sender, TouchEventArgs e)
+        {
+
+        }
+
+        private void btnPlayRA_TouchLeave(object sender, TouchEventArgs e)
+        {
+
+        }
+
+        private void btnRepAct_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+
+        }
+
+        private void btnRepAct_MouseEnter(object sender, MouseEventArgs e)
+        {
+
+        }
+
+        private void btnRepAct_MouseLeave(object sender, MouseEventArgs e)
+        {
+
+        }
     }
 }

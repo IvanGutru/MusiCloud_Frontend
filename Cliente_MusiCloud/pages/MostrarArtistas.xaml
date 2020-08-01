@@ -4,11 +4,89 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Cliente_MusiCloud.pages"
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
       mc:Ignorable="d" 
       d:DesignHeight="500" d:DesignWidth="990"
-      Title="MostrarArtistas" Background="#1a1a1a">
+      Title="MostrarArtistas" Background="#454545" >
 
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="5*"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <TextBlock Text="Artistas" HorizontalAlignment="Center" FontSize="40" FontWeight="Heavy" FontFamily="Comic Sans MS" Foreground="White" />
+        </Grid>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+            <Grid Grid.Column="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="3.5*"/>
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="4*"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBox Grid.Column="0"  x:Name="txt_Nombre" Style="{StaticResource MaterialDesignFilledTextFieldTextBox}"
+                    VerticalAlignment="Top" TextWrapping="Wrap" Margin="40,10,0,0"
+                    Height="70" MaxLines="50" MaxLength="50" Foreground="White" SelectionBrush="#34f7c3" CaretBrush="#34f7c3"
+                    materialDesign:HintAssist.Hint="Ingrese nombre del artista" Background="{x:Null}" BorderBrush="{x:Null}"/>
+                    <Grid Grid.Column="1">
+                        <Button Grid.Column="1" x:Name="Btn_Buscar"
+                            VerticalAlignment="Center" Margin="5" Background="#262626"  BorderBrush="#34f7c3"
+                            Style="{StaticResource MaterialDesignFloatingActionAccentButton}"
+                            ToolTip="Buscar" Click="Btn_Buscar_Click" >
+                            <materialDesign:PackIcon Kind="Search" Height="24" Width="24" />
+                        </Button>
+                    </Grid>
+                </Grid>
+                <Grid Grid.Row="1">
+                    <ListView Margin="40,0,40,0" x:Name="listViewArtistas" Foreground="White" FontSize="14">
+                        <ListView.View>
+                            <GridView >
+                                <GridViewColumn  Header="Nombre" Width="200" DisplayMemberBinding="{Binding nombre}" />
+                                <GridViewColumn Header="Descripción" Width="200" DisplayMemberBinding="{Binding descripcion}"/>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                </Grid>
+            </Grid>
+            <Grid Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="3*"/>
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0">
+                    
+                </Grid>
+                <Grid Grid.Row="1">
+                    <ListView Grid.Row="0" x:Name="listView_Albumes" Padding="5" Margin="50,10,50,10">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Vertical">
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="Nombre: " />
+                                        <TextBlock Text="{Binding nombre}" />
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="Compañia: " />
+                                        <TextBlock Text="{Binding compania}" />
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="Cupo: " />
+                                        <TextBlock Text="" />
+                                    </StackPanel>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </Grid>
+            </Grid>
+        </Grid>
     </Grid>
 </Page>

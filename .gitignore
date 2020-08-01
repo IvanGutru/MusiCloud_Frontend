@@ -342,3 +342,13 @@ ASALocalRun/
 healthchecksdb
 Cliente_MusiCloud/.vs/Cliente_MusiCloud/v16/.suo
 Cliente_MusiCloud/.vs/Cliente_MusiCloud/v16/Server/sqlite3/storage.ide
+Cliente_MusiCloud/obj/Debug/Cliente_MusiCloud_MarkupCompile.i.cache
+*.cache
+*.ide
+Cliente_MusiCloud/.vs/Cliente_MusiCloud/v16/.suo
+*.exe
+*.pdb
+*.baml
+*.cache
+*.pdb
+*.exe

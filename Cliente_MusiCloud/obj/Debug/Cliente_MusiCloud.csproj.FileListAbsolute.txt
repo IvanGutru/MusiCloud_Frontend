@@ -42,3 +42,11 @@ C:\Users\IvanGutru\Documents\0.-IngenieriaSoftware\SextoSemestre\1.-DesarrolloSi
 C:\Users\IvanGutru\Documents\0.-IngenieriaSoftware\SextoSemestre\1.-DesarrolloSistemasRed\MusiCloud_Frontend\Cliente_MusiCloud\obj\Debug\pages\Home.baml
 C:\Users\IvanGutru\Documents\0.-IngenieriaSoftware\SextoSemestre\1.-DesarrolloSistemasRed\MusiCloud_Frontend\Cliente_MusiCloud\obj\Debug\pages\MostrarArtistas.g.cs
 C:\Users\IvanGutru\Documents\0.-IngenieriaSoftware\SextoSemestre\1.-DesarrolloSistemasRed\MusiCloud_Frontend\Cliente_MusiCloud\obj\Debug\pages\MostrarArtistas.baml
+C:\Users\IvanGutru\Documents\0.-IngenieriaSoftware\SextoSemestre\1.-DesarrolloSistemasRed\MusiCloud_Frontend\Cliente_MusiCloud\obj\Debug\paginas\Busqueda.g.cs
+C:\Users\IvanGutru\Documents\0.-IngenieriaSoftware\SextoSemestre\1.-DesarrolloSistemasRed\MusiCloud_Frontend\Cliente_MusiCloud\obj\Debug\paginas\ListaDeReproduccion.g.cs
+C:\Users\IvanGutru\Documents\0.-IngenieriaSoftware\SextoSemestre\1.-DesarrolloSistemasRed\MusiCloud_Frontend\Cliente_MusiCloud\obj\Debug\paginas\ReproduccionActual.g.cs
+C:\Users\IvanGutru\Documents\0.-IngenieriaSoftware\SextoSemestre\1.-DesarrolloSistemasRed\MusiCloud_Frontend\Cliente_MusiCloud\obj\Debug\paginas\Busqueda.baml
+C:\Users\IvanGutru\Documents\0.-IngenieriaSoftware\SextoSemestre\1.-DesarrolloSistemasRed\MusiCloud_Frontend\Cliente_MusiCloud\obj\Debug\paginas\ListaDeReproduccion.baml
+C:\Users\IvanGutru\Documents\0.-IngenieriaSoftware\SextoSemestre\1.-DesarrolloSistemasRed\MusiCloud_Frontend\Cliente_MusiCloud\obj\Debug\paginas\ReproduccionActual.baml
+C:\Users\IvanGutru\Documents\0.-IngenieriaSoftware\SextoSemestre\1.-DesarrolloSistemasRed\MusiCloud_Frontend\Cliente_MusiCloud\obj\Debug\pages\CrearPlaylist.g.cs
+C:\Users\IvanGutru\Documents\0.-IngenieriaSoftware\SextoSemestre\1.-DesarrolloSistemasRed\MusiCloud_Frontend\Cliente_MusiCloud\obj\Debug\pages\CrearPlaylist.baml

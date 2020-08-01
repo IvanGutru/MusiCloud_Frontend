@@ -16,18 +16,29 @@ using System.Windows.Shapes;
 namespace Cliente_MusiCloud.pages
 {
     /// <summary>
-    /// Lógica de interacción para Home.xaml
+    /// Lógica de interacción para CrearPlaylist.xaml
     /// </summary>
-    public partial class Home : Page
+    public partial class CrearPlaylist : Page
     {
-        public Home()
+        public CrearPlaylist()
         {
             InitializeComponent();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void Btn_Regresar_Click(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new CrearPlaylist());
+            NavigationService.Navigate(new Home());
+        }
+
+    
+        private void subirPortada_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void GuardarPlaylist_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
