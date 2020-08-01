@@ -46,7 +46,7 @@
                     </Grid>
                 </Grid>
                 <Grid Grid.Row="1">
-                    <ListView Margin="40,0,40,0" x:Name="listViewArtistas" Foreground="White" FontSize="14">
+                    <ListView Margin="40,0,40,0" x:Name="listViewArtistas" Foreground="White" FontSize="14" MouseDoubleClick="listViewArtistas_MouseDoubleClick">
                         <ListView.View>
                             <GridView >
                                 <GridViewColumn  Header="Nombre" Width="200" DisplayMemberBinding="{Binding nombre}" />
@@ -62,24 +62,25 @@
                     <RowDefinition Height="3*"/>
                 </Grid.RowDefinitions>
                 <Grid Grid.Row="0">
-                    
+                    <TextBlock x:Name="txt_textoAlbumes" Grid.Column="2" Text="Lista de albumes" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="26" Foreground="White"/>
                 </Grid>
                 <Grid Grid.Row="1">
                     <ListView Grid.Row="0" x:Name="listView_Albumes" Padding="5" Margin="50,10,50,10">
                         <ListView.ItemTemplate>
                             <DataTemplate>
-                                <StackPanel Orientation="Vertical">
-                                    <StackPanel Orientation="Horizontal">
-                                        <TextBlock Text="Nombre: " />
-                                        <TextBlock Text="{Binding nombre}" />
+                                <StackPanel Orientation="Horizontal">
+                                    <StackPanel>
+                                        <Image Source="/Resources/playlistPortada.png" Height="70"/>
                                     </StackPanel>
-                                    <StackPanel Orientation="Horizontal">
-                                        <TextBlock Text="Compañia: " />
-                                        <TextBlock Text="{Binding compania}" />
-                                    </StackPanel>
-                                    <StackPanel Orientation="Horizontal">
-                                        <TextBlock Text="Cupo: " />
-                                        <TextBlock Text="" />
+                                    <StackPanel Orientation="Vertical">
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="Nombre: " Foreground="White" Margin="8,0,0,0"/>
+                                            <TextBlock Text="{Binding nombre}" Foreground="White" />
+                                        </StackPanel>
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="Compañia: " Foreground="White" Margin="8,0,0,0"/>
+                                            <TextBlock Text="{Binding compania}" Foreground="White" />
+                                        </StackPanel>
                                     </StackPanel>
                                 </StackPanel>
                             </DataTemplate>

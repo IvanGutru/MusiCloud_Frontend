@@ -1,4 +1,6 @@
-﻿using Cliente_MusiCloud.artista.aplicacion;
+﻿using Cliente_MusiCloud.album.aplicacion;
+using Cliente_MusiCloud.album.dominio;
+using Cliente_MusiCloud.artista.aplicacion;
 using Cliente_MusiCloud.artista.Dominio;
 using System;
 using System.Collections.Generic;
@@ -25,6 +27,7 @@ namespace Cliente_MusiCloud.pages
         public MostrarArtistas()
         {
             InitializeComponent();
+            txt_textoAlbumes.Visibility = Visibility.Hidden; 
         }
 
 
@@ -59,6 +62,26 @@ namespace Cliente_MusiCloud.pages
                 return false;
             }
             return true;
+        }
+
+        private async void listViewArtistas_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            List<Album> listaAlbumes;
+            Artista artista = (Artista)listViewArtistas.SelectedValue;
+            if (artista != null)
+            {
+                try
+                {
+                    listaAlbumes = await AplicacionAlbum.ObtenerAlbumesArtistaPorId(artista.idArtista);
+                    listView_Albumes.ItemsSource = listaAlbumes;
+                    txt_textoAlbumes.Visibility = Visibility.Visible;
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+              
+            }
         }
     }
 }

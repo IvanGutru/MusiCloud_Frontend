@@ -85,6 +85,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="album\aplicacion\AplicacionAlbum.cs" />
+    <Compile Include="album\dominio\Album.cs" />
     <Compile Include="artista\aplicacion\Aplicacion.cs" />
     <Compile Include="artista\Dominio\Artista.cs" />
     <Compile Include="cuenta\Dominio\Cuentas.cs" />
