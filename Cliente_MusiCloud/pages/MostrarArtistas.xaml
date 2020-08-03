@@ -79,7 +79,7 @@
                     <TextBlock x:Name="txt_nombreArtista" Text="" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="26" Foreground="White" Margin="274,34,29,35" Width="192"/>
                 </Grid>
                 <Grid Grid.Row="1">
-                    <ListView Grid.Row="0" x:Name="listView_Albumes" Padding="5" Margin="50,10,50,10">
+                    <ListView Grid.Row="0" x:Name="listView_Albumes" Padding="5" Margin="50,10,50,10" MouseDoubleClick="ListView_Albumes_MouseDoubleClick">
                         <ListView.ItemTemplate>
                             <DataTemplate>
                                 <StackPanel Orientation="Horizontal">
