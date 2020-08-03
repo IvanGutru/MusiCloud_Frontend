@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Cliente_MusiCloud.album.dominio
 {
-    class Album
+    public class Album
     {
         public string idAlbum { get; set; }
         public string nombre { get; set; }

@@ -87,5 +87,13 @@ namespace Cliente_MusiCloud.pages
 
             }
         }
+        private void ListView_Albumes_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            Album album = (Album)listView_Albumes.SelectedItem;
+            if (listView_Albumes.SelectedItems.Count>0)
+            {
+              NavigationService.Navigate(new MostrarCanciones(album));
+            }
+        }
     }
 }
