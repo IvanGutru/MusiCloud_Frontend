@@ -1,4 +1,5 @@
-﻿using Cliente_MusiCloud.album.dominio;
+﻿using Cliente_MusiCloud.album.aplicacion;
+using Cliente_MusiCloud.album.dominio;
 using Cliente_MusiCloud.cancion.aplicacion;
 using Cliente_MusiCloud.cancion.dominio;
 using System;
@@ -25,6 +26,7 @@ namespace Cliente_MusiCloud.pages
     {
         Album album;
         List<Cancion> listaCanciones;
+        String idAlbum;
         public MostrarCanciones(Album albumLista)
         {
             album = albumLista;
@@ -32,9 +34,17 @@ namespace Cliente_MusiCloud.pages
             txt_NombreAlbum.Text = album.nombre;
             txt_NombreCompania.Text = album.compania;
             CargarCanciones();
+            Btn_RegresarAMostrarAlbumes.Visibility = Visibility.Hidden;
 
         }
-
+        public MostrarCanciones(String idAlbum)
+        {
+            InitializeComponent();
+            this.idAlbum = idAlbum;
+            CargarCancionesDesdeMostrarAlbum();
+            Btn_Regresar.Visibility = Visibility.Hidden;
+            CargarInformacionAlbum();
+        }
         private async void CargarCanciones()
         {
             if (album != null)
@@ -51,9 +61,43 @@ namespace Cliente_MusiCloud.pages
             }
         }
 
+        private async void CargarCancionesDesdeMostrarAlbum()
+        {
+            try
+            {
+                listaCanciones = await AplicacionCancion.ObtenerCancionesPorIdAlbumAsync(idAlbum);
+                listView_Canciones.ItemsSource = listaCanciones;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+        private async void CargarInformacionAlbum()
+        {
+            try
+            {
+                List<Album> album = await AplicacionAlbum.ObtenerAlbumPorId(idAlbum);
+                foreach (var nombre in album)
+                {
+                    txt_NombreAlbum.Text = nombre.nombre;
+                    txt_NombreCompania.Text = nombre.compania; 
+                }
+               
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
         private void Btn_Regresar_Click(object sender, RoutedEventArgs e)
         {
             NavigationService.Navigate(new MostrarArtistas());
+        }
+        private void Btn_Regresar_MostrarCanciones_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new MostrarAlbumes());
         }
     }
 }
