@@ -35,7 +35,6 @@ namespace Cliente_MusiCloud.Cuenta
             {
                 if (response.IsSuccessStatusCode)
                 {
-                    //String respuesta = await response.Content.ReadAsAsync<String>();
                     return true;
                 }
                 else
