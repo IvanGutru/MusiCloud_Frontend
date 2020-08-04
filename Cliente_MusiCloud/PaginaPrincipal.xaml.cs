@@ -51,6 +51,7 @@ namespace Cliente_MusiCloud
                     centralFrame.Navigate(new Home());
                     break;
                 case "ItemAlbum":
+                    centralFrame.Navigate(new MostrarAlbumes());
                     break;
                 case "ItemArtista":
                     centralFrame.Navigate(new MostrarArtistas());
