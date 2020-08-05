@@ -28,7 +28,56 @@
             <TextBlock Grid.Column="2" Text="Crear playlist" VerticalAlignment="Center" FontSize="16" Foreground="White"/>
         </Grid>
         <Grid Grid.Row="1">
-            
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="8*"/>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Grid.Column="0" Text="Playlist del sistema" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16" Foreground="White"/>
+                <TextBlock Grid.Column="1" Text="Artistas" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16" Foreground="White"/>
+                <TextBlock Grid.Column="2" Text="Albumes" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16" Foreground="White"/>
+            </Grid>
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+                <Grid x:Name="GridRecomendadas" Grid.Column="0">
+                    <ListView Grid.Row="0" x:Name="listViewPlaylistSistema" Padding="5" Margin="30,10,30,10" >
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <StackPanel>
+                                        <Image x:Name="imagens" Source="{Binding imagenPortada}" Height="70"/>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Vertical">
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="Nombre: " Foreground="White" Margin="8,0,0,0"/>
+                                            <TextBlock Text="{Binding nombre}" Foreground="White" />
+                                        </StackPanel>
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="Descripcion: " Foreground="White" Margin="8,0,0,0"/>
+                                            <TextBlock Text="{Binding descripcion}" Foreground="White" />
+                                        </StackPanel>
+                                    </StackPanel>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </Grid>
+                <Grid x:Name="GridArtistas" Grid.Column="1">
+                    
+                </Grid>
+                <Grid x:Name="GridAlbumes" Grid.Column="1">
+
+                </Grid>
+            </Grid>
         </Grid>
     </Grid>
 </Page>

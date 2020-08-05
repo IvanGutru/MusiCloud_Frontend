@@ -46,13 +46,13 @@ namespace Cliente_MusiCloud.pages
                         bool respuesta = await AplicacionPlaylist.CrearPlaylist(playlist);
                         if (respuesta)
                         {
-                            MessageBox.Show("Playlist Registrada con éxito");
+                            MessageBox.Show("Playlist Registrada con éxito","Playlist Registrada",MessageBoxButton.OK,MessageBoxImage.Information);
                             NavigationService.Navigate(new Home());
                         }
                     }
                     catch (Exception ex)
                     {
-                        MessageBox.Show(ex.Message);
+                        MessageBox.Show(ex.Message,"Error", MessageBoxButton.OK,MessageBoxImage.Warning);
                         Console.WriteLine(ex.Message);
                     }
 
@@ -97,7 +97,7 @@ namespace Cliente_MusiCloud.pages
         {
             if (rdb_privada.IsChecked == false && rdb_publica.IsChecked == false )
             {
-                MessageBox.Show("Por favor selecciona el tipo de playlist (Pública o Privada)");
+                MessageBox.Show("Por favor selecciona el tipo de playlist (Pública o Privada)","Advertencia",MessageBoxButton.OK,MessageBoxImage.Warning);
                 return false;
             }
             return true;

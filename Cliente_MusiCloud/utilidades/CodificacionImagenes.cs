@@ -2,6 +2,7 @@
 using System;
 using System.Drawing;
 using System.IO;
+using System.Windows.Media.Imaging;
 
 namespace Cliente_MusiCloud.utilidades
 {
@@ -19,6 +20,20 @@ namespace Cliente_MusiCloud.utilidades
                     return base64String;
                 }
             }
+        }
+
+        public static BitmapImage DecodificarBase64(String imagenCodificada)
+        {
+            BitmapImage bitmapImage = new BitmapImage(); 
+            byte[] imagenEnBytes = Convert.FromBase64String(imagenCodificada);
+            var ms = new MemoryStream(imagenEnBytes);
+            
+                //Image imagen = Image.FromStream(ms,true);
+                bitmapImage.BeginInit();
+                bitmapImage.StreamSource = ms;
+                bitmapImage.EndInit();
+                return bitmapImage;
+            
         }
     }
 }

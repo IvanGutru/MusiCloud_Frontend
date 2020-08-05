@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Media.Imaging;
 
 namespace Cliente_MusiCloud.playlist.dominio
 {
@@ -15,5 +17,6 @@ namespace Cliente_MusiCloud.playlist.dominio
         public string portada { get; set; }
         public string idCuenta { get; set; }
         public int idTipoPlaylist { get; set; }
+        public BitmapImage imagenPortada { get; set; }
     }
 }

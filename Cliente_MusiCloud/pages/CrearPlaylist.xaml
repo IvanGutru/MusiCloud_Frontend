@@ -64,7 +64,7 @@
                             <TextBox x:Name="txt_NombrePlaylist" Style="{StaticResource MaterialDesignFilledTextFieldTextBox}"
                              VerticalAlignment="Center" HorizontalAlignment="Center" TextWrapping="Wrap" Margin="72,20,62,0"
                              Width="453" Height="70" MaxLines="50" MaxLength="50" Foreground="White" SelectionBrush="#34f7c3" CaretBrush="#34f7c3"
-                                materialDesign:HintAssist.Hint="Ingrese nombre del artista" Background="{x:Null}" BorderBrush="{x:Null}"/>
+                                materialDesign:HintAssist.Hint="Ingrese nombre de la playlist" Background="{x:Null}" BorderBrush="{x:Null}"/>
                         </StackPanel>
                         <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center"  Height="40" Width="260">
                             <RadioButton x:Name="rdb_privada" GroupName="TipoPlaylist" Foreground="White" Content="Privada" Margin="0,0,30,0" Width="121"/>
