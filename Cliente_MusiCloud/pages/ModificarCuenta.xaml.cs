@@ -45,23 +45,23 @@ namespace Cliente_MusiCloud.pages
             MessageBoxResult messageBoxResult = MessageBox.Show("¿Está seguro de configurar su cuenta como Creador de Contenido?", "Convertirse en creador", MessageBoxButton.OKCancel);
             if (messageBoxResult == MessageBoxResult.OK)
             {
-                if (cuenta.creadorContenido == false)
-                {
+                /*if (cuenta.creadorContenido == false)
+                {*/
                     try
                     {
-                        string respuesta = await Aplicacion.ConvertirseEnCreadorDeContenido(cuenta.idCuenta);
-                        MessageBox.Show(respuesta, "Operación exitosa");
-                        NavigationService.Navigate(new Home());
+                    //    string respuesta = await Aplicacion.ConvertirseEnCreadorDeContenido(cuenta.idCuenta);
+                      //  MessageBox.Show(respuesta, "Operación exitosa");
+                        NavigationService.Navigate(new CrearArtista());
                     }
                     catch (Exception ex)
                     {
                         MessageBox.Show(ex.Message, "Ocurrió un error", MessageBoxButton.OK, MessageBoxImage.Warning);
                     }
-                }
+                /*}
                 else
                 {
                     MessageBox.Show("Ya eres creador de contenido", "Operación fallida");
-                }
+                }*/
             }
         }
 

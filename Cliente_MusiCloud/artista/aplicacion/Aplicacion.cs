@@ -10,6 +10,26 @@ namespace Cliente_MusiCloud.artista.aplicacion
 {
     class Aplicacion
     {
+        public static async Task<Artista> RegistrarArtista(Artista artista)
+        {
+            string path = "Artista";
+            Artista artistaRecuperado = null;
+            using (HttpResponseMessage respuesta = await ConexionApi.ApiCliente.PostAsJsonAsync(path, artista))
+            {
+                if (respuesta.IsSuccessStatusCode)
+                {
+                    artistaRecuperado = await respuesta.Content.ReadAsAsync<Artista>();
+                    return artistaRecuperado;
+                }
+                else
+                {
+                    dynamic error = await respuesta.Content.ReadAsAsync<dynamic>();
+                    string mensaje = error.error;
+                    throw new Exception(mensaje);
+                }
+
+            }
+        }
         public static async Task<List<Artista>> ObtenerArtistaPorNombre(String nombreArtista)
         {
             string path ="Artista/"+nombreArtista;

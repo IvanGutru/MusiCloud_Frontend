@@ -95,7 +95,14 @@
     <Compile Include="artista\Dominio\Artista.cs" />
     <Compile Include="cancion\aplicacion\AplicacionCancion.cs" />
     <Compile Include="cancion\dominio\Cancion.cs" />
+    <Compile Include="cuentaArtista\aplicacion\AplicacionCuentaArtista.cs" />
+    <Compile Include="cuentaArtista\dominio\CuentaArtista.cs" />
     <Compile Include="cuenta\Dominio\Cuentas.cs" />
+    <Compile Include="genero\aplicacion\AplicacionGenero.cs" />
+    <Compile Include="genero\dominio\Genero.cs" />
+    <Compile Include="pages\CrearArtista.xaml.cs">
+      <DependentUpon>CrearArtista.xaml</DependentUpon>
+    </Compile>
     <Compile Include="pages\CrearPlaylist.xaml.cs">
       <DependentUpon>CrearPlaylist.xaml</DependentUpon>
     </Compile>
@@ -146,6 +153,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="pages\CrearArtista.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="pages\CrearPlaylist.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

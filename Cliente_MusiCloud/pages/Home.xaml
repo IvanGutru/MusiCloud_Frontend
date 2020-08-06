@@ -66,7 +66,7 @@
                     </ListView>
                 </Grid>
                 <Grid x:Name="GridArtistas" Grid.Column="1">
-                    <ListView Grid.Row="0" x:Name="listViewArtistas" Padding="5" Margin="30,10,30,10" >
+                    <ListView Grid.Row="0" x:Name="listViewArtistas" Padding="5" Margin="30,10,30,10" ScrollViewer.VerticalScrollBarVisibility="Disabled" >
                         <ListView.ItemTemplate>
                             <DataTemplate>
                                 <StackPanel Orientation="Horizontal">

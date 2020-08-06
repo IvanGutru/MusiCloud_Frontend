@@ -4,17 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Cliente_MusiCloud.artista.Dominio
+namespace Cliente_MusiCloud.genero.dominio
 {
-    class Artista
+    public class Genero
     {
-        public string idArtista { get; set; }
+        public int idGenero { get; set; }
         public string nombre { get; set; }
         public string descripcion { get; set; }
         public string portada { get; set; }
-        public DateTime fechaRegistro { get; set; }
-        public int idGenero { get; set; }
-
- 
     }
 }
