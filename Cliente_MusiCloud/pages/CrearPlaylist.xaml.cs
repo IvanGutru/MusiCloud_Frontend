@@ -27,7 +27,7 @@ namespace Cliente_MusiCloud.pages
     {
         const int PLAYLISTTIPOUSUARIO = 2;
         String pathAbsolutoImagen;
-        String idCuenta = SingletonCuenta.GetSingletonCuenta().cuenta.idCuenta;
+        String idCuenta = SingletonCuenta.GetSingletonCuenta().idCuenta;
         Playlist playlist = new Playlist();
         public CrearPlaylist()
         {

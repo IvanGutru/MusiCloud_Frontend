@@ -30,5 +30,26 @@ namespace Cliente_MusiCloud.artista.aplicacion
 
             }
         }
+
+        public static async Task<List<Artista>> ObtenerArtistaHome()
+        {
+            string path = "ArtistaHome";
+            List<Artista> listaArtistas;
+            using (HttpResponseMessage response = await ConexionApi.ApiCliente.GetAsync(path))
+            {
+                if (response.IsSuccessStatusCode)
+                {
+                    listaArtistas = await response.Content.ReadAsAsync<List<Artista>>();
+                    return listaArtistas;
+                }
+                else
+                {
+                    dynamic error = await response.Content.ReadAsAsync<dynamic>();
+                    string mensaje = error.error;
+                    throw new Exception(mensaje);
+                }
+
+            }
+        }
     }
 }

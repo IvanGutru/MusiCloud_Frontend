@@ -1,4 +1,6 @@
-﻿using Cliente_MusiCloud.playlist.aplicacion;
+﻿using Cliente_MusiCloud.artista.aplicacion;
+using Cliente_MusiCloud.artista.Dominio;
+using Cliente_MusiCloud.playlist.aplicacion;
 using Cliente_MusiCloud.playlist.dominio;
 using System;
 using System.Collections.Generic;
@@ -23,10 +25,12 @@ namespace Cliente_MusiCloud.pages
     public partial class Home : Page
     {
         List<Playlist> listaPlaylistSistema;
+        List<Artista> listaArtistasHome;
         public Home()
         {
             InitializeComponent();
             CargarPlaylistSistemaAsync();
+            CargarArtistas();
         }
 
         private async void CargarPlaylistSistemaAsync()
@@ -43,7 +47,18 @@ namespace Cliente_MusiCloud.pages
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message,"Ocurrió un error",MessageBoxButton.OK, MessageBoxImage.Warning);
-                Console.WriteLine(ex.Message);
+            }
+        }
+        private async void CargarArtistas()
+        {
+            try
+            {
+                listaArtistasHome = await Aplicacion.ObtenerArtistaHome();
+                listViewArtistas.ItemsSource = listaArtistasHome;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Ocurrió un error", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
         }
 

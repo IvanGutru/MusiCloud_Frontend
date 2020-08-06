@@ -29,14 +29,15 @@
                 </Grid.RowDefinitions>
                 <Grid Grid.Row="0">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="4*"/>
-                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="208*"/>
+                        <ColumnDefinition Width="188*"/>
+                        <ColumnDefinition Width="99*"/>
                     </Grid.ColumnDefinitions>
                     <TextBox Grid.Column="0"  x:Name="txt_Nombre" Style="{StaticResource MaterialDesignFilledTextFieldTextBox}"
                     VerticalAlignment="Top" TextWrapping="Wrap" Margin="40,10,0,0"
                     Height="70" MaxLines="50" MaxLength="50" Foreground="White" SelectionBrush="#34f7c3" CaretBrush="#34f7c3"
-                    materialDesign:HintAssist.Hint="Ingrese nombre del artista" Background="{x:Null}" BorderBrush="{x:Null}"/>
-                    <Grid Grid.Column="1">
+                    materialDesign:HintAssist.Hint="Ingrese nombre del artista" Background="{x:Null}" BorderBrush="{x:Null}" Grid.ColumnSpan="2"/>
+                    <Grid Grid.Column="2">
                         <Button Grid.Column="1" x:Name="Btn_Buscar"
                             VerticalAlignment="Center" Margin="5" Background="#262626"  BorderBrush="#34f7c3"
                             Style="{StaticResource MaterialDesignFloatingActionAccentButton}"

@@ -13,7 +13,7 @@ namespace Cliente_MusiCloud
         public PaginaPrincipal()
         {
             InitializeComponent();
-            txt_UserName.Text = SingletonCuenta.GetSingletonCuenta().cuenta.nombreUsuario;
+            txt_UserName.Text = SingletonCuenta.GetSingletonCuenta().nombreUsuario;
             centralFrame.Navigate(new Home());
             centralFrame.NavigationUIVisibility = System.Windows.Navigation.NavigationUIVisibility.Hidden;
         }
@@ -32,7 +32,7 @@ namespace Cliente_MusiCloud
 
         private void Button_account_Click(object sender, RoutedEventArgs e)
         {
-
+            centralFrame.Navigate(new ModificarCuenta());
         }
 
         private void Button_signout_Click(object sender, RoutedEventArgs e)

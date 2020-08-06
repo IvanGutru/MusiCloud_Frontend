@@ -8,15 +8,15 @@ namespace Cliente_MusiCloud.Cuenta
 {
     class Aplicacion
     {
-        public static async Task<LoginResponse> Login(LoginRequest request)
+        public static async Task<Cuentas> Login(LoginRequest request)
         {
             string path = "Cuenta/Login";
-            LoginResponse loginResponse = null;
+            Cuentas loginResponse = null;
             using (HttpResponseMessage response = await ConexionApi.ApiCliente.PostAsJsonAsync(path, request))
             {
                 if (response.IsSuccessStatusCode)
                 {
-                    loginResponse = await response.Content.ReadAsAsync<LoginResponse>();
+                    loginResponse = await response.Content.ReadAsAsync<Cuentas>();
                     return loginResponse;
                 }
                 else
@@ -40,6 +40,46 @@ namespace Cliente_MusiCloud.Cuenta
                 else
                 {
                     dynamic error = await response.Content.ReadAsAsync<dynamic>();
+                    string mensaje = error.error;
+                    throw new Exception(mensaje);
+
+                }
+            }
+
+        }
+        public static async Task<String> ConvertirseEnCreadorDeContenido(string idCuenta )
+        {
+            string path = "Cuenta/CreadorContenido/"+idCuenta;
+            using (HttpResponseMessage response = await ConexionApi.ApiCliente.PutAsJsonAsync(path, idCuenta))
+            {
+                if (response.IsSuccessStatusCode)
+                {
+                    string respuesta = await response.Content.ReadAsStringAsync();
+                    return respuesta;
+                }
+                else
+                {
+                    dynamic error = await response.Content.ReadAsAsync<dynamic>();
+                    string mensaje = error.error;
+                    throw new Exception(mensaje);
+
+                }
+            }
+
+        }
+        public static async Task<bool> ActualizarCuenta(Cuentas cuenta)
+        {
+            string path = "Cuenta/Actualizar";
+            using (HttpResponseMessage respuesta = await ConexionApi.ApiCliente.PutAsJsonAsync(path, cuenta))
+            {
+                if (respuesta.IsSuccessStatusCode)
+                {
+                    bool mensaje = true;
+                    return mensaje;
+                }
+                else
+                {
+                    dynamic error = await respuesta.Content.ReadAsAsync<dynamic>();
                     string mensaje = error.error;
                     throw new Exception(mensaje);
 

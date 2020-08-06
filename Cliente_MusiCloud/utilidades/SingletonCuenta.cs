@@ -1,22 +1,21 @@
-﻿using Cliente_MusiCloud.cuenta.LoginRR;
+﻿using Cliente_MusiCloud.cuenta.Dominio;
+using Cliente_MusiCloud.cuenta.LoginRR;
 
 namespace Cliente_MusiCloud.utilidades
 {
     class SingletonCuenta
     {
-        private static LoginResponse cuentaSesion = null;
+        private static Cuentas cuentaSesion = null;
+
 
         private SingletonCuenta() { }
 
-        public static void SetCuenta(LoginResponse cuenta)
+        public static void SetCuenta(Cuentas cuenta)
         {
-            if (cuentaSesion == null)
-            {
-                cuentaSesion = cuenta;
-            }
+          cuentaSesion = cuenta;
         }
 
-        public static LoginResponse GetSingletonCuenta()
+        public static Cuentas GetSingletonCuenta()
         {
             return cuentaSesion;
         }

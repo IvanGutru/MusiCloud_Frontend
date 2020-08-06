@@ -16,6 +16,7 @@ namespace Cliente_MusiCloud.cuenta.Dominio
         public string nombre { get; set; }
         public bool creadorContenido { get; set; }
 
+        public string token { get; set; }
         public Cuentas()
         {
         }
