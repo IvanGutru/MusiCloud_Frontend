@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Media.Imaging;
 
 namespace Cliente_MusiCloud.artista.Dominio
 {
@@ -15,6 +16,8 @@ namespace Cliente_MusiCloud.artista.Dominio
         public DateTime fechaRegistro { get; set; }
         public int idGenero { get; set; }
 
- 
+        public BitmapImage imagenPortadaArtista { get; set; }
+
+
     }
 }

@@ -31,7 +31,7 @@ namespace Cliente_MusiCloud.Cuenta
         public static async Task<bool> CrearCuenta(Cuentas cuenta)
         {
             string path = "Cuenta";
-            using (HttpResponseMessage response = await ConexionApi.ApiCliente.PostAsJsonAsync(path,cuenta))
+            using (HttpResponseMessage response = await ConexionApi.ApiCliente.PostAsJsonAsync(path, cuenta))
             {
                 if (response.IsSuccessStatusCode)
                 {
@@ -47,15 +47,14 @@ namespace Cliente_MusiCloud.Cuenta
             }
 
         }
-        public static async Task<String> ConvertirseEnCreadorDeContenido(string idCuenta )
+        public static async Task<bool> ConvertirseEnCreadorDeContenido(CreadorRequest creadorRequest)
         {
-            string path = "Cuenta/CreadorContenido/"+idCuenta;
-            using (HttpResponseMessage response = await ConexionApi.ApiCliente.PutAsJsonAsync(path, idCuenta))
+            string path = "Cuenta/CreadorContenido/" + creadorRequest.IdCuenta;
+            using (HttpResponseMessage response = await ConexionApi.ApiCliente.PutAsJsonAsync(path, creadorRequest))
             {
                 if (response.IsSuccessStatusCode)
                 {
-                    string respuesta = await response.Content.ReadAsStringAsync();
-                    return respuesta;
+                    return true;
                 }
                 else
                 {

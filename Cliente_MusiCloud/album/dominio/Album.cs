@@ -13,6 +13,7 @@ namespace Cliente_MusiCloud.album.dominio
         public string compania { get; set; }
         public string portada { get; set; }
         public int idGenero  { get; set; }
+        public DateTime fechaRegistro { get; set; }
         public string idArtista  { get; set; }
 
     }

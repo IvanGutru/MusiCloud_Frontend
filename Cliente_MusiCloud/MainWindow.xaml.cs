@@ -1,9 +1,13 @@
-﻿using Cliente_MusiCloud.cuenta.Dominio;
+﻿using Cliente_MusiCloud.artista.Dominio;
+using Cliente_MusiCloud.artista.aplicacion;
 using Cliente_MusiCloud.cuenta.LoginRR;
 using Cliente_MusiCloud.Cuenta;
+using Cliente_MusiCloud.cuentaArtista.aplicacion;
+using Cliente_MusiCloud.cuentaArtista.dominio;
 using Cliente_MusiCloud.pages;
 using Cliente_MusiCloud.utilidades;
 using System;
+using System.Threading.Tasks;
 using System.Windows;
 
 namespace Cliente_MusiCloud
@@ -13,7 +17,9 @@ namespace Cliente_MusiCloud
     /// </summary>
     public partial class MainWindow : Window
     {
-        private LoginResponse cuenta;
+        CuentaArtista CuentaArtista;
+        Artista artista;
+ 
         public MainWindow()
         {
             InitializeComponent();
@@ -28,8 +34,14 @@ namespace Cliente_MusiCloud
                 if (ValidarCampos())
                 {
                     LoginRequest loginRequest = GetLoginRequest();
-                    var loginResponse = await Aplicacion.Login(loginRequest);
+                    var loginResponse = await Cuenta.Aplicacion.Login(loginRequest);
                     SingletonCuenta.SetCuenta(loginResponse);
+                    CuentaArtista = await ObtenerCuentaArtistaAsync(loginResponse.idCuenta);
+                    if (CuentaArtista != null)
+                    {
+                        artista = await ObtenerArtista(CuentaArtista.idArtista);
+                        SingletonArtista.SetArtista(artista);
+                    }
                     PaginaPrincipal paginaInicio = new PaginaPrincipal();
                     paginaInicio.Show();
                     this.Close();
@@ -45,7 +57,7 @@ namespace Cliente_MusiCloud
             }
 
         }
-
+ 
         private LoginRequest GetLoginRequest()
         {
             String correo = txt_email.Text;
@@ -68,6 +80,37 @@ namespace Cliente_MusiCloud
             RegistrarCuenta registrarCuenta = new RegistrarCuenta();
             registrarCuenta.Show();
             this.Close();
+        }
+
+
+        private async Task<CuentaArtista> ObtenerCuentaArtistaAsync(string idCuenta)
+        {
+            CuentaArtista cuentaArtista = null;
+            try
+            {
+                cuentaArtista = await AplicacionCuentaArtista.ObtenerCuentaArtistaIdCuenta(idCuenta);
+                
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            return cuentaArtista;
+        }
+
+        private async Task<Artista> ObtenerArtista(string idArtista)
+        {
+            Artista artista = null;
+            try
+            {
+                artista = await Cliente_MusiCloud.artista.aplicacion.Aplicacion.ObtenerArtistaPorId(idArtista);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+
+            return artista;
         }
     }
 }

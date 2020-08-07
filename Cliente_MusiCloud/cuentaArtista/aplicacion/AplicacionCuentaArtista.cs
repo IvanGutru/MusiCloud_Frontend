@@ -28,5 +28,25 @@ namespace Cliente_MusiCloud.cuentaArtista.aplicacion
 
             }
         }
+        public static async Task<CuentaArtista> ObtenerCuentaArtistaIdCuenta(String idCuenta)
+        {
+            string path = "CuentaArtista/" + idCuenta;
+            CuentaArtista cuentaArtista;
+            using (HttpResponseMessage response = await ConexionApi.ApiCliente.GetAsync(path))
+            {
+                if (response.IsSuccessStatusCode)
+                {
+                    cuentaArtista = await response.Content.ReadAsAsync<CuentaArtista>();
+                    return cuentaArtista;
+                }
+                else
+                {
+                    dynamic error = await response.Content.ReadAsAsync<dynamic>();
+                    string mensaje = error.error;
+                    throw new Exception(mensaje);
+                }
+
+            }
+        }
     }
 }

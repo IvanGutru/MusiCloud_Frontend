@@ -1,5 +1,5 @@
-﻿using Cliente_MusiCloud.artista.aplicacion;
-using Cliente_MusiCloud.artista.Dominio;
+﻿using Cliente_MusiCloud.artista.Dominio;
+using Cliente_MusiCloud.cuenta.Dominio;
 using Cliente_MusiCloud.cuentaArtista.aplicacion;
 using Cliente_MusiCloud.cuentaArtista.dominio;
 using Cliente_MusiCloud.genero.aplicacion;
@@ -8,18 +8,11 @@ using Cliente_MusiCloud.utilidades;
 using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace Cliente_MusiCloud.pages
 {
@@ -31,13 +24,12 @@ namespace Cliente_MusiCloud.pages
         List<Genero> listaGeneros;
         String pathAbsolutoImagen;
         Artista artista;
-        String idCuenta = SingletonCuenta.GetSingletonCuenta().idCuenta; 
+        Cuentas cuenta = SingletonCuenta.GetSingletonCuenta();
         public CrearArtista()
         {
             InitializeComponent();
             CargarGenerosAsync();
         }
-
 
         private async void CargarGenerosAsync()
         {
@@ -58,22 +50,15 @@ namespace Cliente_MusiCloud.pages
      
         private async void GuardarArtista_Click(object sender, RoutedEventArgs e)
         {
-            artista = await RegistrarArtistaAsync();
-            if (artista!=null)
+            CuentaArtista cuentaArtista = await ObtenerCuentaArtistaAsync();
+            if (cuentaArtista!=null)
             {
                 try
                 {
-                    CuentaArtista cuentaArtista = new CuentaArtista
-                    {
-                        idCuenta = idCuenta,
-                        idArtista = artista.idArtista
-                    };
-                    bool respuesta = await AplicacionCuentaArtista.RegistrarCuentaArtista(cuentaArtista);
-                    if (respuesta)
-                    {
-                        MessageBox.Show("Artista Registrado con éxito", "Operación éxitosa", MessageBoxButton.OK);
-                        NavigationService.Navigate(new Home());
-                    }
+                    await GuardarNuevoValorCreadorContenidoAsync();
+                    await AplicacionCuentaArtista.RegistrarCuentaArtista(cuentaArtista);
+                    MessageBox.Show("Artista Registrado con éxito", "Operación éxitosa", MessageBoxButton.OK);
+                    NavigationService.Navigate(new Home());
                 }
                 catch (Exception ex)
                 {
@@ -81,28 +66,64 @@ namespace Cliente_MusiCloud.pages
                 }
             }
         }
+        private async Task GuardarNuevoValorCreadorContenidoAsync()
+        {
+                CreadorRequest creadorRequest = new CreadorRequest
+                {
+                    IdCuenta = cuenta.idCuenta
+                };
+                await Cuenta.Aplicacion.ConvertirseEnCreadorDeContenido(creadorRequest);
+        }
+        private bool ValidarCreadorContenidoNoRegistrado()
+        {
+            if (cuenta.creadorContenido)
+            {
+                MessageBox.Show("Ya se ha registrado como creador de contenido", "Ocurrió un error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return false;
+            }
+            return true;
+    
+        }
 
+        private async Task<CuentaArtista> ObtenerCuentaArtistaAsync()
+        {
+            CuentaArtista cuentaArtista = null;
+            artista = await RegistrarArtistaAsync();
+            if (artista!=null)
+            {
+                cuentaArtista = new CuentaArtista
+                {
+                    idCuenta = cuenta.idCuenta,
+                    idArtista = artista.idArtista
+                };
+            }
+            return cuentaArtista;
+        }
         private async Task<Artista> RegistrarArtistaAsync()
         {
-            Artista artistaRecuperado = null;
-            if (ValidarCampos())
+            Artista artistaRegistradoEnBD = null;
+            if (ValidarCampos() && ValidarCreadorContenidoNoRegistrado())
             {
                 try
                 {
                     artista = await ObtenerInformacionArtistaAsync();
-                    artistaRecuperado = await Aplicacion.RegistrarArtista(artista);
+                    artistaRegistradoEnBD = await Cliente_MusiCloud.artista.aplicacion.Aplicacion.RegistrarArtista(artista);
                 }
                 catch (Exception ex)
                 {
                     MessageBox.Show(ex.Message, "Ocurrió un error", MessageBoxButton.OK, MessageBoxImage.Warning);
                 }
             }
-            else
+            return artistaRegistradoEnBD;
+        }
+        private bool ValidarCampos()
+        {
+            if (String.IsNullOrEmpty(txt_NombreArtista.Text) && (String.IsNullOrEmpty(txt_DescripcionArtista.Text)))
             {
                 MessageBox.Show("Favor de ingresar información en todos los campos", "Advertencia", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return false;
             }
-
-            return artistaRecuperado;
+            return true;
         }
 
         private async Task<Artista> ObtenerInformacionArtistaAsync()
@@ -128,12 +149,7 @@ namespace Cliente_MusiCloud.pages
             }
             return portadaArtista = "";
         }
-        private bool ValidarCampos()
-        {
-            if (String.IsNullOrEmpty(txt_NombreArtista.Text) && (String.IsNullOrEmpty(txt_DescripcionArtista.Text)))
-                return false;
-            return true;
-        }
+
         private async Task<int> ObtenerIdGeneroAsync()
         {
             int idGenero = -1;

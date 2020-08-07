@@ -47,7 +47,7 @@
                                 <ColumnDefinition Width="181*"/>
                             </Grid.ColumnDefinitions>
                             <Button x:Name="subirPortada" Grid.Column="0" Width="30" Height="30" 
-                                Style="{StaticResource MaterialDesignIconButton}" ToolTip="Reproducir" Background="#1a1a1a"
+                                Style="{StaticResource MaterialDesignIconButton}" ToolTip="Cargar portada" Background="#1a1a1a"
                                  HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="65,0,0,47" Click="subirPortada_Click" >
                                 <materialDesign:PackIcon Kind="Upload" Width="20" Height="20"/>
                             </Button>
@@ -80,7 +80,7 @@
             </StackPanel>
             <Grid Grid.Row="1">
                 <Button Grid.Column="1" x:Name="GuardarArtista"
-                   Style="{StaticResource MaterialDesignIconButton}" ToolTip="Reproducir" Background="#1a1a1a"
+                   Style="{StaticResource MaterialDesignIconButton}" ToolTip="Registrar" Background="#1a1a1a"
                    HorizontalAlignment="Center" Margin="0,0,10,0" VerticalAlignment="Top" Click="GuardarArtista_Click" >
                     <materialDesign:PackIcon Kind="Add"/>
                 </Button>

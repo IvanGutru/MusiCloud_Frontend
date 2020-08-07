@@ -1,4 +1,5 @@
-﻿using Cliente_MusiCloud.pages;
+﻿
+using Cliente_MusiCloud.pages;
 using Cliente_MusiCloud.utilidades;
 using System.Windows;
 using System.Windows.Controls;
@@ -16,6 +17,7 @@ namespace Cliente_MusiCloud
             txt_UserName.Text = SingletonCuenta.GetSingletonCuenta().nombreUsuario;
             centralFrame.Navigate(new Home());
             centralFrame.NavigationUIVisibility = System.Windows.Navigation.NavigationUIVisibility.Hidden;
+            ValidarEsCreadorContenido();
         }
 
         private void ButtonCloseMenu_Click(object sender, RoutedEventArgs e)
@@ -60,6 +62,9 @@ namespace Cliente_MusiCloud
                     break;
                 case "ItemGeneros":
                     break;
+                case "ItemModuloArtista":
+                    centralFrame.Navigate(new GestionArtista());
+                    break;
                 case "ItemExit":
                     Salir();
                     break;
@@ -75,6 +80,15 @@ namespace Cliente_MusiCloud
             main.Show();
             this.Close();
         }
+        private void ValidarEsCreadorContenido()
+        {
+            bool esCreador = SingletonCuenta.GetSingletonCuenta().creadorContenido;
+            if (!esCreador)
+            {
+                ItemModuloArtista.Visibility = Visibility.Hidden;
+            }
+        }
+
 
     }
 }

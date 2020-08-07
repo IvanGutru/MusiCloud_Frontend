@@ -199,7 +199,19 @@
                             <TextBlock Text="Géneros" VerticalAlignment="Center"  Margin="20 10"/>
                         </StackPanel>
                     </ListViewItem>
-                    <ListViewItem x:Name="ItemA" Height="60">
+                    <ListViewItem x:Name="ItemModuloArtista" Height="60">
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Kind="MusicNoteAdd" Height="25" Width="25" Margin="10"/>
+                            <TextBlock Text="Géneros" VerticalAlignment="Center"  Margin="20 10"/>
+                        </StackPanel>
+                    </ListViewItem>
+                    <ListViewItem x:Name="Item" Height="60">
+                   
+                    </ListViewItem>
+                    <ListViewItem x:Name="Itm" Height="60">
+
+                    </ListViewItem>
+                    <ListViewItem x:Name="tem" Height="60">
 
                     </ListViewItem>
                     <ListViewItem x:Name="ItemExit" Height="60">

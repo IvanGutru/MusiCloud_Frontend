@@ -35,33 +35,12 @@ namespace Cliente_MusiCloud.pages
             
         }
 
-        private void Btn_Regresar_Click(object sender, RoutedEventArgs e)
-        {
-            NavigationService.Navigate(new Home());
-        }
-
-        private async void btn_ConvertirseEnCreador_Click(object sender, RoutedEventArgs e)
+        private void btn_ConvertirseEnCreador_Click(object sender, RoutedEventArgs e)
         {
             MessageBoxResult messageBoxResult = MessageBox.Show("¿Está seguro de configurar su cuenta como Creador de Contenido?", "Convertirse en creador", MessageBoxButton.OKCancel);
             if (messageBoxResult == MessageBoxResult.OK)
             {
-                /*if (cuenta.creadorContenido == false)
-                {*/
-                    try
-                    {
-                    //    string respuesta = await Aplicacion.ConvertirseEnCreadorDeContenido(cuenta.idCuenta);
-                      //  MessageBox.Show(respuesta, "Operación exitosa");
-                        NavigationService.Navigate(new CrearArtista());
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show(ex.Message, "Ocurrió un error", MessageBoxButton.OK, MessageBoxImage.Warning);
-                    }
-                /*}
-                else
-                {
-                    MessageBox.Show("Ya eres creador de contenido", "Operación fallida");
-                }*/
+                NavigationService.Navigate(new CrearArtista());
             }
         }
 
@@ -88,24 +67,9 @@ namespace Cliente_MusiCloud.pages
                 }
             }
         }
-        private Cuentas ObtenerNuevosDatosCuenta()
-        {
-            Cuentas nuevaCuenta = new Cuentas
-            {
-                idCuenta = cuenta.idCuenta,
-                nombre = txt_Nombre.Text,
-                apellidos = txt_Apellidos.Text,
-                contraseña = txt_contraseña.Password,
-                nombreUsuario = cuenta.nombreUsuario,
-                correo = cuenta.correo,
-                creadorContenido = cuenta.creadorContenido
-            };
-            
-            return nuevaCuenta;
-        }
         private bool ValidarCampos()
         {
-            if (String.IsNullOrEmpty(txt_NombreUsuario.Text) || String.IsNullOrEmpty(txt_Nombre.Text) || String.IsNullOrEmpty(txt_Apellidos.Text) 
+            if (String.IsNullOrEmpty(txt_NombreUsuario.Text) || String.IsNullOrEmpty(txt_Nombre.Text) || String.IsNullOrEmpty(txt_Apellidos.Text)
                 || String.IsNullOrEmpty(txt_contraseña.Password))
             {
                 MessageBox.Show("Favor de ingresar información en todos los campos", "Advertencia", MessageBoxButton.OK, MessageBoxImage.Warning);
@@ -131,6 +95,22 @@ namespace Cliente_MusiCloud.pages
             }
             return false;
         }
+        private Cuentas ObtenerNuevosDatosCuenta()
+        {
+            Cuentas nuevaCuenta = new Cuentas
+            {
+                idCuenta = cuenta.idCuenta,
+                nombre = txt_Nombre.Text,
+                apellidos = txt_Apellidos.Text,
+                contraseña = txt_contraseña.Password,
+                nombreUsuario = cuenta.nombreUsuario,
+                correo = cuenta.correo,
+                creadorContenido = cuenta.creadorContenido
+            };
+            
+            return nuevaCuenta;
+        }
+
         private void btn_HabilitarCampos_Click(object sender, RoutedEventArgs e)
         {
             btn_ConvertirseEnCreador.Visibility = Visibility.Visible;
@@ -166,6 +146,10 @@ namespace Cliente_MusiCloud.pages
             txt_Apellidos.Text = cuenta.apellidos;
             txt_NombreUsuario.Text = cuenta.nombreUsuario;
             txt_Correo.Text = cuenta.correo;
+        }
+        private void Btn_Regresar_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new Home());
         }
     }
 }

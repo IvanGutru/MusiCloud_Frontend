@@ -71,7 +71,7 @@
                             <DataTemplate>
                                 <StackPanel Orientation="Horizontal">
                                     <StackPanel>
-                                        <Image Source="/Resources/portadaArtista.png" Height="70"/>
+                                        <Image Source="{Binding imagenPortadaArtista}" Height="70"/>
                                     </StackPanel>
                                     <StackPanel Orientation="Vertical">
                                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">

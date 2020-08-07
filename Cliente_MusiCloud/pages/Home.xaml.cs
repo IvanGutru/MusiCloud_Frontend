@@ -54,6 +54,10 @@ namespace Cliente_MusiCloud.pages
             try
             {
                 listaArtistasHome = await Aplicacion.ObtenerArtistaHome();
+                foreach (var artistasHome in listaArtistasHome)
+                {
+                    artistasHome.imagenPortadaArtista = await Aplicacion.ObtenerImagenArtista(artistasHome.portada);
+                }
                 listViewArtistas.ItemsSource = listaArtistasHome;
             }
             catch (Exception ex)
