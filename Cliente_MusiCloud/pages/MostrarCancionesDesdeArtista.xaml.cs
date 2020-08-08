@@ -1,5 +1,4 @@
-﻿using Cliente_MusiCloud.album.aplicacion;
-using Cliente_MusiCloud.album.dominio;
+﻿using Cliente_MusiCloud.album.dominio;
 using Cliente_MusiCloud.cancion.aplicacion;
 using Cliente_MusiCloud.cancion.dominio;
 using Cliente_MusiCloud.reproductor;
@@ -22,30 +21,31 @@ using System.Windows.Shapes;
 namespace Cliente_MusiCloud.pages
 {
     /// <summary>
-    /// Lógica de interacción para MostrarCanciones.xaml
+    /// Lógica de interacción para MostrarCancionesDesdeArtista.xaml
     /// </summary>
-    public partial class MostrarCanciones : Page
+    public partial class MostrarCancionesDesdeArtista : Page
     {
         Album album;
         List<Cancion> listaCanciones;
-        String idAlbum;
-        public MostrarCanciones(Album albumLista)
-        {
-            album = albumLista;
-            InitializeComponent();
-            txt_NombreAlbum.Text = album.nombre;
-            txt_NombreCompania.Text = album.compania;
-            CargarCanciones();
-            Btn_RegresarAMostrarAlbumes.Visibility = Visibility.Hidden;
-
-        }
-        public MostrarCanciones(String idAlbum)
+        public MostrarCancionesDesdeArtista(Album album)
         {
             InitializeComponent();
-            this.idAlbum = idAlbum;
-            CargarCancionesDesdeMostrarAlbum();
-            Btn_Regresar.Visibility = Visibility.Hidden;
+            this.album = album;
             CargarInformacionAlbum();
+            CargarCanciones();
+        }
+
+        private void CargarInformacionAlbum()
+        {
+            txt_Nombre.Text = album.nombre;
+            txt_Compania.Text = album.compania;
+            txt_Nombre.IsEnabled = false;
+            txt_Compania.IsEnabled = false;
+        }
+
+        private void CargarPortadaAlbum()
+        {
+            
         }
         private async void CargarCanciones()
         {
@@ -62,45 +62,11 @@ namespace Cliente_MusiCloud.pages
                 }
             }
         }
-
-        private async void CargarCancionesDesdeMostrarAlbum()
-        {
-            try
-            {
-                listaCanciones = await AplicacionCancion.ObtenerCancionesPorIdAlbumAsync(idAlbum);
-                listView_Canciones.ItemsSource = listaCanciones;
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-        }
-        private async void CargarInformacionAlbum()
-        {
-            try
-            {
-                List<Album> album = await AplicacionAlbum.ObtenerAlbumPorId(idAlbum);
-                foreach (var nombre in album)
-                {
-                    txt_NombreAlbum.Text = nombre.nombre;
-                    txt_NombreCompania.Text = nombre.compania; 
-                }
-               
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-        }
-
         private void Btn_Regresar_Click(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new MostrarArtistas());
+            NavigationService.Navigate(new GestionArtista());
         }
-        private void Btn_Regresar_MostrarCanciones_Click(object sender, RoutedEventArgs e)
-        {
-            NavigationService.Navigate(new MostrarAlbumes());
-        }
+
         private async void btn_Reproducir_Click(object sender, RoutedEventArgs e)
         {
             Button button = sender as Button;
@@ -135,5 +101,6 @@ namespace Cliente_MusiCloud.pages
             Cancion cancion = button.DataContext as Cancion;
             //GenerarRadio(cancion);
         }
+
     }
 }

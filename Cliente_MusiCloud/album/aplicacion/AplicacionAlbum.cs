@@ -67,5 +67,24 @@ namespace Cliente_MusiCloud.album.aplicacion
                 }
             }
         }
+        public static async Task<Album> GuardarAlbum(Album album)
+        {
+            Album albumRegistrado;
+            string path = "Album";
+            using (HttpResponseMessage respuesta = await ConexionApi.ApiCliente.PostAsJsonAsync(path,album))
+            {
+                if (respuesta.IsSuccessStatusCode)
+                {
+                    albumRegistrado = await respuesta.Content.ReadAsAsync<Album>();
+                    return albumRegistrado;
+                }
+                else
+                {
+                    dynamic error = await respuesta.Content.ReadAsAsync<dynamic>();
+                    string mensaje = error.error;
+                    throw new Exception(mensaje);
+                }
+            }
+        }
     }
 }

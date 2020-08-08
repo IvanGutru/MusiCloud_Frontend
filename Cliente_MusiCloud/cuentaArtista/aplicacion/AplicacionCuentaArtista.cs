@@ -1,19 +1,19 @@
-﻿using Cliente_MusiCloud.cancion.dominio;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using Cliente_MusiCloud.cuentaArtista.dominio;
 
-namespace Cliente_MusiCloud.cancion.aplicacion
+namespace Cliente_MusiCloud.cuentaArtista.aplicacion
 {
-    class AplicacionCancion
+    class AplicacionCuentaArtista
     {
-        public static async Task<bool> CrearCancion(Cancion cancion)
+        public static async Task<bool> RegistrarCuentaArtista(CuentaArtista cuentaArtista)
         {
-            string path = "Cancion";
-            using (HttpResponseMessage respuesta = await ConexionApi.ApiCliente.PostAsJsonAsync(path,cancion))
+            string path = "CuentaArtista";
+            using (HttpResponseMessage respuesta = await ConexionApi.ApiCliente.PostAsJsonAsync(path, cuentaArtista))
             {
                 if (respuesta.IsSuccessStatusCode)
                 {
@@ -25,26 +25,27 @@ namespace Cliente_MusiCloud.cancion.aplicacion
                     string mensaje = error.error;
                     throw new Exception(mensaje);
                 }
+
             }
         }
-        public static async Task<List<Cancion>> ObtenerCancionesPorIdAlbumAsync(String idAlbum)
+        public static async Task<CuentaArtista> ObtenerCuentaArtistaIdCuenta(String idCuenta)
         {
-            String path = "Canciones/" + idAlbum;
-            List<Cancion> listaCanciones;
+            string path = "CuentaArtista/" + idCuenta;
+            CuentaArtista cuentaArtista;
             using (HttpResponseMessage response = await ConexionApi.ApiCliente.GetAsync(path))
             {
                 if (response.IsSuccessStatusCode)
                 {
-                    listaCanciones = await response.Content.ReadAsAsync<List<Cancion>>();
-                    return listaCanciones;
+                    cuentaArtista = await response.Content.ReadAsAsync<CuentaArtista>();
+                    return cuentaArtista;
                 }
                 else
                 {
                     dynamic error = await response.Content.ReadAsAsync<dynamic>();
                     string mensaje = error.error;
                     throw new Exception(mensaje);
-
                 }
+
             }
         }
     }

@@ -1,4 +1,5 @@
-﻿using Cliente_MusiCloud.playlist.aplicacion;
+﻿using Cliente_MusiCloud.cuenta.Dominio;
+using Cliente_MusiCloud.playlist.aplicacion;
 using Cliente_MusiCloud.playlist.dominio;
 using Cliente_MusiCloud.utilidades;
 using Microsoft.Win32;
@@ -26,9 +27,12 @@ namespace Cliente_MusiCloud.pages
     public partial class CrearPlaylist : Page
     {
         const int PLAYLISTTIPOUSUARIO = 2;
+        const int PLAYLISTSISTEMA = 1;
+        const String CUENTAADMI = "admi@hotmail.com";
         String pathAbsolutoImagen;
-        String idCuenta = SingletonCuenta.GetSingletonCuenta().cuenta.idCuenta;
+        Cuentas cuenta = SingletonCuenta.GetSingletonCuenta();
         Playlist playlist = new Playlist();
+        
         public CrearPlaylist()
         {
             InitializeComponent();
@@ -46,13 +50,13 @@ namespace Cliente_MusiCloud.pages
                         bool respuesta = await AplicacionPlaylist.CrearPlaylist(playlist);
                         if (respuesta)
                         {
-                            MessageBox.Show("Playlist Registrada con éxito");
+                            MessageBox.Show("Playlist Registrada con éxito","Playlist Registrada",MessageBoxButton.OK,MessageBoxImage.Information);
                             NavigationService.Navigate(new Home());
                         }
                     }
                     catch (Exception ex)
                     {
-                        MessageBox.Show(ex.Message);
+                        MessageBox.Show(ex.Message,"Error", MessageBoxButton.OK,MessageBoxImage.Warning);
                         Console.WriteLine(ex.Message);
                     }
 
@@ -66,17 +70,27 @@ namespace Cliente_MusiCloud.pages
 
         private Playlist CrearPlaylistIngresada()
         {
+
             Playlist playlist = new Playlist
             {
                 nombre = txt_NombrePlaylist.Text,
                 publica = EsPlaylistPublica(),
                 fechaCreacion = DateTime.Now,
                 portada = ObtenerPortada(),
-                idCuenta = idCuenta,
-                idTipoPlaylist = PLAYLISTTIPOUSUARIO
+                idCuenta = cuenta.idCuenta,
+                idTipoPlaylist = ObtenerValorTipoPlaylist()
                
             };
             return playlist;
+        }
+
+        private int ObtenerValorTipoPlaylist()
+        {
+            if (cuenta.correo.Equals(CUENTAADMI))
+            {
+                return PLAYLISTSISTEMA;
+            }
+            return PLAYLISTTIPOUSUARIO;
         }
         private String ObtenerPortada()
         {
@@ -97,7 +111,7 @@ namespace Cliente_MusiCloud.pages
         {
             if (rdb_privada.IsChecked == false && rdb_publica.IsChecked == false )
             {
-                MessageBox.Show("Por favor selecciona el tipo de playlist (Pública o Privada)");
+                MessageBox.Show("Por favor selecciona el tipo de playlist (Pública o Privada)","Advertencia",MessageBoxButton.OK,MessageBoxImage.Warning);
                 return false;
             }
             return true;

@@ -1,0 +1,97 @@
+﻿<Page x:Class="Cliente_MusiCloud.pages.ModificarCuenta"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Cliente_MusiCloud.pages"
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      mc:Ignorable="d" 
+      d:DesignHeight="500" d:DesignWidth="990"
+      Title="ModificarCuenta" Background="#454545">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="6*"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <Button Background="#262626" Padding="0" Margin="10,0,0,0" HorizontalAlignment="Left"
+                    x:Name="Btn_Regresar" Foreground="White" BorderBrush="#34f7c3"
+                    ToolTip="Regresar" Width="40" Height="40" Click="Btn_Regresar_Click" >
+                <materialDesign:PackIcon Kind="ArrowLeft"  Width="40" Height="40"/>
+            </Button>
+            <Button x:Name="btn_HabilitarCampos" Background="#262626" Margin="60,0,0,0" HorizontalAlignment="Left"
+                     Width="45" Height="45"
+                Style="{StaticResource MaterialDesignFloatingActionButton}" 
+                ToolTip="Editar" Click="btn_HabilitarCampos_Click">
+                <materialDesign:PackIcon Kind="AccountEditOutline" Height="30" Width="30" />
+            </Button>
+        </Grid>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width=".1*"/>
+                <ColumnDefinition Width="1.8*"/>
+                <ColumnDefinition Width="2*"/>
+            </Grid.ColumnDefinitions>
+            <Grid Grid.Column="1">
+                <TextBox  x:Name="txt_Nombre" Style="{StaticResource MaterialDesignFilledTextFieldTextBox}"
+                    VerticalAlignment="Top" TextWrapping="Wrap" Margin="20,20,20,40"
+                    Height="70" MaxLines="50" MaxLength="50" Foreground="White" SelectionBrush="#34f7c3" CaretBrush="#34f7c3"
+                    materialDesign:HintAssist.Hint="Nombre" Background="{x:Null}" BorderBrush="{x:Null}" Grid.ColumnSpan="2"/>
+                <TextBox x:Name="txt_Apellidos" Style="{StaticResource MaterialDesignFilledTextFieldTextBox}"
+                    VerticalAlignment="Top" TextWrapping="Wrap" Margin="20,110,20,40"
+                    Height="70" MaxLines="50" MaxLength="50" Foreground="White" SelectionBrush="#34f7c3" CaretBrush="#34f7c3"
+                    materialDesign:HintAssist.Hint="Apellidos" Background="{x:Null}" BorderBrush="{x:Null}" Grid.ColumnSpan="2"/>
+                <TextBox x:Name="txt_NombreUsuario" Style="{StaticResource MaterialDesignFilledTextFieldTextBox}"
+                    VerticalAlignment="Top" TextWrapping="Wrap"   Margin="20,205,20,0"
+                    Height="70" MaxLines="50" MaxLength="50" Foreground="White" SelectionBrush="#34f7c3" CaretBrush="#34f7c3"
+                    materialDesign:HintAssist.Hint="Nombre de usuario" Background="{x:Null}" BorderBrush="{x:Null}" Grid.ColumnSpan="2"/>
+                <TextBox x:Name="txt_Correo" Style="{StaticResource MaterialDesignFilledTextFieldTextBox}"
+                    VerticalAlignment="Top" TextWrapping="Wrap" Margin="20,301,20,0"
+                    Height="70" MaxLines="50" MaxLength="50" Foreground="White" SelectionBrush="#34f7c3" CaretBrush="#34f7c3"
+                    materialDesign:HintAssist.Hint="Correo" Background="{x:Null}" BorderBrush="{x:Null}" Grid.ColumnSpan="2"/>
+            </Grid>
+            <Grid Grid.Row="1" Grid.Column="2">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0">
+                    <PasswordBox x:Name="txt_contraseña" Height="72" Margin="20,20,20,40"
+                         Style="{StaticResource MaterialDesignFilledPasswordFieldPasswordBox}"
+                         VerticalAlignment="Top" Foreground="White"
+                         IsEnabled="{Binding Path=IsChecked, ElementName=MaterialDesignFilledPasswordFieldPasswordBoxEnabledComboBox}"
+                         materialDesign:HintAssist.Hint="Contraseña" />
+                    <PasswordBox x:Name="txt_Confirmarcontraseña" Height="72"  Margin="20,110,20,40"
+                         Style="{StaticResource MaterialDesignFilledPasswordFieldPasswordBox}"
+                         VerticalAlignment="Top" Foreground="White"
+                         IsEnabled="{Binding Path=IsChecked, ElementName=MaterialDesignFilledPasswordFieldPasswordBoxEnabledComboBox}"
+                         materialDesign:HintAssist.Hint="Confirmar contraseña" />
+                </Grid>
+                <Grid Grid.Row="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+                    <Button Grid.Column="0" x:Name="btn_GuardarCambios" Background="#262626"
+                        Width="45" Height="45" VerticalAlignment="Center" HorizontalAlignment="Center" 
+                      Style="{StaticResource MaterialDesignFloatingActionButton}" 
+                      ToolTip="Guardar cambios" Click="btn_GuardarCambios_Click" >
+                        <materialDesign:PackIcon Kind="ContentSaveOutline" Height="30" Width="30" />
+                    </Button>
+                    <TextBlock x:Name="txt_guardar" Text="Guardar cambios" VerticalAlignment="Center" FontSize="16" Foreground="White" HorizontalAlignment="Center" Margin="0,70,0,0"/>
+                    <Grid Grid.Column="1">
+                        <Button x:Name="btn_ConvertirseEnCreador" Background="#262626" 
+                        Width="45" Height="45" HorizontalAlignment="Center" VerticalAlignment="Center"
+                      Style="{StaticResource MaterialDesignFloatingActionButton}" 
+                      ToolTip="Guardar cambios" Click="btn_ConvertirseEnCreador_Click" >
+                            <materialDesign:PackIcon Kind="AccountTick" Height="30" Width="30" />
+                        </Button>
+                        <TextBlock x:Name="txt_Creador" Text="Convertirse en creador" VerticalAlignment="Center" FontSize="16" Foreground="White" HorizontalAlignment="Center" Margin="0,70,0,0"/>
+                    </Grid>
+                    
+                </Grid>
+            </Grid>
+        </Grid>
+    </Grid>
+</Page>

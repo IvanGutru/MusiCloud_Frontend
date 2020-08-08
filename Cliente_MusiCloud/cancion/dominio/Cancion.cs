@@ -10,7 +10,7 @@ namespace Cliente_MusiCloud.cancion.dominio
     {
         public String idCancion { get; set; }
         public String nombre { get; set; }
-        public float duracion { get; set; }
+        public String duracion { get; set; }
         public String archivo { get; set; }
         public String idAlbum { get; set; }
         
