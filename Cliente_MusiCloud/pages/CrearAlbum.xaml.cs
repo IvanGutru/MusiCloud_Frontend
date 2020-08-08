@@ -5,6 +5,7 @@ using Cliente_MusiCloud.cancion.aplicacion;
 using Cliente_MusiCloud.cancion.dominio;
 using Cliente_MusiCloud.utilidades;
 using Microsoft.Win32;
+using NAudio.Wave;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -185,6 +186,11 @@ namespace Cliente_MusiCloud.pages
             };
             listaDeCanciones.Add(cancion);
             ActualizarTabla();
+        }
+        private string ObtenerSegundos()
+        {
+           // Mp3FileReader mp3Reader = new Mp3FileReader(new MemoryStream(bytes));
+           // waveStream = new WaveChannel32(mp3Reader);
         }
 
         private void ActualizarTabla()

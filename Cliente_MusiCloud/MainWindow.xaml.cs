@@ -9,6 +9,7 @@ using Cliente_MusiCloud.utilidades;
 using System;
 using System.Threading.Tasks;
 using System.Windows;
+using Cliente_MusiCloud.reproductor;
 
 namespace Cliente_MusiCloud
 {
@@ -25,6 +26,7 @@ namespace Cliente_MusiCloud
             InitializeComponent();
             ConexionApi.Initialize();
             ServidorReproduccion.ServidorReproduccion.Conectar();
+            Reproductor.Initialize();
             
         }
 

@@ -59,10 +59,10 @@
                                     </materialDesign:PopupBox>
                                 </StackPanel>
                                 <StackPanel Margin="20">
-                                    <Button
+                                    <Button x:Name="btn_Reproducir"
                                           Style="{StaticResource MaterialDesignIconButton}"
-                                            ToolTip="MaterialDesignIconButton"
-                                              Background="{DynamicResource MaterialDesignTextFieldBoxBackground}">
+                                          ToolTip="MaterialDesignIconButton"
+                                          Background="{DynamicResource MaterialDesignTextFieldBoxBackground}" Click="btn_Reproducir_Click">
                                         <materialDesign:PackIcon
                                              Kind="Play" />
                                     </Button>

@@ -57,8 +57,10 @@
                                         <Image x:Name="imagens" Source="{Binding imagenPortada}" Height="80"/>
                                     </StackPanel>
                                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                        <TextBlock Text="Nombre: " Foreground="White" Margin="8,0,0,0"/>
-                                          <TextBlock Text="{Binding nombre}" Foreground="White" />
+                                        <TextBox  x:Name="txt_NombrePlaylist" Style="{StaticResource MaterialDesignFilledTextFieldTextBox}" IsEnabled="False"
+                                                  VerticalAlignment="Top" TextWrapping="Wrap" Text="{Binding nombre}"  Width="150"
+                                                  Height="70" MaxLines="50" MaxLength="50" Foreground="White" SelectionBrush="#34f7c3" CaretBrush="#34f7c3"
+                                                   materialDesign:HintAssist.Hint="Nombre de artista" Background="{x:Null}" BorderBrush="{x:Null}" Grid.ColumnSpan="2"/>
                                     </StackPanel>
                                 </StackPanel>
                             </DataTemplate>
@@ -75,8 +77,10 @@
                                     </StackPanel>
                                     <StackPanel Orientation="Vertical">
                                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                            <TextBlock Text="Nombre: " Foreground="White" Margin="8,0,0,0"/>
-                                            <TextBlock Text="{Binding nombre}" Foreground="White" />
+                                            <TextBox  x:Name="txt_Nombre" Style="{StaticResource MaterialDesignFilledTextFieldTextBox}" IsEnabled="False"
+                                                  VerticalAlignment="Top" TextWrapping="Wrap" Text="{Binding nombre}"  Width="150"
+                                                  Height="70" MaxLines="50" MaxLength="50" Foreground="White" SelectionBrush="#34f7c3" CaretBrush="#34f7c3"
+                                                   materialDesign:HintAssist.Hint="Nombre de artista" Background="{x:Null}" BorderBrush="{x:Null}" Grid.ColumnSpan="2"/>
                                         </StackPanel>
                                     </StackPanel>
                                 </StackPanel>
