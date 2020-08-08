@@ -52,17 +52,18 @@
                                 <StackPanel Margin="20">
                                     <materialDesign:PopupBox x:Name="PopupBox_options" PlacementMode="BottomAndAlignRightEdges" StaysOpen="False" Margin="10" Foreground="White" >
                                         <StackPanel Width="auto" >
-                                            <Button x:Name="Button_add_queue" Content="Agregar a cola" />
-                                            <Button x:Name="Button_generate_radio" Content="Agregar a siguiente"  />
-                                            <Button x:Name="Button_add_playlist" Content="Agregar a playlist"/>
+                                            <Button x:Name="btn_agregarCola" Content="Agregar a cola" Click="btn_agregarCola_Click" />
+                                            <Button x:Name="btn_agregarSiguiente" Content="Agregar a siguiente" Click="btn_agregarSiguiente_Click"  />
+                                            <Button x:Name="btn_agregarAPlaylist" Content="Agregar a playlist" Click="btn_agregarAPlaylist_Click"/>
+                                            <Button x:Name="btn_generarRadio" Content="Generar Radio" Click="btn_generarRadio_Click"/>
                                         </StackPanel>
                                     </materialDesign:PopupBox>
                                 </StackPanel>
                                 <StackPanel Margin="20">
-                                    <Button
+                                    <Button x:Name="btn_Reproducir"
                                           Style="{StaticResource MaterialDesignIconButton}"
-                                            ToolTip="MaterialDesignIconButton"
-                                              Background="{DynamicResource MaterialDesignTextFieldBoxBackground}">
+                                          ToolTip="MaterialDesignIconButton"
+                                          Background="{DynamicResource MaterialDesignTextFieldBoxBackground}" Click="btn_Reproducir_Click">
                                         <materialDesign:PackIcon
                                              Kind="Play" />
                                     </Button>

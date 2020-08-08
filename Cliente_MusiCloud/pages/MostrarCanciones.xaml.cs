@@ -2,6 +2,8 @@
 using Cliente_MusiCloud.album.dominio;
 using Cliente_MusiCloud.cancion.aplicacion;
 using Cliente_MusiCloud.cancion.dominio;
+using Cliente_MusiCloud.reproductor;
+using Cliente_MusiCloud.utilidades;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -98,6 +100,40 @@ namespace Cliente_MusiCloud.pages
         private void Btn_Regresar_MostrarCanciones_Click(object sender, RoutedEventArgs e)
         {
             NavigationService.Navigate(new MostrarAlbumes());
+        }
+        private async void btn_Reproducir_Click(object sender, RoutedEventArgs e)
+        {
+            Button button = sender as Button;
+            Cancion cancion = button.DataContext as Cancion;
+            await Reproductor.Reproducir(cancion);
+            SingletonReproductor.GetPaginaPrincipal().CargarInformacion(cancion);
+        }
+
+
+        private void btn_agregarCola_Click(object sender, RoutedEventArgs e)
+        {
+            Button button = sender as Button;
+            Cancion cancion = button.DataContext as Cancion;
+            Reproductor.AgregarCancionACola(cancion);
+        }
+
+        private void btn_agregarSiguiente_Click(object sender, RoutedEventArgs e)
+        {
+            Button button = sender as Button;
+            Cancion cancion = button.DataContext as Cancion;
+            Reproductor.AgregarSiguienteACola(cancion);
+        }
+
+        private void btn_agregarAPlaylist_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btn_generarRadio_Click(object sender, RoutedEventArgs e)
+        {
+            Button button = sender as Button;
+            Cancion cancion = button.DataContext as Cancion;
+            //GenerarRadio(cancion);
         }
     }
 }

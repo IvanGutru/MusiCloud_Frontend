@@ -59,6 +59,7 @@ namespace Cliente_MusiCloud.pages
                     await GuardarNuevoValorCreadorContenidoAsync();
                     await AplicacionCuentaArtista.RegistrarCuentaArtista(cuentaArtista);
                     MessageBox.Show("Artista Registrado con éxito", "Operación éxitosa", MessageBoxButton.OK);
+                    SingletonReproductor.GetPaginaPrincipal().ItemModuloArtista.Visibility = Visibility.Visible;
                     NavigationService.Navigate(new Home());
                 }
                 catch (Exception ex)

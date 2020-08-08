@@ -165,6 +165,7 @@
     <Compile Include="utilidades\CodificacionImagenes.cs" />
     <Compile Include="utilidades\SingletonArtista.cs" />
     <Compile Include="utilidades\SingletonCuenta.cs" />
+    <Compile Include="utilidades\SingletonReproductor.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

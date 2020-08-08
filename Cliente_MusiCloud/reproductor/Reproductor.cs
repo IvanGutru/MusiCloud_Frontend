@@ -72,5 +72,110 @@ namespace Cliente_MusiCloud.reproductor
             }
         }
 
+        public static bool EstaReproduciendose()
+        {
+            if (waveOutEvent.PlaybackState == PlaybackState.Playing)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public static double ObtenerTotalSegundosCancion()
+        {
+            return waveStream.TotalTime.TotalSeconds;
+        }
+
+        public static double ObtenerSegundosActuales()
+        {
+            return waveStream.CurrentTime.TotalSeconds;
+        }
+        public static double ObtenerTiempoParaBarra()
+        {
+            return (waveStream.CurrentTime.TotalSeconds * 100) / waveStream.TotalTime.TotalSeconds;
+        }
+        public static bool TerminoCancion()
+        {
+            if (waveStream.Position >= waveStream.Length)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public static async Task<Cancion> ReproducirSiguienteCancion()
+        {
+            if (ColaCanciones.Count > 0)
+            {
+                Reproductor.PararReproduccion();
+                Cancion cancion = ColaCanciones.Dequeue();
+                cancionLista = false;
+                if (await Reproductor.Reproducir(cancion))
+                {
+                    return cancion;
+                }
+                else
+                {
+                    return null;
+                }
+
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        public static void ReiniciarCancion()
+        {
+            if (cancionLista)
+            {
+                waveStream.Position = 0;
+
+            }
+        }
+
+        public static void ActualizarVolumen(double volume)
+        {
+            if (waveOutEvent != null)
+            {
+                waveOutEvent.Volume = (Convert.ToSingle(volume)) / 100f;
+
+            }
+        }
+        public static void ActualizarPosicionCancion(double position)
+        {
+            var totalSeconds = (position * waveStream.TotalTime.TotalSeconds) / 100;
+
+            waveStream.CurrentTime = TimeSpan.FromSeconds(totalSeconds);
+        }
+        public static void AgregarCancionACola(Cancion cancion)
+        {
+            ColaCanciones.Enqueue(cancion);
+        }
+        public static void AgregarSiguienteACola(Cancion cancion)
+        {
+            List<Cancion> listaCanciones = ColaCanciones.Prepend(cancion).ToList();
+            ColaCanciones.Clear();
+            foreach (var track in listaCanciones)
+            {
+                ColaCanciones.Enqueue(track);
+            }
+
+        }
+        public static void AgregarListaCancionesACola(List<Cancion> cancion)
+        {
+            foreach (var item in cancion)
+            {
+                ColaCanciones.Enqueue(item);
+            }
+        }
+
     }
 }

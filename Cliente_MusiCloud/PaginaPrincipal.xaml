@@ -69,8 +69,8 @@
                             <Image x:Name="PortadaCancion" Source="/Resources/portadaCancionDefault.png" Height="100" />
                         </Grid>
                         <Grid Grid.Column="1">
-                            <TextBlock Text="Nombre cancion" VerticalAlignment="Top" Margin="0,20,0,0" FontSize="16" Foreground="White"/>
-                            <TextBlock Text="Duracion" VerticalAlignment="Bottom" FontSize="16" Foreground="White"/>
+                            <TextBlock x:Name="txt_NombreCancion" Text="Nombre cancion" VerticalAlignment="Top" Margin="0,20,0,0" FontSize="16" Foreground="White"/>
+                            <TextBlock x:Name="txt_Duracion" Text="Duracion" VerticalAlignment="Bottom" FontSize="16" Foreground="White"/>
                         </Grid>
 
                     </Grid>
@@ -87,7 +87,7 @@
                                 <ColumnDefinition Width="1*"/>
                             </Grid.ColumnDefinitions>
                             <Grid Grid.Column="0">
-                                <Button Margin="0,2,0,0"
+                                <Button Margin="0,2,0,0" Name="btn_Anterior"
                                 Style="{StaticResource MaterialDesignIconButton}"
                                 ToolTip="Anterior"
                                 Background="#1a1a1a">
@@ -95,37 +95,37 @@
                                 </Button>
                             </Grid>
                             <Grid Grid.Column="1">
-                                <Button Margin="0,2,0,0"
+                                <Button Margin="0,2,0,0" Name="btn_Reproducir"
                                 Style="{StaticResource MaterialDesignIconButton}"
                                 ToolTip="Reproducir"
-                                Background="#1a1a1a">
-                                    <materialDesign:PackIcon Kind="Play" />
+                                Background="#1a1a1a" Click="btn_Reproducir_Click">
+                                    <materialDesign:PackIcon Kind="Play"  x:Name="Play_icon"/>
                                 </Button>
                             </Grid>
                             <Grid Grid.Column="2">
-                                <Button Margin="0,2,0,0"
+                                <Button x:Name="btn_siguiente" Margin="0,2,0,0"
                                 Style="{StaticResource MaterialDesignIconButton}"
-                                ToolTip="Pausa"
-                                Background="#1a1a1a">
-                                    <materialDesign:PackIcon Kind="Pause" />
+                                ToolTip="Siguiente"
+                                Background="#1a1a1a" Click="btn_siguiente_Click">
+                                    <materialDesign:PackIcon Kind="SkipNext" />
                                 </Button>
                             </Grid>
                             <Grid Grid.Column="3">
-                                <Button Margin="0,2,0,0"
+                                <Button Margin="0,2,0,0" Name="btn_Si"
                                 Style="{StaticResource MaterialDesignIconButton}"
                                 ToolTip="Siguiente"
-                                Background="#1a1a1a">
-                                    <materialDesign:PackIcon Kind="SkipNext" />
+                                Background="#1a1a1a"> 
+                                    <materialDesign:PackIcon Kind="Heart" Foreground="White" />
                                 </Button>
                             </Grid>
                         </Grid>
                         <Grid Grid.Row="1">
                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                <TextBlock x:Name="TextBlock_initial_duration" Text="0:00" Foreground="White"/>
-                                <Slider x:Name="Slider_track_duration" Orientation="Horizontal" Maximum="100" Minimum="0" Value="0"
-                            Width="300" Foreground="AliceBlue"
+                                <TextBlock x:Name="txt_DuracionInicial" Text="0:00" Foreground="White"/>
+                                <Slider x:Name="ProgresoDuration" Orientation="Horizontal" Maximum="100" Minimum="0" Value="0"
+                            Width="300" Foreground="AliceBlue" ValueChanged="progreso_cancion_ValueChanged"
                             VerticalAlignment="Center" Margin="10,0,10,0" />
-                                <TextBlock  x:Name="TextBlock_final_duration" Text="00:00" Foreground="White"/>
+                                <TextBlock  x:Name="txt_duracionFinal" Text="00:00" Foreground="White"/>
                             </StackPanel>
                         </Grid>
 
@@ -135,8 +135,8 @@
                             <Button x:Name="Buttom_volume" Height="25" Width="25" Padding="0" Foreground="White" Background="#1a1a1a">
                                 <materialDesign:PackIcon Kind="VolumeMedium" Width="20" Height="20" Background="#1a1a1a" Foreground="#34f7c3"/>
                             </Button>
-                            <Slider x:Name="Slider_volume" Orientation="Horizontal" Maximum="100" Minimum="0" Value="50"
-                            Width="180" Foreground="White"
+                            <Slider x:Name="barra_volumen" Orientation="Horizontal" Maximum="100" Minimum="0" Value="50"
+                            Width="180" Foreground="White" ValueChanged="barra_volumen_ValueChanged"
                             VerticalAlignment="Center" />
                         </StackPanel>
                     </Grid>

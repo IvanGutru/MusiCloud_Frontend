@@ -34,6 +34,7 @@ namespace Cliente_MusiCloud.pages
         Artista artista = SingletonArtista.GetArtista();
         Album albumRecuperado;
         Random random = new Random();
+        
         public CrearAlbum()
         {
             InitializeComponent();
@@ -64,6 +65,7 @@ namespace Cliente_MusiCloud.pages
                     {
                         cancion.idAlbum = albumRecuperado.idAlbum;
                         var archivo = ObtenerBytesArchivo(cancion.archivo);
+                        cancion.duracion = ObtenerDuracionCancion(archivo);
                         cancion.archivo = random.Next().ToString();
                         AudioCancion audioCancion = new AudioCancion
                         {
@@ -85,6 +87,16 @@ namespace Cliente_MusiCloud.pages
         private Byte[] ObtenerBytesArchivo(string path)
         {
             return File.ReadAllBytes(path);
+        }
+        private String ObtenerDuracionCancion(Byte[] bytesCancion)
+        {
+            Mp3FileReader mp3Reader = new Mp3FileReader(new MemoryStream(bytesCancion));
+            WaveStream waveStream = new WaveChannel32(mp3Reader);
+            double totalSegudos = waveStream.TotalTime.TotalSeconds;
+            TimeSpan timeSpan = TimeSpan.FromSeconds(totalSegudos);
+            string duracion = string.Format("{0}:{1}", timeSpan.Duration().Minutes, timeSpan.Duration().Seconds);
+            return duracion;
+
         }
         private bool ValidarCamposAlbum()
         {
@@ -187,11 +199,7 @@ namespace Cliente_MusiCloud.pages
             listaDeCanciones.Add(cancion);
             ActualizarTabla();
         }
-        private string ObtenerSegundos()
-        {
-           // Mp3FileReader mp3Reader = new Mp3FileReader(new MemoryStream(bytes));
-           // waveStream = new WaveChannel32(mp3Reader);
-        }
+     
 
         private void ActualizarTabla()
         {
