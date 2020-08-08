@@ -10,6 +10,23 @@ namespace Cliente_MusiCloud.cancion.aplicacion
 {
     class AplicacionCancion
     {
+        public static async Task<bool> CrearCancion(Cancion cancion)
+        {
+            string path = "Cancion";
+            using (HttpResponseMessage respuesta = await ConexionApi.ApiCliente.PostAsJsonAsync(path,cancion))
+            {
+                if (respuesta.IsSuccessStatusCode)
+                {
+                    return true;
+                }
+                else
+                {
+                    dynamic error = await respuesta.Content.ReadAsAsync<dynamic>();
+                    string mensaje = error.error;
+                    throw new Exception(mensaje);
+                }
+            }
+        }
         public static async Task<List<Cancion>> ObtenerCancionesPorIdAlbumAsync(String idAlbum)
         {
             String path = "Canciones/" + idAlbum;

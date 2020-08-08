@@ -24,6 +24,7 @@ namespace Cliente_MusiCloud
         {
             InitializeComponent();
             ConexionApi.Initialize();
+            ServidorReproduccion.ServidorReproduccion.Conectar();
             
         }
 

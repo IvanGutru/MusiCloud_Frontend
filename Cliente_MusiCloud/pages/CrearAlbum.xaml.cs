@@ -1,11 +1,13 @@
 ﻿using Cliente_MusiCloud.album.aplicacion;
 using Cliente_MusiCloud.album.dominio;
 using Cliente_MusiCloud.artista.Dominio;
+using Cliente_MusiCloud.cancion.aplicacion;
 using Cliente_MusiCloud.cancion.dominio;
 using Cliente_MusiCloud.utilidades;
 using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -30,6 +32,7 @@ namespace Cliente_MusiCloud.pages
         String pathAbsolutoImagen;
         Artista artista = SingletonArtista.GetArtista();
         Album albumRecuperado;
+        Random random = new Random();
         public CrearAlbum()
         {
             InitializeComponent();
@@ -43,13 +46,44 @@ namespace Cliente_MusiCloud.pages
             {
                 if (validarAlMenosUnaCancionAñadida())
                 {
-                    albumRecuperado = await GuardarAlbumAsync();
-                    if (albumRecuperado!=null)
-                    {
-
-                    }
+                    await GuardarCancionesAsync();
+                    MessageBox.Show("Album con canciones registrado con éxito", "Realizado", MessageBoxButton.OK, MessageBoxImage.Warning);
                 }
             }
+        }
+        private async Task<bool> GuardarCancionesAsync()
+        {
+            bool realizado = false;
+            albumRecuperado = await GuardarAlbumAsync();
+            if (albumRecuperado != null)
+            {
+                try
+                {
+                    foreach (var cancion in listaDeCanciones)
+                    {
+                        cancion.idAlbum = albumRecuperado.idAlbum;
+                        var archivo = ObtenerBytesArchivo(cancion.archivo);
+                        cancion.archivo = random.Next().ToString();
+                        AudioCancion audioCancion = new AudioCancion
+                        {
+                            Audio = archivo,
+                            NombreCancion = cancion.archivo
+                        };
+                        realizado = await AplicacionCancion.CrearCancion(cancion);
+                        await ServidorReproduccion.ServidorReproduccion.client.SubirAudioAsync(audioCancion);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "Ocurrió un error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                }
+
+            }
+            return realizado;
+        }
+        private Byte[] ObtenerBytesArchivo(string path)
+        {
+            return File.ReadAllBytes(path);
         }
         private bool ValidarCamposAlbum()
         {
@@ -145,7 +179,9 @@ namespace Cliente_MusiCloud.pages
         {
             Cancion cancion = new Cancion
             {
-                nombre = txt_NombreCancion.Text
+                nombre = txt_NombreCancion.Text,
+                archivo = txt_NombreArchivo.Text
+                
             };
             listaDeCanciones.Add(cancion);
             ActualizarTabla();
@@ -208,8 +244,8 @@ namespace Cliente_MusiCloud.pages
             {
                 if (openFileDialog.ShowDialog() == true)
                 {
-                    string imagen = openFileDialog.SafeFileName;
-                    txt_NombreArchivo.Text = imagen;
+                    string archivo = openFileDialog.FileName;
+                    txt_NombreArchivo.Text = archivo;
                 }
             }
             catch (Exception ex)
