@@ -1,4 +1,5 @@
-﻿using Cliente_MusiCloud.playlist.aplicacion;
+﻿using Cliente_MusiCloud.cuenta.Dominio;
+using Cliente_MusiCloud.playlist.aplicacion;
 using Cliente_MusiCloud.playlist.dominio;
 using Cliente_MusiCloud.utilidades;
 using Microsoft.Win32;
@@ -26,9 +27,12 @@ namespace Cliente_MusiCloud.pages
     public partial class CrearPlaylist : Page
     {
         const int PLAYLISTTIPOUSUARIO = 2;
+        const int PLAYLISTSISTEMA = 1;
+        const String CUENTAADMI = "admi@hotmail.com";
         String pathAbsolutoImagen;
-        String idCuenta = SingletonCuenta.GetSingletonCuenta().idCuenta;
+        Cuentas cuenta = SingletonCuenta.GetSingletonCuenta();
         Playlist playlist = new Playlist();
+        
         public CrearPlaylist()
         {
             InitializeComponent();
@@ -66,17 +70,27 @@ namespace Cliente_MusiCloud.pages
 
         private Playlist CrearPlaylistIngresada()
         {
+
             Playlist playlist = new Playlist
             {
                 nombre = txt_NombrePlaylist.Text,
                 publica = EsPlaylistPublica(),
                 fechaCreacion = DateTime.Now,
                 portada = ObtenerPortada(),
-                idCuenta = idCuenta,
-                idTipoPlaylist = PLAYLISTTIPOUSUARIO
+                idCuenta = cuenta.idCuenta,
+                idTipoPlaylist = ObtenerValorTipoPlaylist()
                
             };
             return playlist;
+        }
+
+        private int ObtenerValorTipoPlaylist()
+        {
+            if (cuenta.correo.Equals(CUENTAADMI))
+            {
+                return PLAYLISTSISTEMA;
+            }
+            return PLAYLISTTIPOUSUARIO;
         }
         private String ObtenerPortada()
         {
