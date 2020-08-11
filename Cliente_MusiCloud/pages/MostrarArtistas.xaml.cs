@@ -16,36 +16,47 @@ namespace Cliente_MusiCloud.pages
     /// </summary>
     public partial class MostrarArtistas : Page
     {
+        List<Artista> listaArtistas;
+        List<Album> listaAlbumes;
         public MostrarArtistas()
         {
             InitializeComponent();
-            txt_textoAlbumes.Visibility = Visibility.Hidden; 
-            txt_nombreArtista.Visibility = Visibility.Hidden; 
+            txt_textoAlbumes.Visibility = Visibility.Hidden;
+            txt_nombreArtista.Visibility = Visibility.Hidden;
         }
 
 
 
-        private async void Btn_Buscar_Click(object sender, RoutedEventArgs e)
+        private void Btn_Buscar_Click(object sender, RoutedEventArgs e)
+        {
+
+            if (ValidateField())
+            {
+                String nombre = txt_Nombre.Text;
+                CargarArtistas(nombre);
+            }
+            else
+            {
+                MessageBox.Show("Favor de ingresar un nombre de artista");
+            }
+
+
+        }
+        private async void CargarArtistas(string nombre)
         {
             try
             {
-                if (ValidateField())
+                listaArtistas = await Aplicacion.ObtenerArtistaPorNombre(nombre);
+                foreach (var artistalista in listaArtistas)
                 {
-                    List<Artista> listaArtistas;
-                    String nombre = txt_Nombre.Text;
-                    listaArtistas= await Aplicacion.ObtenerArtistaPorNombre(nombre);
-                    listViewArtistas.ItemsSource = listaArtistas;
+                    artistalista.imagenPortadaArtista = await Aplicacion.ObtenerImagenArtista(artistalista.portada);
                 }
-                else
-                {
-                    MessageBox.Show("Favor de ingresar un nombre de artista");
-                }
+                listViewArtistas.ItemsSource = listaArtistas;
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
-            
         }
 
         private bool ValidateField()
@@ -57,30 +68,44 @@ namespace Cliente_MusiCloud.pages
             return true;
         }
 
-        private async void listViewArtistas_MouseDoubleClick_1(object sender, MouseButtonEventArgs e)
+        private  void listViewArtistas_MouseDoubleClick_1(object sender, MouseButtonEventArgs e)
         {
-            List<Album> listaAlbumes;
-            Artista artista = (Artista)listViewArtistas.SelectedItem;
-                try
-                {
-                    listaAlbumes = await AplicacionAlbum.ObtenerAlbumesArtistaPorId(artista.idArtista);
-                    listView_Albumes.ItemsSource = listaAlbumes;
-                    txt_nombreArtista.Text = artista.nombre;
-                    txt_textoAlbumes.Visibility = Visibility.Visible;
-                    txt_nombreArtista.Visibility = Visibility.Visible;
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message);
-                }
 
+            Artista artistaSeleccionado = (Artista)listViewArtistas.SelectedItem;
+            CargarAlbumesArtista(artistaSeleccionado.idArtista);
+            ConfigurarCamposAlbum(artistaSeleccionado.nombre);
+           
+
+        }
+        private async void CargarAlbumesArtista(string idArtista)
+        {
+            try
+            {
+                listaAlbumes = await AplicacionAlbum.ObtenerAlbumesArtistaPorId(idArtista);
+                foreach (var albumDeLista in listaAlbumes)
+                {
+                    albumDeLista.imagenPortadaAlbum = await AplicacionAlbum.ObtenerImagenAlbum(albumDeLista.portada);
+                }
+                listView_Albumes.ItemsSource = listaAlbumes;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Ocurrió un error", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
+        }
+        private void ConfigurarCamposAlbum(string nombre)
+        {
+            txt_nombreArtista.Text = nombre;
+            txt_textoAlbumes.Visibility = Visibility.Visible;
+            txt_nombreArtista.Visibility = Visibility.Visible;
         }
         private void ListView_Albumes_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             Album album = (Album)listView_Albumes.SelectedItem;
-            if (listView_Albumes.SelectedItems.Count>0)
+            Artista artistaSelec = (Artista)listViewArtistas.SelectedItem;
+            if (listView_Albumes.SelectedItems.Count > 0)
             {
-              NavigationService.Navigate(new MostrarCanciones(album));
+                NavigationService.Navigate(new MostrarCanciones(album,artistaSelec));
             }
         }
     }

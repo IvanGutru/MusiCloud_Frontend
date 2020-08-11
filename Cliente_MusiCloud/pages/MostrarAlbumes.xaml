@@ -15,12 +15,15 @@
             <RowDefinition Height="5*"/>
         </Grid.RowDefinitions>
         <Grid Grid.Row="0">
-            <TextBlock Text="Albumes" HorizontalAlignment="Center" FontSize="40" FontWeight="Heavy" FontFamily="Comic Sans MS" Foreground="White" />
+            <Grid.Background>
+                <ImageBrush ImageSource="/Resources/flores.png" Stretch="UniformToFill"/>
+            </Grid.Background>
+            <TextBlock Text="Álbumes" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="40" FontWeight="Heavy" FontFamily="Comic Sans MS" Foreground="White" />
         </Grid>
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="1*"/>
-                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1.8*"/>
             </Grid.ColumnDefinitions>
             <Grid Grid.Column="0">
                 <Grid.RowDefinitions>
@@ -33,9 +36,9 @@
                         <ColumnDefinition Width="1*"/>
                     </Grid.ColumnDefinitions>
                     <TextBox Grid.Column="0"  x:Name="txt_NombreAlbum" Style="{StaticResource MaterialDesignFilledTextFieldTextBox}"
-                    VerticalAlignment="Top" TextWrapping="Wrap" Margin="40,10,0,0"
+                    VerticalAlignment="Top" TextWrapping="Wrap" Margin="20,13,0,0"
                     Height="70" MaxLines="50" MaxLength="50" Foreground="White" SelectionBrush="#34f7c3" CaretBrush="#34f7c3"
-                    materialDesign:HintAssist.Hint="Ingrese nombre del album" Background="{x:Null}" BorderBrush="{x:Null}"/>
+                    materialDesign:HintAssist.Hint="Ingrese nombre del álbum" Background="{x:Null}" BorderBrush="{x:Null}"/>
                     <Grid Grid.Column="1">
                         <Button Grid.Column="1" x:Name="Btn_Buscar"
                             VerticalAlignment="Center" Margin="5" Background="#262626"  BorderBrush="#34f7c3"
@@ -46,21 +49,21 @@
                     </Grid>
                 </Grid>
                 <Grid Grid.Row="1">
-                    <ListView Grid.Row="0" x:Name="listViewAlbumes" Padding="5" Margin="50,10,50,10" MouseDoubleClick="listViewAlbumes_MouseDoubleClick" >
+                    <ListView Grid.Row="0" x:Name="listViewAlbumes" Padding="5" Margin="10,10,10,10" MouseDoubleClick="listViewAlbumes_MouseDoubleClick" >
                         <ListView.ItemTemplate>
                             <DataTemplate>
                                 <StackPanel Orientation="Horizontal">
                                     <StackPanel>
-                                        <Image Source="/Resources/portadaAlbum.png" Height="70"/>
+                                        <Image Source="{Binding imagenPortadaAlbum}" Height="70"/>
                                     </StackPanel>
                                     <StackPanel Orientation="Vertical">
                                         <StackPanel Orientation="Horizontal">
-                                            <TextBlock Text="Nombre: " Foreground="White" Margin="8,0,0,0"/>
+                                            <TextBlock Text="Álbum: " Foreground="White" Margin="8,0,0,0"/>
                                             <TextBlock Text="{Binding nombre}" Foreground="White" />
                                         </StackPanel>
                                         <StackPanel Orientation="Horizontal">
-                                            <TextBlock Text="Descripcion: " Foreground="White" Margin="8,0,0,0"/>
-                                            <TextBlock Text="{Binding descripcion}" Foreground="White" />
+                                            <TextBlock Text="Compañia " Foreground="White" Margin="8,0,0,0"/>
+                                            <TextBlock Text="{Binding compania}" Foreground="White" />
                                         </StackPanel>
                                     </StackPanel>
                                 </StackPanel>
@@ -70,14 +73,70 @@
                 </Grid>
             </Grid>
             <Grid Grid.Column="1">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="1*"/>
-                    <RowDefinition Height="3*"/>
-                </Grid.RowDefinitions>
-                <Grid Grid.Row="0">
-                 </Grid>
-                <Grid Grid.Row="1">
-                   
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="7*"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+                <Grid Grid.Column="0">
+                    <ListView Grid.Row="0" x:Name="listView_Canciones" Padding="5" Margin="5,10,10,10" ScrollViewer.VerticalScrollBarVisibility="Disabled">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <StackPanel Margin="5">
+                                        <materialDesign:PopupBox x:Name="PopupBox_options" PlacementMode="BottomAndAlignRightEdges" StaysOpen="False" Margin="10" Foreground="White" >
+                                            <StackPanel Width="auto" >
+                                                <Button x:Name="btn_agregarCola" Content="Agregar a cola" Click="btn_agregarCola_Click" />
+                                                <Button x:Name="btn_agregarSiguiente" Content="Agregar a siguiente" Click="btn_agregarSiguiente_Click"  />
+                                                <Button x:Name="btn_agregarAPlaylist" Content="Agregar a playlist" Click="btn_agregarAPlaylist_Click"/>
+                                                <Button x:Name="btn_generarRadio" Content="Generar Radio" Click="btn_generarRadio_Click"/>
+                                            </StackPanel>
+                                        </materialDesign:PopupBox>
+                                    </StackPanel>
+                                    <StackPanel Margin="5">
+                                        <Button Name="btn_AñadirMegusta"
+                                             Style="{StaticResource MaterialDesignIconButton}"
+                                             ToolTip="Me gusta" Background="{DynamicResource MaterialDesignTextFieldBoxBackground}">
+                                            <materialDesign:PackIcon Kind="Heart" Foreground="White" />
+                                        </Button>
+                                    </StackPanel>
+                                    <StackPanel Margin="5">
+                                        <Button x:Name="btn_Reproducir"
+                                          Style="{StaticResource MaterialDesignIconButton}"
+                                          ToolTip="Reproducir"
+                                          Background="{DynamicResource MaterialDesignTextFieldBoxBackground}" Click="btn_Reproducir_Click">
+                                            <materialDesign:PackIcon
+                                             Kind="Play" />
+                                        </Button>
+                                    </StackPanel>
+                                    
+                                    <StackPanel Margin="10">
+                                        <Image Source="{Binding imagenPortadaCancion}" Height="70"/>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Vertical" Margin="20">
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="Nombre: " Foreground="White" Margin="8,0,0,0"/>
+                                            <TextBlock Text="{Binding nombre}" Foreground="White" />
+                                        </StackPanel>
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="Duracion: " Foreground="White" Margin="8,0,0,0"/>
+                                            <TextBlock Text="{Binding duracion}" Foreground="White" />
+                                            <TextBlock Text=" minutos" Foreground="White" Margin="0,0,0,0"/>
+                                        </StackPanel>
+                                    </StackPanel>
+
+                                </StackPanel>
+
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </Grid>
+                <Grid Grid.Column="1">
+                    <Button x:Name="Btn_AgregarTodasLasCanciones" 
+                            VerticalAlignment="Top" Margin="0,18,0,0" Background="#262626"  BorderBrush="#34f7c3"
+                            Style="{StaticResource MaterialDesignFloatingActionAccentButton}"
+                            ToolTip="Agregar todas las canciones a cola" Click="Btn_AgregarTodasLasCanciones_Click" >
+                        <materialDesign:PackIcon Kind="MusicNoteAdd" Height="24" Width="24" />
+                    </Button>
                 </Grid>
             </Grid>
         </Grid>

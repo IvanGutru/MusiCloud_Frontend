@@ -33,13 +33,13 @@
                     <RowDefinition Height="1*"/>
                 </Grid.RowDefinitions>
                 <Grid Grid.Row="0">
-                    <Image x:Name="PortadaCancion" Source="/Resources/portadaArtista.png" Height="130" VerticalAlignment="Top"/>
+                    <Image x:Name="PortadaCancion" Source="/Resources/portadaArtista.png" Height="160" VerticalAlignment="Top"/>
                     <Button x:Name="subirPortada" Width="30" Height="30" 
                                 Style="{StaticResource MaterialDesignIconButton}" ToolTip="Cargar portada" Background="#1a1a1a"
-                                 HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,140,0,0" Click="subirPortada_Click" >
+                                 HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,170,0,0" Click="subirPortada_Click" >
                         <materialDesign:PackIcon Kind="Upload" Width="20" Height="20"/>
                     </Button>
-                    <TextBlock Grid.Column="1" Text="Añadir portada" VerticalAlignment="Center" FontSize="16" Margin="0,80,0,0" Foreground="White" Height="21" HorizontalAlignment="Center"/>
+                    <TextBlock Grid.Column="1" Text="Añadir portada" VerticalAlignment="Center" FontSize="16" Margin="0,110,0,0" Foreground="White" Height="21" HorizontalAlignment="Center"/>
                 </Grid>
                 <Grid Grid.Row="1">
                     <StackPanel Grid.Row="0">
@@ -82,13 +82,13 @@
                              materialDesign:HintAssist.Hint="Nombre archivo" Background="{x:Null}" BorderBrush="{x:Null}" Margin="188,85,35,40" />
                         <TextBlock Text="Añadir archivo" VerticalAlignment="Center" FontSize="16" Foreground="White" Height="21" HorizontalAlignment="Center" Margin="24,104,369,65"/>
                         <Button x:Name="btn_AgregarALista" Width="30" Height="30" 
-                                Style="{StaticResource MaterialDesignIconButton}" ToolTip="Cargar archivo" Background="#1a1a1a"
+                                Style="{StaticResource MaterialDesignIconButton}" ToolTip="Agregar canción" Background="#1a1a1a"
                                  HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,155,312,5" Click="btn_AgregarALista_Click" >
                             <materialDesign:PackIcon Kind="MusicNoteAdd" Width="20" Height="20"/>
                         </Button>
                         <TextBlock Text="Agregar cancion" VerticalAlignment="Center" FontSize="16" Foreground="White" Height="21" HorizontalAlignment="Center" Margin="24,159,347,10" Width="124"/>
                         <Button x:Name="btn_EliminarDeLista" Width="30" Height="30" 
-                                Style="{StaticResource MaterialDesignIconButton}" ToolTip="Cargar archivo" Background="#1a1a1a"
+                                Style="{StaticResource MaterialDesignIconButton}" ToolTip="Eliminar canción" Background="#1a1a1a"
                                  HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,155,19,5" Click="btn_EliminarDeLista_Click"  >
                             <materialDesign:PackIcon Kind="MusicNoteOff" Width="20" Height="20"/>
                         </Button>
@@ -109,8 +109,10 @@
                                             </StackPanel>
                                             <StackPanel Orientation="Vertical">
                                                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                                    <TextBlock Text="Nombre: " Foreground="White" Margin="8,0,0,0"/>
-                                                    <TextBlock Text="{Binding nombre}" Foreground="White" />
+                                                    <TextBox  x:Name="txt_Nombre" Style="{StaticResource MaterialDesignFilledTextFieldTextBox}" IsEnabled="False"
+                                                     VerticalAlignment="Top" TextWrapping="Wrap" Text="{Binding nombre}"  Width="296"
+                                                     Height="70" MaxLines="50" MaxLength="50" Foreground="White" SelectionBrush="#34f7c3" CaretBrush="#34f7c3"
+                                                     materialDesign:HintAssist.Hint="Nombre de la canción" Background="{x:Null}" BorderBrush="{x:Null}" Grid.ColumnSpan="2"/>
                                                 </StackPanel>
                                             </StackPanel>
                                         </StackPanel>
