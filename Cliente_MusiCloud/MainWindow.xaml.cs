@@ -4,7 +4,6 @@ using Cliente_MusiCloud.cuenta.LoginRR;
 using Cliente_MusiCloud.Cuenta;
 using Cliente_MusiCloud.cuentaArtista.aplicacion;
 using Cliente_MusiCloud.cuentaArtista.dominio;
-using Cliente_MusiCloud.pages;
 using Cliente_MusiCloud.utilidades;
 using System;
 using System.Threading.Tasks;
@@ -103,17 +102,17 @@ namespace Cliente_MusiCloud
 
         private async Task<Artista> ObtenerArtista(string idArtista)
         {
-            Artista artista = null;
+            Artista artistaRecuperado = null;
             try
             {
-                artista = await Cliente_MusiCloud.artista.aplicacion.Aplicacion.ObtenerArtistaPorId(idArtista);
+                artistaRecuperado = await Cliente_MusiCloud.artista.aplicacion.Aplicacion.ObtenerArtistaPorId(idArtista);
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
             }
 
-            return artista;
+            return artistaRecuperado;
         }
     }
 }

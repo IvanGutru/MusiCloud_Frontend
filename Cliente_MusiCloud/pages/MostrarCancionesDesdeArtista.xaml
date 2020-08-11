@@ -54,8 +54,6 @@
                                         <StackPanel Width="auto" >
                                             <Button x:Name="btn_agregarCola" Content="Agregar a cola" Click="btn_agregarCola_Click" />
                                             <Button x:Name="btn_agregarSiguiente" Content="Agregar a siguiente" Click="btn_agregarSiguiente_Click"  />
-                                            <Button x:Name="btn_agregarAPlaylist" Content="Agregar a playlist" Click="btn_agregarAPlaylist_Click"/>
-                                            <Button x:Name="btn_generarRadio" Content="Generar Radio" Click="btn_generarRadio_Click"/>
                                         </StackPanel>
                                     </materialDesign:PopupBox>
                                 </StackPanel>
@@ -79,7 +77,7 @@
                                     <StackPanel Orientation="Horizontal">
                                         <TextBlock Text="Duracion: " Foreground="White" Margin="8,0,0,0"/>
                                         <TextBlock Text="{Binding duracion}" Foreground="White" />
-                                        <TextBlock Text=" minutos: " Foreground="White" Margin="8,0,0,0"/>
+                                        <TextBlock Text=" minutos" Foreground="White" Margin="1,0,0,0"/>
                                     </StackPanel>
                                 </StackPanel>
 

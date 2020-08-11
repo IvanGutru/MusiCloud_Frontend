@@ -2,16 +2,13 @@
 using Cliente_MusiCloud.utilidades;
 using System;
 using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
 using System.Net.Http;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Media.Imaging;
 
 namespace Cliente_MusiCloud.playlist.aplicacion
 {
-    class AplicacionPlaylist
+    static class AplicacionPlaylist
     {
         public static async Task<bool> CrearPlaylist(Playlist playlist)
         {

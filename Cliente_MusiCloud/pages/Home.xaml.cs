@@ -1,21 +1,14 @@
-﻿using Cliente_MusiCloud.artista.aplicacion;
+﻿using Cliente_MusiCloud.album.aplicacion;
+using Cliente_MusiCloud.album.dominio;
+using Cliente_MusiCloud.artista.aplicacion;
 using Cliente_MusiCloud.artista.Dominio;
 using Cliente_MusiCloud.playlist.aplicacion;
 using Cliente_MusiCloud.playlist.dominio;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace Cliente_MusiCloud.pages
 {
@@ -26,11 +19,13 @@ namespace Cliente_MusiCloud.pages
     {
         List<Playlist> listaPlaylistSistema;
         List<Artista> listaArtistasHome;
+        List<Album> listaAlbumesHome;
         public Home()
         {
             InitializeComponent();
             CargarPlaylistSistemaAsync();
             CargarArtistas();
+            CargarAlbumes();
         }
 
         private async void CargarPlaylistSistemaAsync()
@@ -59,6 +54,24 @@ namespace Cliente_MusiCloud.pages
                     artistasHome.imagenPortadaArtista = await Aplicacion.ObtenerImagenArtista(artistasHome.portada);
                 }
                 listViewArtistas.ItemsSource = listaArtistasHome;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Ocurrió un error", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
+        }
+
+        private async void CargarAlbumes()
+        {
+            try
+            {
+
+                listaAlbumesHome = await AplicacionAlbum.ObtenerAlbumHome();
+                foreach (var albumHome in listaAlbumesHome)
+                {
+                    albumHome.imagenPortadaAlbum = await Aplicacion.ObtenerImagenArtista(albumHome.portada);
+                }
+                listViewAlbum.ItemsSource = listaAlbumesHome;
             }
             catch (Exception ex)
             {

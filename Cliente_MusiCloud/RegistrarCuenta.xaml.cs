@@ -1,18 +1,8 @@
 ﻿using Cliente_MusiCloud.cuenta.Dominio;
 using Cliente_MusiCloud.Cuenta;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
+
 
 namespace Cliente_MusiCloud
 {
@@ -81,7 +71,7 @@ namespace Cliente_MusiCloud
 
         private Cuentas ObtenerCuenta()
         {
-            Cuentas cuenta = new Cuentas
+            Cuentas cuentaNueva = new Cuentas
             {
                 nombreUsuario = txt_usuario.Text,
                 correo = txt_correo.Text,
@@ -90,7 +80,7 @@ namespace Cliente_MusiCloud
                 contraseña = txt_Contraseña.Password,
                 creadorContenido = false
             };
-            return cuenta;
+            return cuentaNueva;
         }
         private bool ValidarContraseñasIguales()
         {

@@ -146,15 +146,6 @@
     <Compile Include="pages\MostrarCancionesDesdeArtista.xaml.cs">
       <DependentUpon>MostrarCancionesDesdeArtista.xaml</DependentUpon>
     </Compile>
-    <Compile Include="paginas\Busqueda.xaml.cs">
-      <DependentUpon>Busqueda.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="paginas\ListaDeReproduccion.xaml.cs">
-      <DependentUpon>ListaDeReproduccion.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="paginas\ReproduccionActual.xaml.cs">
-      <DependentUpon>ReproduccionActual.xaml</DependentUpon>
-    </Compile>
     <Compile Include="playlist\aplicacion\AplicacionPlaylist.cs" />
     <Compile Include="playlist\dominio\Playlist.cs" />
     <Compile Include="RegistrarCuenta.xaml.cs">
@@ -225,18 +216,6 @@
     <Page Include="PaginaPrincipal.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="paginas\Busqueda.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="paginas\ListaDeReproduccion.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="paginas\ReproduccionActual.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
     </Page>
     <Page Include="RegistrarCuenta.xaml">
       <SubType>Designer</SubType>

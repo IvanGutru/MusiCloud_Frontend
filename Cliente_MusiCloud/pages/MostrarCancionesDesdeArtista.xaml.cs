@@ -1,22 +1,15 @@
-﻿using Cliente_MusiCloud.album.dominio;
+﻿using Cliente_MusiCloud.album.aplicacion;
+using Cliente_MusiCloud.album.dominio;
 using Cliente_MusiCloud.cancion.aplicacion;
 using Cliente_MusiCloud.cancion.dominio;
 using Cliente_MusiCloud.reproductor;
 using Cliente_MusiCloud.utilidades;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace Cliente_MusiCloud.pages
 {
@@ -33,6 +26,7 @@ namespace Cliente_MusiCloud.pages
             this.album = album;
             CargarInformacionAlbum();
             CargarCanciones();
+            CargarPortadaAlbum();
         }
 
         private void CargarInformacionAlbum()
@@ -43,9 +37,17 @@ namespace Cliente_MusiCloud.pages
             txt_Compania.IsEnabled = false;
         }
 
-        private void CargarPortadaAlbum()
+        private async void CargarPortadaAlbum()
         {
-            
+            try
+            {
+                BitmapImage imagen = await AplicacionAlbum.ObtenerImagenAlbum(album.portada);
+                portadaAlbum.Source = imagen;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Ocurrió un error", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
         }
         private async void CargarCanciones()
         {
@@ -97,9 +99,7 @@ namespace Cliente_MusiCloud.pages
 
         private void btn_generarRadio_Click(object sender, RoutedEventArgs e)
         {
-            Button button = sender as Button;
-            Cancion cancion = button.DataContext as Cancion;
-            //GenerarRadio(cancion);
+
         }
 
     }

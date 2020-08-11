@@ -24,6 +24,7 @@ namespace Cliente_MusiCloud
             centralFrame.NavigationUIVisibility = System.Windows.Navigation.NavigationUIVisibility.Hidden;
             ValidarEsCreadorContenido();
             InitializeWindow();
+            ItemGeneros.Visibility = Visibility.Hidden;
         }
         public void InitializeWindow()
         {

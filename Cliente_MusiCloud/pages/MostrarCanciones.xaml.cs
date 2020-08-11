@@ -6,18 +6,9 @@ using Cliente_MusiCloud.reproductor;
 using Cliente_MusiCloud.utilidades;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace Cliente_MusiCloud.pages
 {
@@ -79,8 +70,8 @@ namespace Cliente_MusiCloud.pages
         {
             try
             {
-                List<Album> album = await AplicacionAlbum.ObtenerAlbumPorId(idAlbum);
-                foreach (var nombre in album)
+                List<Album> albumesPorId = await AplicacionAlbum.ObtenerAlbumPorId(idAlbum);
+                foreach (var nombre in albumesPorId)
                 {
                     txt_NombreAlbum.Text = nombre.nombre;
                     txt_NombreCompania.Text = nombre.compania; 
@@ -131,9 +122,7 @@ namespace Cliente_MusiCloud.pages
 
         private void btn_generarRadio_Click(object sender, RoutedEventArgs e)
         {
-            Button button = sender as Button;
-            Cancion cancion = button.DataContext as Cancion;
-            //GenerarRadio(cancion);
+           
         }
     }
 }

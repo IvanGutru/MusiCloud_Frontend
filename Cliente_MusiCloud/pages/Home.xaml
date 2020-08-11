@@ -38,7 +38,7 @@
                     <ColumnDefinition Width="1*"/>
                     <ColumnDefinition Width="1*"/>
                 </Grid.ColumnDefinitions>
-                <TextBlock Grid.Column="0" Text="Playlist del sistema" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16" Foreground="White"/>
+                <TextBlock Grid.Column="0" Text="Recomendaciones" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16" Foreground="White"/>
                 <TextBlock Grid.Column="1" Text="Artistas" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16" Foreground="White"/>
                 <TextBlock Grid.Column="2" Text="Albumes" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16" Foreground="White"/>
             </Grid>
@@ -88,8 +88,26 @@
                         </ListView.ItemTemplate>
                     </ListView>
                 </Grid>
-                <Grid x:Name="GridAlbumes" Grid.Column="1">
-
+                <Grid x:Name="GridAlbumes" Grid.Column="2">
+                    <ListView Grid.Row="0" x:Name="listViewAlbum" Padding="5" Margin="30,10,30,10" ScrollViewer.VerticalScrollBarVisibility="Disabled" >
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <StackPanel>
+                                        <Image Source="{Binding imagenPortadaAlbum}" Height="70"/>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Vertical">
+                                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                            <TextBox  x:Name="txt_NombreAlbum" Style="{StaticResource MaterialDesignFilledTextFieldTextBox}" IsEnabled="False"
+                                                  VerticalAlignment="Top" TextWrapping="Wrap" Text="{Binding nombre}"  Width="150"
+                                                  Height="70" MaxLines="50" MaxLength="50" Foreground="White" SelectionBrush="#34f7c3" CaretBrush="#34f7c3"
+                                                   materialDesign:HintAssist.Hint="Nombre de album" Background="{x:Null}" BorderBrush="{x:Null}" Grid.ColumnSpan="2"/>
+                                        </StackPanel>
+                                    </StackPanel>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
                 </Grid>
             </Grid>
         </Grid>
