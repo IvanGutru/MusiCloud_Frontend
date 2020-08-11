@@ -1,21 +1,10 @@
 ﻿using Cliente_MusiCloud.cuenta.Dominio;
-using Cliente_MusiCloud.cuenta.LoginRR;
 using Cliente_MusiCloud.Cuenta;
 using Cliente_MusiCloud.utilidades;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace Cliente_MusiCloud.pages
 {
@@ -46,10 +35,8 @@ namespace Cliente_MusiCloud.pages
 
         private async void btn_GuardarCambios_Click(object sender, RoutedEventArgs e)
         {
-            if (ValidarCampos() && ValidarContraseñasIguales())
+            if (ValidarCampos() && ValidarContraseñasIguales() && ValidarAccionGuardar())
             {
-                if (ValidarAccionGuardar())
-                {
                     nuevaCuenta = ObtenerNuevosDatosCuenta();
                     try
                     {
@@ -64,7 +51,6 @@ namespace Cliente_MusiCloud.pages
                     {
                         MessageBox.Show(ex.Message, "Ocurrió un error", MessageBoxButton.OK, MessageBoxImage.Warning);
                     }
-                }
             }
         }
         private bool ValidarCampos()
@@ -97,7 +83,7 @@ namespace Cliente_MusiCloud.pages
         }
         private Cuentas ObtenerNuevosDatosCuenta()
         {
-            Cuentas nuevaCuenta = new Cuentas
+            Cuentas cuentaCreada = new Cuentas
             {
                 idCuenta = cuenta.idCuenta,
                 nombre = txt_Nombre.Text,
@@ -108,7 +94,7 @@ namespace Cliente_MusiCloud.pages
                 creadorContenido = cuenta.creadorContenido
             };
             
-            return nuevaCuenta;
+            return cuentaCreada;
         }
 
         private void btn_HabilitarCampos_Click(object sender, RoutedEventArgs e)

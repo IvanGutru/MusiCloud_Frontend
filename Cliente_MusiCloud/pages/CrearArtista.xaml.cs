@@ -155,17 +155,16 @@ namespace Cliente_MusiCloud.pages
                 idGenero = await ObtenerIdGeneroAsync()
             };
             return artista;
-   
+    
         }
 
-        private String ObtenerPortada()
+        private string ObtenerPortada()
         {
-            string portadaArtista;
             if (pathAbsolutoImagen != null)
             {
-                return portadaArtista = CodificacionImagenes.CodificarBase64(pathAbsolutoImagen);
+                return _ = CodificacionImagenes.CodificarBase64(pathAbsolutoImagen);
             }
-            return portadaArtista = "";
+            return "";
         }
 
         private async Task<int> ObtenerIdGeneroAsync()

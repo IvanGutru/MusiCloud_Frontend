@@ -4,7 +4,6 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Cliente_MusiCloud.reproductor
@@ -32,12 +31,12 @@ namespace Cliente_MusiCloud.reproductor
             try
             {
                 var trackAudio = await ServidorReproduccion.ServidorReproduccion.client.ObtenerCancionAsync(cancion.archivo);
-                PararReproduccion();
+                Reproductor.PararReproduccion();
                 Mp3FileReader mp3Reader = new Mp3FileReader(new MemoryStream(trackAudio.Audio));
                 waveStream = new WaveChannel32(mp3Reader);
                 waveOutEvent.Init(waveStream);
                 cancionLista = true;
-                ComenzarReproduccion();
+                Reproductor.ComenzarReproduccion();
                 return true;
 
             }
@@ -113,10 +112,10 @@ namespace Cliente_MusiCloud.reproductor
         {
             if (ColaCanciones.Count > 0)
             {
-                Reproductor.PararReproduccion();
+                PararReproduccion();
                 Cancion cancion = ColaCanciones.Dequeue();
                 cancionLista = false;
-                if (await Reproductor.Reproducir(cancion))
+                if (await Reproducir(cancion))
                 {
                     return cancion;
                 }
@@ -163,9 +162,9 @@ namespace Cliente_MusiCloud.reproductor
         {
             List<Cancion> listaCanciones = ColaCanciones.Prepend(cancion).ToList();
             ColaCanciones.Clear();
-            foreach (var track in listaCanciones)
+            foreach (var cancionlista in listaCanciones)
             {
-                ColaCanciones.Enqueue(track);
+                ColaCanciones.Enqueue(cancionlista);
             }
 
         }

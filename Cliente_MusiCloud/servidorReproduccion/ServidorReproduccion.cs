@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Thrift.Protocol;
 using Thrift.Transport;
 using Thrift.Transport.Client;
@@ -13,7 +9,7 @@ namespace Cliente_MusiCloud.ServidorReproduccion
     {
         public static ServicioReproduccion.Client client;
 
-        public ServidorReproduccion() {}
+        public ServidorReproduccion() { }
 
         public static void Conectar()
         {

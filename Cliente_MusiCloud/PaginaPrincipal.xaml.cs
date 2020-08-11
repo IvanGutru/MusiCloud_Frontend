@@ -1,4 +1,6 @@
 ﻿
+using Cliente_MusiCloud.album.aplicacion;
+using Cliente_MusiCloud.artista.aplicacion;
 using Cliente_MusiCloud.cancion.dominio;
 using Cliente_MusiCloud.pages;
 using Cliente_MusiCloud.reproductor;
@@ -24,6 +26,7 @@ namespace Cliente_MusiCloud
             centralFrame.NavigationUIVisibility = System.Windows.Navigation.NavigationUIVisibility.Hidden;
             ValidarEsCreadorContenido();
             InitializeWindow();
+            ItemGeneros.Visibility = Visibility.Hidden;
         }
         public void InitializeWindow()
         {
@@ -33,10 +36,10 @@ namespace Cliente_MusiCloud
             loadProgressTrackTimer.Interval = new TimeSpan(0, 0, 0, 1);
  
         }
-        public void CargarInformacion(Cancion cancion)
+        public async void CargarInformacionAsync(Cancion cancion)
         {
-            txt_NombreCancion.Text = cancion.nombre;
-            txt_Duracion.Text = cancion.duracion;
+            txt_Nombre.Text = cancion.nombre;
+            PortadaCancion.Source = await AplicacionAlbum.ObtenerImagenAlbum(cancion.portada);
             ContinuarReproduccion();
         }
         private void ButtonCloseMenu_Click(object sender, RoutedEventArgs e)
@@ -164,7 +167,7 @@ namespace Cliente_MusiCloud
             if (cancion != null)
             {
                 ContinuarReproduccion();
-                CargarInformacion(cancion);
+                CargarInformacionAsync(cancion);
             }
         }
         private void barra_volumen_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)

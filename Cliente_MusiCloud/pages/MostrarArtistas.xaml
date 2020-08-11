@@ -15,7 +15,10 @@
             <RowDefinition Height="5*"/>
         </Grid.RowDefinitions>
         <Grid Grid.Row="0">
-            <TextBlock Text="Artistas" HorizontalAlignment="Center" FontSize="40" FontWeight="Heavy" FontFamily="Comic Sans MS" Foreground="White" />
+            <Grid.Background>
+                <ImageBrush ImageSource="/Resources/plantas.png" Stretch="UniformToFill"/>
+            </Grid.Background>
+            <TextBlock Text="Artistas" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="40" FontWeight="Heavy" FontFamily="Comic Sans MS" Foreground="White" />
         </Grid>
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
@@ -47,21 +50,25 @@
                     </Grid>
                 </Grid>
                 <Grid Grid.Row="1">
-                    <ListView Grid.Row="0" x:Name="listViewArtistas" Padding="5" Margin="50,10,50,10" MouseDoubleClick="listViewArtistas_MouseDoubleClick_1">
+                    <ListView Grid.Row="0" x:Name="listViewArtistas" Padding="5" Margin="20,10,20,10" MouseDoubleClick="listViewArtistas_MouseDoubleClick_1">
                         <ListView.ItemTemplate>
                             <DataTemplate>
                                 <StackPanel Orientation="Horizontal">
                                     <StackPanel>
-                                        <Image Source="/Resources/PortadaArtista.png" Height="70"/>
+                                        <Image Source="{Binding imagenPortadaArtista}" Height="70"/>
                                     </StackPanel>
                                     <StackPanel Orientation="Vertical">
                                         <StackPanel Orientation="Horizontal">
-                                            <TextBlock Text="Nombre: " Foreground="White" Margin="8,0,0,0"/>
+                                            <TextBlock Text="Artista: " Foreground="White" Margin="8,0,0,0"/>
                                             <TextBlock Text="{Binding nombre}" Foreground="White" />
                                         </StackPanel>
                                         <StackPanel Orientation="Horizontal">
-                                            <TextBlock Text="Descripcion: " Foreground="White" Margin="8,0,0,0"/>
-                                            <TextBlock Text="{Binding descripcion}" Foreground="White" />
+                                            <TextBox Margin="10,0,0,0"
+                                                TextWrapping="Wrap" VerticalAlignment="Center" MaxWidth="300" SelectionBrush="#34f7c3" CaretBrush="#34f7c3"
+                                                VerticalScrollBarVisibility="Auto"  IsEnabled="False" Background="{x:Null}" BorderBrush="{x:Null}"
+                                                Foreground="White" materialDesign:HintAssist.Hint="Descripcion"
+                                                Height="auto" Text="{Binding descripcion}">
+                                            </TextBox>
                                         </StackPanel>
                                     </StackPanel>
                                 </StackPanel>
@@ -85,7 +92,7 @@
                             <DataTemplate>
                                 <StackPanel Orientation="Horizontal">
                                     <StackPanel>
-                                        <Image Source="/Resources/playlistPortada.png" Height="70"/>
+                                        <Image Source="{Binding imagenPortadaAlbum}" Height="70"/>
                                     </StackPanel>
                                     <StackPanel Orientation="Vertical">
                                         <StackPanel Orientation="Horizontal">

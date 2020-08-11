@@ -9,18 +9,11 @@ using NAudio.Wave;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace Cliente_MusiCloud.pages
 {
@@ -48,9 +41,25 @@ namespace Cliente_MusiCloud.pages
             {
                 if (validarAlMenosUnaCancionAñadida())
                 {
-                    await GuardarCancionesAsync();
-                    MessageBox.Show("Album con canciones registrado con éxito", "Realizado", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    if (await GuardarCancionesAsync())
+                    {
+
+                        MessageBox.Show("Album con canciones registrado con éxito", "Realizado", MessageBoxButton.OK);
+                        NavigationService.Navigate(new GestionArtista());
+                    }
+                    else
+                    {
+                        MessageBox.Show("No se pudieron guardar las canciones", "Realizado", MessageBoxButton.OK);
+                    }
                 }
+                else
+                {
+                    MessageBox.Show("Debe agregar al menos una canción", "Advertencia", MessageBoxButton.OK, MessageBoxImage.Warning);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Favor de ingresar información dek álbum", "Advertencia", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
         }
         private async Task<bool> GuardarCancionesAsync()
@@ -102,7 +111,6 @@ namespace Cliente_MusiCloud.pages
         {
             if (String.IsNullOrEmpty(txt_NombreAlbum.Text) || String.IsNullOrEmpty(txt_CompaniaAlbum.Text))
             {
-                MessageBox.Show("Favor de ingresar información dek álbum", "Advertencia", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return false;
             }
             return true;
@@ -115,7 +123,7 @@ namespace Cliente_MusiCloud.pages
             }
             else
             {
-                MessageBox.Show("Debe agregar al menos una canción", "Advertencia", MessageBoxButton.OK, MessageBoxImage.Warning);
+               
                 return false;
             }
         }
@@ -153,7 +161,7 @@ namespace Cliente_MusiCloud.pages
             {
                 return portadaArtista = CodificacionImagenes.CodificarBase64(pathAbsolutoImagen);
             }
-            return portadaArtista = "";
+            return "";
         }
         private void subirPortada_Click(object sender, RoutedEventArgs e)
         {

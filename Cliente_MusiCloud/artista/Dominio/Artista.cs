@@ -1,13 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Media.Imaging;
 
 namespace Cliente_MusiCloud.artista.Dominio
 {
-    class Artista
+    public class Artista
     {
         public string idArtista { get; set; }
         public string nombre { get; set; }

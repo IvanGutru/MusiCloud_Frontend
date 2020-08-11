@@ -20,11 +20,6 @@
                     ToolTip="Regresar" Width="40" Height="40" Click="Btn_Regresar_Click" >
                 <materialDesign:PackIcon Kind="ArrowLeft"  Width="40" Height="40"/>
             </Button>
-            <Button Background="#262626" Padding="0" Margin="10,0,0,0" HorizontalAlignment="Left"
-                    x:Name="Btn_RegresarAMostrarAlbumes" Foreground="White" BorderBrush="#34f7c3"
-                    ToolTip="Regresar" Width="40" Height="40" Click="Btn_Regresar_MostrarCanciones_Click" >
-                <materialDesign:PackIcon Kind="ArrowLeft"  Width="40" Height="40"/>
-            </Button>
         </Grid>
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
@@ -37,57 +32,87 @@
                     <RowDefinition Height="1.5*"/>
                 </Grid.RowDefinitions>
                 <Grid Grid.Row="0">
-                    <Image  Source="/Resources/playlistPortada.png" Height="150"/>
+                    <Image x:Name="portadaAlbum" Margin="0,15,0,0"/>
                 </Grid>
                 <Grid Grid.Row="1">
-                    <TextBlock x:Name="txt_NombreAlbum" Text="Nombre album "  HorizontalAlignment="Center" FontSize="26" Foreground="White" Margin="31,0,38,202" Width="214" TextAlignment="Center" />
-                    <TextBlock x:Name="txt_NombreCompania" Text="Nombre compania "  HorizontalAlignment="Center" FontSize="26" Foreground="White" Margin="31,50,38,151" Width="214" TextAlignment="Center" />
+                    <TextBox  x:Name="txt_NombreArtista" Style="{StaticResource MaterialDesignFilledTextFieldTextBox}"
+                    VerticalAlignment="Top" TextWrapping="Wrap" Margin="20,20,20,40" IsEnabled="False"
+                    Height="70" MaxLines="50" MaxLength="50" Foreground="White" SelectionBrush="#34f7c3" CaretBrush="#34f7c3"
+                    materialDesign:HintAssist.Hint="Nombre del artista" Background="{x:Null}" BorderBrush="{x:Null}" Grid.ColumnSpan="2"/>
+                    <TextBox  x:Name="txt_NombreAlbum" Style="{StaticResource MaterialDesignFilledTextFieldTextBox}"
+                    VerticalAlignment="Top" TextWrapping="Wrap" Margin="20,98,20,0"   VerticalScrollBarVisibility="Auto"
+                    Height="70" Foreground="White" SelectionBrush="#34f7c3" CaretBrush="#34f7c3" IsEnabled="False"
+                    materialDesign:HintAssist.Hint="Nombre de album" Background="{x:Null}" BorderBrush="{x:Null}"/>
+                    <TextBox  x:Name="txt_NombreCompania" Style="{StaticResource MaterialDesignFilledTextFieldTextBox}"
+                    VerticalAlignment="Top" TextWrapping="Wrap" Margin="20,180,20,0" IsEnabled="false"
+                    Height="70" MaxLines="50" MaxLength="50" Foreground="White" SelectionBrush="#34f7c3" CaretBrush="#34f7c3"
+                    materialDesign:HintAssist.Hint="Compañia" Background="{x:Null}" BorderBrush="{x:Null}" Grid.ColumnSpan="2"/>
                 </Grid>
             </Grid>
             <Grid Grid.Column="1">
-                <ListView Grid.Row="0" x:Name="listView_Canciones" Padding="5" Margin="50,10,50,10" >
-                    <ListView.ItemTemplate>
-                        <DataTemplate>
-                            <StackPanel Orientation="Horizontal">
-                                <StackPanel Margin="20">
-                                    <materialDesign:PopupBox x:Name="PopupBox_options" PlacementMode="BottomAndAlignRightEdges" StaysOpen="False" Margin="10" Foreground="White" >
-                                        <StackPanel Width="auto" >
-                                            <Button x:Name="btn_agregarCola" Content="Agregar a cola" Click="btn_agregarCola_Click" />
-                                            <Button x:Name="btn_agregarSiguiente" Content="Agregar a siguiente" Click="btn_agregarSiguiente_Click"  />
-                                            <Button x:Name="btn_agregarAPlaylist" Content="Agregar a playlist" Click="btn_agregarAPlaylist_Click"/>
-                                            <Button x:Name="btn_generarRadio" Content="Generar Radio" Click="btn_generarRadio_Click"/>
-                                        </StackPanel>
-                                    </materialDesign:PopupBox>
-                                </StackPanel>
-                                <StackPanel Margin="20">
-                                    <Button x:Name="btn_Reproducir"
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="5*"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+                <Grid Grid.Column="0">
+                    <ListView Grid.Row="0" x:Name="listView_Canciones" Padding="5" Margin="50,10,0,10" ScrollViewer.VerticalScrollBarVisibility="Disabled">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <StackPanel Margin="5,10,-10,0">
+                                        <materialDesign:PopupBox x:Name="PopupBox_options" PlacementMode="BottomAndAlignRightEdges" StaysOpen="False" Margin="10" Foreground="White" >
+                                            <StackPanel Width="auto" >
+                                                <Button x:Name="btn_agregarCola" Content="Agregar a cola" Click="btn_agregarCola_Click" />
+                                                <Button x:Name="btn_agregarSiguiente" Content="Agregar a siguiente" Click="btn_agregarSiguiente_Click"  />
+                                                <Button x:Name="btn_agregarAPlaylist" Content="Agregar a playlist" Click="btn_agregarAPlaylist_Click"/>
+                                                <Button x:Name="btn_generarRadio" Content="Generar Radio" Click="btn_generarRadio_Click"/>
+                                            </StackPanel>
+                                        </materialDesign:PopupBox>
+                                    </StackPanel>
+                                    <StackPanel Margin="5">
+                                        <Button Name="btn_AñadirMegusta"
+                                             Style="{StaticResource MaterialDesignIconButton}"
+                                             ToolTip="Me gusta" Background="{DynamicResource MaterialDesignTextFieldBoxBackground}">
+                                            <materialDesign:PackIcon Kind="Heart" Foreground="White" />
+                                        </Button>
+                                    </StackPanel>
+                                    <StackPanel Margin="5">
+                                        <Button x:Name="btn_Reproducir"
                                           Style="{StaticResource MaterialDesignIconButton}"
-                                          ToolTip="MaterialDesignIconButton"
+                                          ToolTip="Reproducir"
                                           Background="{DynamicResource MaterialDesignTextFieldBoxBackground}" Click="btn_Reproducir_Click">
-                                        <materialDesign:PackIcon
+                                            <materialDesign:PackIcon
                                              Kind="Play" />
-                                    </Button>
-                                </StackPanel>
-                                <StackPanel Margin="10">
-                                    <Image Source="/Resources/playlistPortada.png" Height="70"/>
-                                </StackPanel>
-                                <StackPanel Orientation="Vertical" Margin="20">
-                                    <StackPanel Orientation="Horizontal">
-                                        <TextBlock Text="Nombre: " Foreground="White" Margin="8,0,0,0"/>
-                                        <TextBlock Text="{Binding nombre}" Foreground="White" />
+                                        </Button>
                                     </StackPanel>
-                                    <StackPanel Orientation="Horizontal">
-                                        <TextBlock Text="Duracion: " Foreground="White" Margin="8,0,0,0"/>
-                                        <TextBlock Text="{Binding duracion}" Foreground="White" />
-                                        <TextBlock Text=" minutos: " Foreground="White" Margin="8,0,0,0"/>
+                                    <StackPanel Margin="10">
+                                        <Image Source="{Binding imagenPortadaCancion}" Height="70"/>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Vertical" Margin="20">
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="Nombre: " Foreground="White" Margin="8,0,0,0"/>
+                                            <TextBlock Text="{Binding nombre}" Foreground="White" />
+                                        </StackPanel>
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="Duracion: " Foreground="White" Margin="8,0,0,0"/>
+                                            <TextBlock Text="{Binding duracion}" Foreground="White" />
+                                            <TextBlock Text=" minutos" Foreground="White" Margin="0,0,0,0"/>
+                                        </StackPanel>
                                     </StackPanel>
                                 </StackPanel>
-
-                            </StackPanel>
-                            
-                        </DataTemplate>
-                    </ListView.ItemTemplate>
-                </ListView>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </Grid>
+                <Grid Grid.Column="2">
+                    <Button x:Name="Btn_AgregarTodasLasCanciones" 
+                            VerticalAlignment="Top" Margin="0,18,0,0" Background="#262626"  BorderBrush="#34f7c3"
+                            Style="{StaticResource MaterialDesignFloatingActionAccentButton}"
+                            ToolTip="Reproducir todo el álbum" Click="Btn_AgregarTodasLasCanciones_Click" >
+                        <materialDesign:PackIcon Kind="MusicNoteAdd" Height="24" Width="24" />
+                    </Button>
+                </Grid>
+               
             </Grid>
         </Grid>
     </Grid>

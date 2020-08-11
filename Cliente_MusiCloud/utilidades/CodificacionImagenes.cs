@@ -24,16 +24,14 @@ namespace Cliente_MusiCloud.utilidades
 
         public static BitmapImage DecodificarBase64(String imagenCodificada)
         {
-            BitmapImage bitmapImage = new BitmapImage(); 
+            BitmapImage bitmapImage = new BitmapImage();
             byte[] imagenEnBytes = Convert.FromBase64String(imagenCodificada);
             var ms = new MemoryStream(imagenEnBytes);
-            
-                //Image imagen = Image.FromStream(ms,true);
-                bitmapImage.BeginInit();
-                bitmapImage.StreamSource = ms;
-                bitmapImage.EndInit();
-                return bitmapImage;
-            
+            bitmapImage.BeginInit();
+            bitmapImage.StreamSource = ms;
+            bitmapImage.EndInit();
+            return bitmapImage;
+
         }
     }
 }

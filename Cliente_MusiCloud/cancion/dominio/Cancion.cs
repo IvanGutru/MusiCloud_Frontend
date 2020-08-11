@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Windows.Media.Imaging;
 
 namespace Cliente_MusiCloud.cancion.dominio
 {
@@ -13,6 +10,9 @@ namespace Cliente_MusiCloud.cancion.dominio
         public String duracion { get; set; }
         public String archivo { get; set; }
         public String idAlbum { get; set; }
-        
+
+        public String portada { get; set; }
+        public BitmapImage imagenPortadaCancion { get; set; }
+
     }
 }

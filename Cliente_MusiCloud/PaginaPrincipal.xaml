@@ -66,11 +66,13 @@
                             <ColumnDefinition Width="2*"/>
                         </Grid.ColumnDefinitions>
                         <Grid Grid.Column="0">
-                            <Image x:Name="PortadaCancion" Source="/Resources/portadaCancionDefault.png" Height="100" />
+                            <Image x:Name="PortadaCancion" Source="/Resources/portadaCancionDefault.png" Height="70" />
                         </Grid>
                         <Grid Grid.Column="1">
-                            <TextBlock x:Name="txt_NombreCancion" Text="Nombre cancion" VerticalAlignment="Top" Margin="0,20,0,0" FontSize="16" Foreground="White"/>
-                            <TextBlock x:Name="txt_Duracion" Text="Duracion" VerticalAlignment="Bottom" FontSize="16" Foreground="White"/>
+                            <TextBox  x:Name="txt_Nombre" Style="{StaticResource MaterialDesignFilledTextFieldTextBox}"
+                             VerticalAlignment="Center" TextWrapping="Wrap"  HorizontalAlignment="Center" IsEnabled="False"
+                            Height="70" Width="250"  MaxLines="50" MaxLength="50" Foreground="White" SelectionBrush="#34f7c3" CaretBrush="#34f7c3"
+                            materialDesign:HintAssist.Hint="Cancion en reproducción" Background="{x:Null}" BorderBrush="{x:Null}" Grid.ColumnSpan="2"/>
                         </Grid>
 
                     </Grid>

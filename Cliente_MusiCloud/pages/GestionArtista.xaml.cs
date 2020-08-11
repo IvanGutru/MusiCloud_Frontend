@@ -5,18 +5,11 @@ using Cliente_MusiCloud.artista.Dominio;
 using Cliente_MusiCloud.utilidades;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace Cliente_MusiCloud.pages
 {
@@ -26,6 +19,7 @@ namespace Cliente_MusiCloud.pages
     public partial class GestionArtista : Page
     {
         Artista artistaSingleton = SingletonArtista.GetArtista();
+        List<Album> listaAlbumes;
         public GestionArtista()
         {
             InitializeComponent();
@@ -36,16 +30,20 @@ namespace Cliente_MusiCloud.pages
 
         private async void CargarAlbumesArtista()
         {
-            List<Album> listaAlbumes;
-                try
+  
+            try
+            {
+                listaAlbumes = await AplicacionAlbum.ObtenerAlbumesArtistaPorId(artistaSingleton.idArtista);
+                foreach (var albumEnLista in listaAlbumes)
                 {
-                    listaAlbumes = await AplicacionAlbum.ObtenerAlbumesArtistaPorId(artistaSingleton.idArtista);
-                    listView_Albumes.ItemsSource = listaAlbumes;
+                    albumEnLista.imagenPortadaAlbum = await AplicacionAlbum.ObtenerImagenAlbum(albumEnLista.portada);
                 }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message);
-                }
+                listView_Albumes.ItemsSource = listaAlbumes;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
 
         }
         private async void CargarImagenArtistaAsync()
@@ -66,8 +64,7 @@ namespace Cliente_MusiCloud.pages
         {
             txt_Nombre.Text = artistaSingleton.nombre;
             txt_Descripcion.Text = artistaSingleton.descripcion;
-            txt_Nombre.IsEnabled = false;
-            txt_Descripcion.IsEnabled = false;
+         
         }
 
         private void listView_Albumes_MouseDoubleClick(object sender, MouseButtonEventArgs e)

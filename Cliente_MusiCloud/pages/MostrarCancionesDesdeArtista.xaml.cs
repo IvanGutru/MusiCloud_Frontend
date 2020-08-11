@@ -1,22 +1,15 @@
-﻿using Cliente_MusiCloud.album.dominio;
+﻿using Cliente_MusiCloud.album.aplicacion;
+using Cliente_MusiCloud.album.dominio;
 using Cliente_MusiCloud.cancion.aplicacion;
 using Cliente_MusiCloud.cancion.dominio;
 using Cliente_MusiCloud.reproductor;
 using Cliente_MusiCloud.utilidades;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace Cliente_MusiCloud.pages
 {
@@ -33,20 +26,18 @@ namespace Cliente_MusiCloud.pages
             this.album = album;
             CargarInformacionAlbum();
             CargarCanciones();
+
         }
 
         private void CargarInformacionAlbum()
         {
-            txt_Nombre.Text = album.nombre;
-            txt_Compania.Text = album.compania;
-            txt_Nombre.IsEnabled = false;
-            txt_Compania.IsEnabled = false;
+            txt_NombreAlbum.Text = album.nombre;
+            txt_NombreCompania.Text = album.compania;
+            txt_NombreArtista.Text = SingletonArtista.GetArtista().nombre;
+            portadaAlbum.Source = album.imagenPortadaAlbum;
         }
 
-        private void CargarPortadaAlbum()
-        {
-            
-        }
+   
         private async void CargarCanciones()
         {
             if (album != null)
@@ -54,6 +45,10 @@ namespace Cliente_MusiCloud.pages
                 try
                 {
                     listaCanciones = await AplicacionCancion.ObtenerCancionesPorIdAlbumAsync(album.idAlbum);
+                    foreach (var cancionDeLista in listaCanciones)
+                    {
+                        cancionDeLista.imagenPortadaCancion = await AplicacionAlbum.ObtenerImagenAlbum(cancionDeLista.portada);
+                    }
                     listView_Canciones.ItemsSource = listaCanciones;
                 }
                 catch (Exception ex)
@@ -72,7 +67,7 @@ namespace Cliente_MusiCloud.pages
             Button button = sender as Button;
             Cancion cancion = button.DataContext as Cancion;
             await Reproductor.Reproducir(cancion);
-            SingletonReproductor.GetPaginaPrincipal().CargarInformacion(cancion);
+            SingletonReproductor.GetPaginaPrincipal().CargarInformacionAsync(cancion);
         }
 
 
@@ -97,10 +92,14 @@ namespace Cliente_MusiCloud.pages
 
         private void btn_generarRadio_Click(object sender, RoutedEventArgs e)
         {
-            Button button = sender as Button;
-            Cancion cancion = button.DataContext as Cancion;
-            //GenerarRadio(cancion);
+
         }
 
+        private void Btn_AgregarTodasLasCanciones_Click(object sender, RoutedEventArgs e)
+        {
+            Reproductor.ColaCanciones.Clear();
+            Reproductor.AgregarListaCancionesACola(listaCanciones);
+            SingletonReproductor.GetPaginaPrincipal().SiguienteCancion();
+        }
     }
 }
