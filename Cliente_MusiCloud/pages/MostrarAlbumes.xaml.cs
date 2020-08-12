@@ -37,13 +37,14 @@ namespace Cliente_MusiCloud.pages
                     foreach (var albumes in listaAlbumes)
                     {
                         albumes.imagenPortadaAlbum = await AplicacionAlbum.ObtenerImagenAlbum(albumes.portada);
+                        albumes.fechalanzamiento = albumes.fechaRegistro.ToShortDateString();
                         
                     }
                     listViewAlbumes.ItemsSource = listaAlbumes;
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show(ex.Message);
+                    MessageBox.Show(ex.Message, "Ocurrió un error", MessageBoxButton.OK, MessageBoxImage.Warning);
                 }
             }
    
@@ -81,7 +82,7 @@ namespace Cliente_MusiCloud.pages
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show(ex.Message, "Ocurrió un error", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
         }
         private async void btn_Reproducir_Click(object sender, RoutedEventArgs e)

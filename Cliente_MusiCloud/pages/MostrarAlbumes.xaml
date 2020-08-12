@@ -65,6 +65,10 @@
                                             <TextBlock Text="Compañia " Foreground="White" Margin="8,0,0,0"/>
                                             <TextBlock Text="{Binding compania}" Foreground="White" />
                                         </StackPanel>
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="Año lanzamiento: " Foreground="White" Margin="8,0,0,0"/>
+                                            <TextBlock Text="{Binding fechalanzamiento}" Foreground="White" />
+                                        </StackPanel>
                                     </StackPanel>
                                 </StackPanel>
                             </DataTemplate>

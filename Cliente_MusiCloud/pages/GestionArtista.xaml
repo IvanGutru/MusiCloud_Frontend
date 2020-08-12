@@ -43,7 +43,7 @@
                     Height="70" MaxLines="50" MaxLength="50" Foreground="White" SelectionBrush="#34f7c3" CaretBrush="#34f7c3"
                     materialDesign:HintAssist.Hint="Nombre de artista" Background="{x:Null}" BorderBrush="{x:Null}" Grid.ColumnSpan="2"/>
                         <TextBox  x:Name="txt_Descripcion" Style="{StaticResource MaterialDesignFilledTextFieldTextBox}"
-                    VerticalAlignment="Top" TextWrapping="Wrap" Margin="20,98,15,0"   VerticalScrollBarVisibility="Visible"
+                    VerticalAlignment="Top" TextWrapping="Wrap" Margin="20,98,15,0"
                     Height="104" Foreground="White" SelectionBrush="#34f7c3" CaretBrush="#34f7c3" IsReadOnly="True"
                     materialDesign:HintAssist.Hint="Descripción" Background="{x:Null}" BorderBrush="{x:Null}"/>
                     </Grid>

@@ -45,5 +45,26 @@ namespace Cliente_MusiCloud.cancion.aplicacion
                 }
             }
         }
+
+        public static async Task<Cancion> ObtenerCancionPorId(String idCancion)
+        {
+            String path = "Canciones/Id/" + idCancion;
+            Cancion cancion;
+            using (HttpResponseMessage response = await ConexionApi.ApiCliente.GetAsync(path))
+            {
+                if (response.IsSuccessStatusCode)
+                {
+                    cancion = await response.Content.ReadAsAsync<Cancion>();
+                    return cancion;
+                }
+                else
+                {
+                    dynamic error = await response.Content.ReadAsAsync<dynamic>();
+                    string mensaje = error.error;
+                    throw new Exception(mensaje);
+
+                }
+            }
+        }
     }
 }
