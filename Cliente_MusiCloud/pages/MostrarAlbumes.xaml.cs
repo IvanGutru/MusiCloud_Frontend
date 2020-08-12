@@ -37,6 +37,7 @@ namespace Cliente_MusiCloud.pages
                     foreach (var albumes in listaAlbumes)
                     {
                         albumes.imagenPortadaAlbum = await AplicacionAlbum.ObtenerImagenAlbum(albumes.portada);
+                        albumes.fechalanzamiento = albumes.fechaRegistro.ToShortDateString();
                         
                     }
                     listViewAlbumes.ItemsSource = listaAlbumes;

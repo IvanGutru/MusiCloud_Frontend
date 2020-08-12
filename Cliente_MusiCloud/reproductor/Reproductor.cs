@@ -1,9 +1,13 @@
 ﻿using Cliente_MusiCloud.cancion.dominio;
+using Cliente_MusiCloud.cuenta.Dominio;
+using Cliente_MusiCloud.historial.aplicacion;
+using Cliente_MusiCloud.utilidades;
 using NAudio.Wave;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 
 namespace Cliente_MusiCloud.reproductor
@@ -13,9 +17,9 @@ namespace Cliente_MusiCloud.reproductor
         public static WaveOutEvent waveOutEvent { set; get; }
         public static WaveStream waveStream { set; get; }
         public static bool cancionLista { get; set; }
-
         public static Queue<Cancion> ColaCanciones { get; set; }
 
+        
         public Reproductor() { }
 
         public static void Initialize()
@@ -23,7 +27,7 @@ namespace Cliente_MusiCloud.reproductor
             waveOutEvent = new WaveOutEvent();
             cancionLista = false;
             ColaCanciones = new Queue<Cancion>();
-            ServidorReproduccion.ServidorReproduccion.Conectar();
+            ServidorReproduccion.ServidorReproduccion.Conectar(); 
         }
 
         public static async Task<bool> Reproducir(Cancion cancion)
@@ -36,6 +40,7 @@ namespace Cliente_MusiCloud.reproductor
                 waveStream = new WaveChannel32(mp3Reader);
                 waveOutEvent.Init(waveStream);
                 cancionLista = true;
+                await AplicacionHistorial.AñadirCancionAHistorial(cancion.idCancion,SingletonCuenta.GetSingletonCuenta().idCuenta);
                 Reproductor.ComenzarReproduccion();
                 return true;
 
