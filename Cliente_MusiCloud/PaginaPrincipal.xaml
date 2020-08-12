@@ -45,7 +45,7 @@
                     </StackPanel>
                 </materialDesign:PopupBox>
             </StackPanel>
-            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="22" Foreground="White">MUSICLOUD</TextBlock>
+            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Margin="70,0,0,0" FontSize="22" Foreground="White">MUSICLOUD</TextBlock>
         </Grid>
 
         <Grid x:Name="GridReproductor" Height="80" VerticalAlignment="Bottom" Background="#363636">

@@ -1,4 +1,9 @@
-﻿using System;
+﻿using Cliente_MusiCloud.cuenta.Dominio;
+using Cliente_MusiCloud.playlist.aplicacion;
+using Cliente_MusiCloud.playlist.dominio;
+using Cliente_MusiCloud.reproductor;
+using Cliente_MusiCloud.utilidades;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,58 +18,42 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Cliente_MusiCloud.pages {
+namespace Cliente_MusiCloud.pages
+{
     /// <summary>
     /// Lógica de interacción para Biblioteca.xaml
     /// </summary>
-    public partial class Biblioteca : Page {
-        public Biblioteca() {
+    public partial class Biblioteca : Page
+    {
+        Cuentas cuenta = SingletonCuenta.GetSingletonCuenta();
+        List<Playlist> listaPlaylistUsuario; 
+        public Biblioteca()
+        {
             InitializeComponent();
+            CargarPlaylistUsuario();
+            CargarColaReproduccion();
         }
 
-        private void btnSiguienteRA_MouseEnter(object sender, MouseEventArgs e)
+        private async void CargarPlaylistUsuario()
         {
-
+            try
+            {
+                listaPlaylistUsuario = await AplicacionPlaylist.ObtenerPlaylistDeUsuario(cuenta.idCuenta);
+                foreach (var playlistDelista in listaPlaylistUsuario)
+                {
+                    playlistDelista.imagenPortada = await AplicacionPlaylist.ObtenerImagenPlaylist(playlistDelista.portada);
+                }
+                listViewMisPlaylist.ItemsSource = listaPlaylistUsuario;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Ocurrió un error", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
         }
 
-        private void btnPauseRA_MouseEnter(object sender, MouseEventArgs e)
+        public void CargarColaReproduccion()
         {
-
-        }
-
-        private void btnPlayRA_MouseEnter(object sender, MouseEventArgs e)
-        {
-
-        }
-
-        private void btnPlayRA_MouseLeave(object sender, MouseEventArgs e)
-        {
-
-        }
-
-        private void btnPlayRA_TouchEnter(object sender, TouchEventArgs e)
-        {
-
-        }
-
-        private void btnPlayRA_TouchLeave(object sender, TouchEventArgs e)
-        {
-
-        }
-
-        private void btnRepAct_MouseDown(object sender, MouseButtonEventArgs e)
-        {
-
-        }
-
-        private void btnRepAct_MouseEnter(object sender, MouseEventArgs e)
-        {
-
-        }
-
-        private void btnRepAct_MouseLeave(object sender, MouseEventArgs e)
-        {
-
+            listViewColaReproduccion.ItemsSource = Reproductor.ColaCanciones;
         }
     }
 }

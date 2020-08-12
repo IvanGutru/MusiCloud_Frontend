@@ -116,6 +116,9 @@
     <Compile Include="gen-netstd\ServicioReproduccion.cs" />
     <Compile Include="genero\aplicacion\AplicacionGenero.cs" />
     <Compile Include="genero\dominio\Genero.cs" />
+    <Compile Include="pages\Biblioteca.xaml.cs">
+      <DependentUpon>Biblioteca.xaml</DependentUpon>
+    </Compile>
     <Compile Include="pages\CrearAlbum.xaml.cs">
       <DependentUpon>CrearAlbum.xaml</DependentUpon>
     </Compile>
@@ -173,6 +176,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="pages\Biblioteca.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="pages\CrearAlbum.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

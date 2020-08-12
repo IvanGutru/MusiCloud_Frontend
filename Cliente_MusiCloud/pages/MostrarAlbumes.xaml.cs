@@ -43,7 +43,7 @@ namespace Cliente_MusiCloud.pages
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show(ex.Message);
+                    MessageBox.Show(ex.Message, "Ocurrió un error", MessageBoxButton.OK, MessageBoxImage.Warning);
                 }
             }
    
@@ -81,7 +81,7 @@ namespace Cliente_MusiCloud.pages
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show(ex.Message, "Ocurrió un error", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
         }
         private async void btn_Reproducir_Click(object sender, RoutedEventArgs e)

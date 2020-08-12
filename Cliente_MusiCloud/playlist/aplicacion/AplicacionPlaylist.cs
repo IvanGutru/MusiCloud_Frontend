@@ -65,5 +65,24 @@ namespace Cliente_MusiCloud.playlist.aplicacion
                 }
             }
         }
+        public static async Task<List<Playlist>> ObtenerPlaylistDeUsuario(string idCuenta)
+        {
+            List<Playlist> listaPlaylist;
+            string path = "Playlist/Usuario/"+idCuenta;
+            using (HttpResponseMessage respuesta = await ConexionApi.ApiCliente.GetAsync(path))
+            {
+                if (respuesta.IsSuccessStatusCode)
+                {
+                    listaPlaylist = await respuesta.Content.ReadAsAsync<List<Playlist>>();
+                    return listaPlaylist;
+                }
+                else
+                {
+                    dynamic error = await respuesta.Content.ReadAsAsync<dynamic>();
+                    string mensaje = error.error;
+                    throw new Exception(mensaje);
+                }
+            }
+        }
     }
 }

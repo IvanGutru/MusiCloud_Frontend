@@ -36,12 +36,7 @@ namespace Cliente_MusiCloud
             loadProgressTrackTimer.Interval = new TimeSpan(0, 0, 0, 1);
  
         }
-        public async void CargarInformacionAsync(Cancion cancion)
-        {
-            txt_Nombre.Text = cancion.nombre;
-            PortadaCancion.Source = await AplicacionAlbum.ObtenerImagenAlbum(cancion.portada);
-            ContinuarReproduccion();
-        }
+     
         private void ButtonCloseMenu_Click(object sender, RoutedEventArgs e)
         {
             ButtonCloseMenu.Visibility = Visibility.Collapsed;
@@ -61,10 +56,7 @@ namespace Cliente_MusiCloud
 
         private void Button_signout_Click(object sender, RoutedEventArgs e)
         {
-            SingletonCuenta.SetCuenta(null);
-            MainWindow main = new MainWindow();
-            main.Show();
-            this.Close();
+            Salir();
         }
 
         private void ListViewMenu_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -81,6 +73,7 @@ namespace Cliente_MusiCloud
                     centralFrame.Navigate(new MostrarArtistas());
                     break;
                 case "ItemBiblioteca":
+                    centralFrame.Navigate(new Biblioteca());
                     break;
                 case "ItemGeneros":
                     break;
@@ -98,9 +91,12 @@ namespace Cliente_MusiCloud
         private void Salir()
         {
             SingletonCuenta.SetCuenta(null);
+            SingletonArtista.SetArtista(null);
             MainWindow main = new MainWindow();
+            PararCancion();
             main.Show();
             this.Close();
+        
         }
         private void ValidarEsCreadorContenido()
         {
@@ -138,14 +134,7 @@ namespace Cliente_MusiCloud
                 loadProgressTrackTimer.Stop();
             }
         }
-        private void ContinuarReproduccion()
-        {
-            if (Reproductor.ComenzarReproduccion())
-            {
-                Play_icon.Kind = (MaterialDesignThemes.Wpf.PackIconKind)Enum.Parse(typeof(MaterialDesignThemes.Wpf.PackIconKind), "Pause");
-                loadProgressTrackTimer.Start();
-            }
-        }
+  
 
         private void PrintProgress(object sender, EventArgs e)
         {
@@ -161,15 +150,7 @@ namespace Cliente_MusiCloud
                 SiguienteCancion();
             }
         }
-        public async void SiguienteCancion()
-        {
-            Cancion cancion = await Reproductor.ReproducirSiguienteCancion();
-            if (cancion != null)
-            {
-                ContinuarReproduccion();
-                CargarInformacionAsync(cancion);
-            }
-        }
+
         private void barra_volumen_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             Reproductor.ActualizarVolumen(barra_volumen.Value);
@@ -183,6 +164,29 @@ namespace Cliente_MusiCloud
         private void btn_siguiente_Click(object sender, RoutedEventArgs e)
         {
             SiguienteCancion();
+        }
+        public async void SiguienteCancion()
+        {
+            Cancion cancion = await Reproductor.ReproducirSiguienteCancion();
+            if (cancion != null)
+            {
+                ContinuarReproduccion();
+                CargarInformacionAsync(cancion);
+            }
+        }
+        private void ContinuarReproduccion()
+        {
+            if (Reproductor.ComenzarReproduccion())
+            {
+                Play_icon.Kind = (MaterialDesignThemes.Wpf.PackIconKind)Enum.Parse(typeof(MaterialDesignThemes.Wpf.PackIconKind), "Pause");
+                loadProgressTrackTimer.Start();
+            }
+        }
+        public async void CargarInformacionAsync(Cancion cancion)
+        {
+            txt_Nombre.Text = cancion.nombre;
+            PortadaCancion.Source = await AplicacionAlbum.ObtenerImagenAlbum(cancion.portada);
+            ContinuarReproduccion();
         }
     }
 }
