@@ -118,8 +118,14 @@
     <Compile Include="genero\dominio\Genero.cs" />
     <Compile Include="historial\aplicacion\AplicacionHistorial.cs" />
     <Compile Include="historial\dominio\Historial.cs" />
+    <Compile Include="pages\AgregarCancionPlaylist.xaml.cs">
+      <DependentUpon>AgregarCancionPlaylist.xaml</DependentUpon>
+    </Compile>
     <Compile Include="pages\Biblioteca.xaml.cs">
       <DependentUpon>Biblioteca.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="pages\BibliotecaPropia.xaml.cs">
+      <DependentUpon>BibliotecaPropia.xaml</DependentUpon>
     </Compile>
     <Compile Include="pages\CrearAlbum.xaml.cs">
       <DependentUpon>CrearAlbum.xaml</DependentUpon>
@@ -151,6 +157,11 @@
     <Compile Include="pages\MostrarCancionesDesdeArtista.xaml.cs">
       <DependentUpon>MostrarCancionesDesdeArtista.xaml</DependentUpon>
     </Compile>
+    <Compile Include="pages\MostrarCancionesPlaylist.xaml.cs">
+      <DependentUpon>MostrarCancionesPlaylist.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="playlistCanciones\aplicacion\AplicacionPlaylistCanciones.cs" />
+    <Compile Include="playlistCanciones\dominio\PlaylistCanciones.cs" />
     <Compile Include="playlist\aplicacion\AplicacionPlaylist.cs" />
     <Compile Include="playlist\dominio\Playlist.cs" />
     <Compile Include="RegistrarCuenta.xaml.cs">
@@ -162,6 +173,9 @@
     <Compile Include="utilidades\SingletonArtista.cs" />
     <Compile Include="utilidades\SingletonCuenta.cs" />
     <Compile Include="utilidades\SingletonReproductor.cs" />
+    <Compile Include="VentanaFlotante.xaml.cs">
+      <DependentUpon>VentanaFlotante.xaml</DependentUpon>
+    </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -178,7 +192,15 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="pages\AgregarCancionPlaylist.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="pages\Biblioteca.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="pages\BibliotecaPropia.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -222,11 +244,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="pages\MostrarCancionesPlaylist.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="PaginaPrincipal.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="RegistrarCuenta.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="VentanaFlotante.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

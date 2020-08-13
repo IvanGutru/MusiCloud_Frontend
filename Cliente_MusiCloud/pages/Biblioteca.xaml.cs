@@ -10,18 +10,11 @@ using Cliente_MusiCloud.reproductor;
 using Cliente_MusiCloud.utilidades;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace Cliente_MusiCloud.pages
 {
@@ -34,6 +27,8 @@ namespace Cliente_MusiCloud.pages
         private List<Playlist> listaPlaylistUsuario;
         private List<Historial> listaHistorial;
         private List<Cancion> listaCancionesHistorial;
+        private const int BIBLIOTECAPROPIA = 5;
+
         public Biblioteca()
         {
             InitializeComponent();
@@ -61,27 +56,32 @@ namespace Cliente_MusiCloud.pages
         }
         private async void CargarHistorialAsync()
         {
-            List<Historial> listaReproduccion =await ObtenerHistorialReproduccion();
-            try
+            List<Historial> listaReproduccion = await ObtenerHistorialReproduccion();
+            if (listaReproduccion != null)
             {
-                foreach (var historialDeLista in listaReproduccion)
+                try
                 {
-                    Cancion cancionDeHistorial = await AplicacionCancion.ObtenerCancionPorId(historialDeLista.idCancion);
-                    listaCancionesHistorial.Add(cancionDeHistorial);
+                    foreach (var historialDeLista in listaReproduccion)
+                    {
+                        Cancion cancionDeHistorial = await AplicacionCancion.ObtenerCancionPorId(historialDeLista.idCancion);
+                        listaCancionesHistorial.Add(cancionDeHistorial);
+                    }
+                    foreach (var cancionDeLista in listaCancionesHistorial)
+                    {
+                        cancionDeLista.imagenPortadaCancion = await AplicacionAlbum.ObtenerImagenAlbum(cancionDeLista.portada);
+                    }
+                    listViewHistorial.ItemsSource = listaCancionesHistorial;
                 }
-                foreach (var cancionDeLista in listaCancionesHistorial)
+                catch (Exception ex)
                 {
-                    cancionDeLista.imagenPortadaCancion = await AplicacionAlbum.ObtenerImagenAlbum(cancionDeLista.portada);
+                    MessageBox.Show(ex.Message, "Ocurrió un error", MessageBoxButton.OK, MessageBoxImage.Warning);
                 }
-                listViewHistorial.ItemsSource = listaCancionesHistorial;
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Ocurrió un error", MessageBoxButton.OK, MessageBoxImage.Warning);
-            }
-           
+
+
+
         }
-         
+
         private async Task<List<Historial>> ObtenerHistorialReproduccion()
         {
             try
@@ -113,6 +113,7 @@ namespace Cliente_MusiCloud.pages
             Button button = sender as Button;
             Cancion cancion = button.DataContext as Cancion;
             Reproductor.AgregarCancionACola(cancion);
+            NavigationService.Refresh();
         }
 
         private void btn_agregarSiguiente_Click(object sender, RoutedEventArgs e)
@@ -132,5 +133,18 @@ namespace Cliente_MusiCloud.pages
 
         }
 
+        private void listViewMisPlaylist_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            Playlist playlistSeleccionada = (Playlist)listViewMisPlaylist.SelectedItem;
+
+            if (playlistSeleccionada.idTipoPlaylist == BIBLIOTECAPROPIA)
+            {
+                NavigationService.Navigate(new BibliotecaPropia(playlistSeleccionada));
+            }
+            else
+            {
+                NavigationService.Navigate(new MostrarCancionesPlaylist(playlistSeleccionada));
+            }
+        }
     }
 }
