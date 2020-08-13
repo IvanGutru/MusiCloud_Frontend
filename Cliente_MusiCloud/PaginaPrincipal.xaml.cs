@@ -8,6 +8,7 @@ using Cliente_MusiCloud.utilidades;
 using System;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Navigation;
 using System.Windows.Threading;
 
 namespace Cliente_MusiCloud
@@ -164,6 +165,7 @@ namespace Cliente_MusiCloud
         private void btn_siguiente_Click(object sender, RoutedEventArgs e)
         {
             SiguienteCancion();
+            
         }
         public async void SiguienteCancion()
         {

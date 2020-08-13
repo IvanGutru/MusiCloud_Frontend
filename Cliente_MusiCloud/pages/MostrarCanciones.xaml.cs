@@ -30,6 +30,7 @@ namespace Cliente_MusiCloud.pages
             CargarCamposAlbum();
 
         }
+       
         private async void CargarCanciones()
         {
             try
@@ -84,7 +85,10 @@ namespace Cliente_MusiCloud.pages
 
         private void btn_agregarAPlaylist_Click(object sender, RoutedEventArgs e)
         {
-
+            Button button = sender as Button;
+            Cancion cancion = button.DataContext as Cancion;
+            VentanaFlotante ventanaflotante = new VentanaFlotante(new AgregarCancionPlaylist(cancion));
+            ventanaflotante.ShowDialog();
         }
 
         private void btn_generarRadio_Click(object sender, RoutedEventArgs e)

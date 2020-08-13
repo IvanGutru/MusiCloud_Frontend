@@ -57,7 +57,7 @@
                     <ColumnDefinition Width="1*"/>
                 </Grid.ColumnDefinitions>
                 <Grid x:Name="GridPlaylis" Grid.Column="0">
-                    <ListView Grid.Row="0" x:Name="listViewMisPlaylist" Padding="5" Margin="10,10,10,10" ScrollViewer.VerticalScrollBarVisibility="Disabled">
+                    <ListView Grid.Row="0" x:Name="listViewMisPlaylist" Padding="5" Margin="10,10,10,10" ScrollViewer.VerticalScrollBarVisibility="Disabled" MouseDoubleClick="listViewMisPlaylist_MouseDoubleClick">
                         <ListView.ItemTemplate>
                             <DataTemplate >
                                 <StackPanel Orientation="Horizontal">

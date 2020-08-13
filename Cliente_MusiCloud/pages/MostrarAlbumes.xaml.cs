@@ -110,7 +110,10 @@ namespace Cliente_MusiCloud.pages
 
         private void btn_agregarAPlaylist_Click(object sender, RoutedEventArgs e)
         {
-
+            Button button = sender as Button;
+            Cancion cancion = button.DataContext as Cancion;
+            VentanaFlotante floating = new VentanaFlotante(new AgregarCancionPlaylist(cancion));
+            floating.ShowDialog();
         }
 
         private void btn_generarRadio_Click(object sender, RoutedEventArgs e)
