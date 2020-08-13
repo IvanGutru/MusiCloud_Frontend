@@ -69,6 +69,10 @@
                                             <TextBlock Text="Año lanzamiento: " Foreground="White" Margin="8,0,0,0"/>
                                             <TextBlock Text="{Binding fechalanzamiento}" Foreground="White" />
                                         </StackPanel>
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="Género: " Foreground="White" Margin="8,0,0,0"/>
+                                            <TextBlock Text="{Binding genero.nombre}" Foreground="White" />
+                                        </StackPanel>
                                     </StackPanel>
                                 </StackPanel>
                             </DataTemplate>
@@ -125,6 +129,10 @@
                                             <TextBlock Text="Duracion: " Foreground="White" Margin="8,0,0,0"/>
                                             <TextBlock Text="{Binding duracion}" Foreground="White" />
                                             <TextBlock Text=" minutos" Foreground="White" Margin="0,0,0,0"/>
+                                        </StackPanel>
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="Género: " Foreground="White" Margin="8,0,0,0"/>
+                                            <TextBlock Text="{Binding genero.nombre}" Foreground="White" />
                                         </StackPanel>
                                     </StackPanel>
 

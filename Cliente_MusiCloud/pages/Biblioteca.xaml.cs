@@ -139,7 +139,7 @@ namespace Cliente_MusiCloud.pages
 
             if (playlistSeleccionada.idTipoPlaylist == BIBLIOTECAPROPIA)
             {
-                NavigationService.Navigate(new BibliotecaPropia(playlistSeleccionada));
+                NavigationService.Navigate(new BibliotecaPropiaPage(playlistSeleccionada));
             }
             else
             {

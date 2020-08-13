@@ -103,6 +103,10 @@
                                             <TextBlock Text="Compañia: " Foreground="White" Margin="8,0,0,0"/>
                                             <TextBlock Text="{Binding compania}" Foreground="White" />
                                         </StackPanel>
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="Género: " Foreground="White" Margin="8,0,0,0"/>
+                                            <TextBlock Text="{Binding genero.nombre}" Foreground="White" />
+                                        </StackPanel>
                                     </StackPanel>
                                 </StackPanel>
                             </DataTemplate>

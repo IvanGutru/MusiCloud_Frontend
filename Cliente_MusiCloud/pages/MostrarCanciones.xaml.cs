@@ -28,7 +28,16 @@ namespace Cliente_MusiCloud.pages
             InitializeComponent();
             CargarCanciones();
             CargarCamposAlbum();
+            Btn_RegresarAHome.Visibility = Visibility.Hidden;
 
+        }
+        public MostrarCanciones(Album album)
+        {
+            InitializeComponent();
+            this.album = album;
+            CargarCanciones();
+            CargarCamposDesdeHome();
+            Btn_Regresar.Visibility = Visibility.Hidden;
         }
        
         private async void CargarCanciones()
@@ -39,12 +48,13 @@ namespace Cliente_MusiCloud.pages
                 foreach (var cancionDeLista in listaCanciones)
                 {
                     cancionDeLista.imagenPortadaCancion = await AplicacionAlbum.ObtenerImagenAlbum(cancionDeLista.portada);
+                    cancionDeLista.genero = album.genero;
                 }
                 listView_Canciones.ItemsSource = listaCanciones;
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show(ex.Message, "Ocurrió un error", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
 
         }
@@ -53,6 +63,13 @@ namespace Cliente_MusiCloud.pages
             txt_NombreAlbum.Text = album.nombre;
             txt_NombreCompania.Text = album.compania;
             txt_NombreArtista.Text = artista.nombre;
+            portadaAlbum.Source = album.imagenPortadaAlbum;
+        }
+        private void CargarCamposDesdeHome()
+        {
+            txt_NombreAlbum.Text = album.nombre;
+            txt_NombreCompania.Text = album.compania;
+            txt_NombreArtista.Text = album.artista.nombre;
             portadaAlbum.Source = album.imagenPortadaAlbum;
         }
         private void Btn_Regresar_Click(object sender, RoutedEventArgs e)
@@ -101,6 +118,11 @@ namespace Cliente_MusiCloud.pages
             Reproductor.ColaCanciones.Clear();
             Reproductor.AgregarListaCancionesACola(listaCanciones);
             SingletonReproductor.GetPaginaPrincipal().SiguienteCancion();
+        }
+
+        private void Btn_RegresarAHome_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new Home());
         }
     }
 }

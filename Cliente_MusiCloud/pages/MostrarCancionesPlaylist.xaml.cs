@@ -40,7 +40,17 @@ namespace Cliente_MusiCloud.pages
             CargarInformacionPlaylist();
             CargarCancionesPlaylistAsync();
             this.listaCanciones = new List<Cancion>();
+            Btn_RegresarAHome.Visibility = Visibility.Hidden;
             
+        }
+        public MostrarCancionesPlaylist(Playlist playlist, int tipoPlaylist)
+        {
+            InitializeComponent();
+            this.playlist = playlist;
+            CargarInformacionPlaylist();
+            CargarCancionesPlaylistAsync();
+            this.listaCanciones = new List<Cancion>();
+            Btn_Regresar.Visibility = Visibility.Hidden;
         }
 
         private async void CargarCancionesPlaylistAsync()
@@ -140,8 +150,13 @@ namespace Cliente_MusiCloud.pages
         private void Btn_AgregarTodasLasCanciones_Click(object sender, RoutedEventArgs e)
         {
             Reproductor.ColaCanciones.Clear();
-          //  Reproductor.AgregarListaCancionesACola(listaCanciones);
+            Reproductor.AgregarListaCancionesACola(listaCanciones);
             SingletonReproductor.GetPaginaPrincipal().SiguienteCancion();
+        }
+
+        private void Btn_RegresarAHome_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new Home());
         }
     }
 }

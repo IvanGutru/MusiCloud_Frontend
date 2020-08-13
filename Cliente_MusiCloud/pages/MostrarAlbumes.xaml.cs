@@ -2,6 +2,7 @@
 using Cliente_MusiCloud.album.dominio;
 using Cliente_MusiCloud.cancion.aplicacion;
 using Cliente_MusiCloud.cancion.dominio;
+using Cliente_MusiCloud.genero.aplicacion;
 using Cliente_MusiCloud.reproductor;
 using Cliente_MusiCloud.utilidades;
 using System;
@@ -38,6 +39,7 @@ namespace Cliente_MusiCloud.pages
                     {
                         albumes.imagenPortadaAlbum = await AplicacionAlbum.ObtenerImagenAlbum(albumes.portada);
                         albumes.fechalanzamiento = albumes.fechaRegistro.ToShortDateString();
+                        albumes.genero = await AplicacionGenero.ObtenerGeneroPorId(albumes.idGenero);
                         
                     }
                     listViewAlbumes.ItemsSource = listaAlbumes;
@@ -77,6 +79,7 @@ namespace Cliente_MusiCloud.pages
                 foreach (var cancion in listaCanciones)
                 {
                     cancion.imagenPortadaCancion = await AplicacionAlbum.ObtenerImagenAlbum(cancion.portada);
+                    cancion.genero = albumRecibido.genero;
                 }
                 listView_Canciones.ItemsSource = listaCanciones;
             }
