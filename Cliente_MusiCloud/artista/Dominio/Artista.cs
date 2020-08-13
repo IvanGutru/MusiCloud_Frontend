@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Cliente_MusiCloud.genero.dominio;
+using System;
 using System.Windows.Media.Imaging;
 
 namespace Cliente_MusiCloud.artista.Dominio
@@ -14,6 +15,7 @@ namespace Cliente_MusiCloud.artista.Dominio
 
         public BitmapImage imagenPortadaArtista { get; set; }
 
+        public Genero genero { get; set; }
 
     }
 }

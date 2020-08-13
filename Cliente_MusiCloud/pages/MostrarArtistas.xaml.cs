@@ -2,6 +2,7 @@
 using Cliente_MusiCloud.album.dominio;
 using Cliente_MusiCloud.artista.aplicacion;
 using Cliente_MusiCloud.artista.Dominio;
+using Cliente_MusiCloud.genero.aplicacion;
 using System;
 using System.Collections.Generic;
 using System.Windows;
@@ -50,12 +51,13 @@ namespace Cliente_MusiCloud.pages
                 foreach (var artistalista in listaArtistas)
                 {
                     artistalista.imagenPortadaArtista = await Aplicacion.ObtenerImagenArtista(artistalista.portada);
+                    artistalista.genero = await AplicacionGenero.ObtenerGeneroPorId(artistalista.idGenero);
                 }
                 listViewArtistas.ItemsSource = listaArtistas;
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show(ex.Message, "Ocurrió un error", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
         }
 
@@ -85,6 +87,7 @@ namespace Cliente_MusiCloud.pages
                 foreach (var albumDeLista in listaAlbumes)
                 {
                     albumDeLista.imagenPortadaAlbum = await AplicacionAlbum.ObtenerImagenAlbum(albumDeLista.portada);
+                    albumDeLista.genero = await AplicacionGenero.ObtenerGeneroPorId(albumDeLista.idGenero);
                 }
                 listView_Albumes.ItemsSource = listaAlbumes;
             }

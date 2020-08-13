@@ -83,5 +83,27 @@ namespace Cliente_MusiCloud.pages
         {
             NavigationService.Navigate(new CrearPlaylist());
         }
+
+        private async void listViewAlbum_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            Album albumSeleccionado = (Album)listViewAlbum.SelectedItem;
+            try
+            {
+                Artista artista = await Aplicacion.ObtenerArtistaPorId(albumSeleccionado.idArtista);
+                albumSeleccionado.artista = artista;
+                NavigationService.Navigate(new MostrarCanciones(albumSeleccionado));
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Ocurrió un error", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
+           
+        }
+
+        private void listViewPlaylistSistema_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            Playlist playlistSeleccionda = (Playlist)listViewPlaylistSistema.SelectedItem;
+            NavigationService.Navigate(new MostrarCancionesPlaylist(playlistSeleccionda,playlistSeleccionda.idTipoPlaylist));
+        }
     }
 }

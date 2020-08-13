@@ -20,6 +20,11 @@
                     ToolTip="Regresar" Width="40" Height="40" Click="Btn_Regresar_Click" >
                 <materialDesign:PackIcon Kind="ArrowLeft"  Width="40" Height="40"/>
             </Button>
+            <Button Background="#262626" Padding="0" Margin="10,0,0,0" HorizontalAlignment="Left"
+                    x:Name="Btn_RegresarAHome" Foreground="White" BorderBrush="#34f7c3"
+                    ToolTip="Regresar" Width="40" Height="40" Click="Btn_RegresarAHome_Click" >
+                <materialDesign:PackIcon Kind="ArrowLeft"  Width="40" Height="40"/>
+            </Button>
         </Grid>
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
@@ -97,6 +102,10 @@
                                             <TextBlock Text="Duracion: " Foreground="White" Margin="8,0,0,0"/>
                                             <TextBlock Text="{Binding duracion}" Foreground="White" />
                                             <TextBlock Text=" minutos" Foreground="White" Margin="0,0,0,0"/>
+                                        </StackPanel>
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="Género: " Foreground="White" Margin="8,0,0,0"/>
+                                            <TextBlock Text="{Binding genero.nombre}" Foreground="White" />
                                         </StackPanel>
                                     </StackPanel>
                                 </StackPanel>
