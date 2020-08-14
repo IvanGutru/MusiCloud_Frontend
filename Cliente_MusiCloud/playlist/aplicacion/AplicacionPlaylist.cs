@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
+using System.Web.Configuration;
 using System.Windows.Media.Imaging;
 
 namespace Cliente_MusiCloud.playlist.aplicacion
@@ -95,6 +96,63 @@ namespace Cliente_MusiCloud.playlist.aplicacion
                 {
                     listaPlaylist = await respuesta.Content.ReadAsAsync<List<Playlist>>();
                     return listaPlaylist;
+                }
+                else
+                {
+                    dynamic error = await respuesta.Content.ReadAsAsync<dynamic>();
+                    string mensaje = error.error;
+                    throw new Exception(mensaje);
+                }
+            }
+        }
+        public static async Task<bool> ValidarCancionEnMeGusta(string idCancion,string idCuenta)
+        {
+            string path = "Playlist/MeGusta/"+idCancion+"/"+idCuenta;
+            string estadoOk = "OK";
+            using (HttpResponseMessage respuesta = await ConexionApi.ApiCliente.GetAsync(path))
+            {
+                if (respuesta.IsSuccessStatusCode)
+                {
+                    string estado = respuesta.StatusCode.ToString();
+                    if (estado == estadoOk)
+                    {
+                        return true;
+                    }
+                    return false;
+                }
+                else
+                {
+                    dynamic error = await respuesta.Content.ReadAsAsync<dynamic>();
+                    string mensaje = error.error;
+                    throw new Exception(mensaje);
+                }
+            }
+        }
+        public static async Task<bool> AgregarMeGusta(string idCancion, string idCuenta)
+        {
+            string path = "Playlist/MeGusta/" + idCancion + "/" + idCuenta;
+            using (HttpResponseMessage respuesta = await ConexionApi.ApiCliente.PostAsync(path, null))
+            {
+                if (respuesta.IsSuccessStatusCode)
+                {
+                    return true;
+                }
+                else
+                {
+                    dynamic error = await respuesta.Content.ReadAsAsync<dynamic>();
+                    string mensaje = error.error;
+                    throw new Exception(mensaje);
+                }
+            }
+        }
+        public static async Task<bool> EliminarDeMeGusta(string idCancion, string idCuenta)
+        {
+            string path = "Playlist/MeGusta/" + idCancion + "/" + idCuenta;
+            using (HttpResponseMessage respuesta = await ConexionApi.ApiCliente.DeleteAsync(path))
+            {
+                if (respuesta.IsSuccessStatusCode)
+                {
+                    return true;
                 }
                 else
                 {

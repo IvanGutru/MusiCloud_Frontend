@@ -2,7 +2,9 @@
 using Cliente_MusiCloud.album.dominio;
 using Cliente_MusiCloud.cancion.aplicacion;
 using Cliente_MusiCloud.cancion.dominio;
+using Cliente_MusiCloud.cuenta.Dominio;
 using Cliente_MusiCloud.genero.aplicacion;
+using Cliente_MusiCloud.playlist.aplicacion;
 using Cliente_MusiCloud.reproductor;
 using Cliente_MusiCloud.utilidades;
 using System;
@@ -20,6 +22,7 @@ namespace Cliente_MusiCloud.pages
     {
         Album album;
         List<Cancion> listaCanciones;
+        Cuentas cuenta = SingletonCuenta.GetSingletonCuenta();
         public MostrarCancionesDesdeArtista(Album album)
         {
             InitializeComponent();
@@ -48,7 +51,7 @@ namespace Cliente_MusiCloud.pages
                     foreach (var cancionDeLista in listaCanciones)
                     {
                         cancionDeLista.imagenPortadaCancion = await AplicacionAlbum.ObtenerImagenAlbum(cancionDeLista.portada);
-                        cancionDeLista.genero = await AplicacionGenero.ObtenerGeneroPorId(album.idGenero);
+                        cancionDeLista.genero = album.genero;
                         cancionDeLista.album = album;
                     }
                     listView_Canciones.ItemsSource = listaCanciones;
@@ -107,11 +110,24 @@ namespace Cliente_MusiCloud.pages
             List<Album> listaAlbumes;
             try
             {
+                List<Cancion> listaCancionesParaRadio = new List<Cancion>();
                 listaAlbumes = await AplicacionGenero.ObtenerAlbumesPorGenero(cancion.genero.idGenero);
+             
                 foreach (var albumDelista in listaAlbumes)
                 {
-                   
+                    listaCancionesParaRadio.AddRange(await AplicacionCancion.ObtenerCancionesPorIdAlbumAsync(albumDelista.idAlbum));
+
                 }
+                foreach (var cancionDeLista in listaCancionesParaRadio)
+                {
+                    cancionDeLista.imagenPortadaCancion = await AplicacionAlbum.ObtenerImagenAlbum(cancionDeLista.portada);
+                    cancionDeLista.genero = album.genero;
+                    cancionDeLista.meGusta = await AplicacionPlaylist.ValidarCancionEnMeGusta(cancionDeLista.idCancion, cuenta.idCuenta);
+                }
+                Reproductor.ColaCanciones.Clear();
+                Reproductor.AgregarListaCancionesACola(listaCancionesParaRadio);
+                SingletonReproductor.GetPaginaPrincipal().SiguienteCancion();
+                MessageBox.Show("Se ha generado tu radio y se ha agregado a la cola de reporducción", "Acción completada", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
             catch (Exception ex)
             {
@@ -123,6 +139,30 @@ namespace Cliente_MusiCloud.pages
             Reproductor.ColaCanciones.Clear();
             Reproductor.AgregarListaCancionesACola(listaCanciones);
             SingletonReproductor.GetPaginaPrincipal().SiguienteCancion();
+        }
+        private async void btn_AñadirMegusta_Click(object sender, RoutedEventArgs e)
+        {
+            Button button = sender as Button;
+            Cancion cancion = button.DataContext as Cancion;
+            try
+            {
+                if (!await AplicacionPlaylist.ValidarCancionEnMeGusta(cancion.idCancion, cuenta.idCuenta))
+                {
+                    if (await AplicacionPlaylist.AgregarMeGusta(cancion.idCancion, cuenta.idCuenta))
+                    {
+                        cancion.meGusta = true;
+                        MessageBox.Show("Canción añadida a tus Me gusta", "Realizado", MessageBoxButton.OK);
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("La canción seleccionada ya se encuentra en tus Me gusta", "Ocurrió un error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Ocurrió un error", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
         }
     }
 }

@@ -48,16 +48,16 @@ namespace Cliente_MusiCloud.album.aplicacion
                 }
             }
         }
-        public static async Task<List<Album>> ObtenerAlbumPorId(String idAlbum)
+        public static async Task<Album> ObtenerAlbumPorId(String idAlbum)
         {
             string path = "Album/Id/" + idAlbum;
-            List<Album> listaAlbumes;
+            Album album;
             using (HttpResponseMessage response = await ConexionApi.ApiCliente.GetAsync(path))
             {
                 if (response.IsSuccessStatusCode)
                 {
-                    listaAlbumes = await response.Content.ReadAsAsync<List<Album>>();
-                    return listaAlbumes;
+                    album = await response.Content.ReadAsAsync<Album>();
+                    return album;
                 }
                 else
                 {

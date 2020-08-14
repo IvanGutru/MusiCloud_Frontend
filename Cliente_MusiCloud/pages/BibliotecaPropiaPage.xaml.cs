@@ -71,17 +71,33 @@ namespace Cliente_MusiCloud.pages
         }
         private async void btn_Reproducir_Click(object sender, RoutedEventArgs e)
         {
-           
+            Button button = sender as Button;
+            BibliotecaPropia bibliotecaPropia = button.DataContext as BibliotecaPropia;
+            Cancion cancion = CrearCancion(bibliotecaPropia);
+            await Reproductor.Reproducir(cancion);
+            SingletonReproductor.GetPaginaPrincipal().CargarInformacionAsync(cancion);
         }
 
 
         private void btn_agregarCola_Click(object sender, RoutedEventArgs e)
         {
             Button button = sender as Button;
-            Cancion cancion = button.DataContext as Cancion;
+            BibliotecaPropia bibliotecaPropia = button.DataContext as BibliotecaPropia;
+            Cancion cancion = CrearCancion(bibliotecaPropia);
             Reproductor.AgregarCancionACola(cancion);
         }
-
+        private Cancion CrearCancion(BibliotecaPropia bibliotecaPropia)
+        {
+            Cancion cancionBiblioteca = new Cancion
+            {
+                idCancion = bibliotecaPropia.idBibliotecaPropia.ToString(),
+                archivo = bibliotecaPropia.archivo,
+                nombre = bibliotecaPropia.nombreCancion,
+                imagenPortadaCancion = bibliotecaPropia.portadaImagenBibliotecaPropia,
+                duracion = bibliotecaPropia.duracion
+            };
+            return cancionBiblioteca;
+        }
         private void btn_agregarSiguiente_Click(object sender, RoutedEventArgs e)
         {
             Button button = sender as Button;
@@ -89,23 +105,17 @@ namespace Cliente_MusiCloud.pages
             Reproductor.AgregarSiguienteACola(cancion);
         }
 
-        private void btn_agregarAPlaylist_Click(object sender, RoutedEventArgs e)
-        {
-            Button button = sender as Button;
-            Cancion cancion = button.DataContext as Cancion;
-            VentanaFlotante ventanaflotante = new VentanaFlotante(new AgregarCancionPlaylist(cancion));
-            ventanaflotante.ShowDialog();
-        }
-
-        private void btn_generarRadio_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
 
         private void Btn_AgregarTodasLasCanciones_Click(object sender, RoutedEventArgs e)
         {
             Reproductor.ColaCanciones.Clear();
-            //  Reproductor.AgregarListaCancionesACola(listaCanciones);
+            List<Cancion> listaCanciones = new List<Cancion>();
+            foreach (var cancionBiblioteca in listaCancionesBiblioteca)
+            {
+                Cancion cancion = CrearCancion(cancionBiblioteca);
+                listaCanciones.Add(cancion);
+            }
+            Reproductor.AgregarListaCancionesACola(listaCanciones);
             SingletonReproductor.GetPaginaPrincipal().SiguienteCancion();
         }
     }

@@ -64,9 +64,10 @@
                         <ListView.ItemTemplate>
                             <DataTemplate>
                                 <StackPanel Orientation="Horizontal">
-                                    <StackPanel Margin="5,10,-10,0">
+                                    <StackPanel Margin="5,10,-5,0">
                                         <materialDesign:PopupBox x:Name="PopupBox_options" PlacementMode="BottomAndAlignRightEdges" StaysOpen="False" Margin="10" Foreground="White" >
                                             <StackPanel Width="auto" >
+                                                <Button x:Name="btn_agregarMeGusta" Content="Agregar a Me gusta"  Click="btn_AñadirMegusta_Click" />
                                                 <Button x:Name="btn_agregarCola" Content="Agregar a cola" Click="btn_agregarCola_Click" />
                                                 <Button x:Name="btn_agregarSiguiente" Content="Agregar a siguiente" Click="btn_agregarSiguiente_Click"  />
                                                 <Button x:Name="btn_agregarAPlaylist" Content="Agregar a playlist" Click="btn_agregarAPlaylist_Click"/>
@@ -74,14 +75,7 @@
                                             </StackPanel>
                                         </materialDesign:PopupBox>
                                     </StackPanel>
-                                    <StackPanel Margin="5">
-                                        <Button Name="btn_AñadirMegusta"
-                                             Style="{StaticResource MaterialDesignIconButton}"
-                                             ToolTip="Me gusta" Background="{DynamicResource MaterialDesignTextFieldBoxBackground}">
-                                            <materialDesign:PackIcon Kind="Heart" Foreground="White" />
-                                        </Button>
-                                    </StackPanel>
-                                    <StackPanel Margin="5">
+                                    <StackPanel Margin="5,10,10,0">
                                         <Button x:Name="btn_Reproducir"
                                           Style="{StaticResource MaterialDesignIconButton}"
                                           ToolTip="Reproducir"

@@ -113,11 +113,11 @@
                                 </Button>
                             </Grid>
                             <Grid Grid.Column="3">
-                                <Button Margin="0,2,0,0" Name="btn_Si"
+                                <Button Margin="0,2,0,0" Name="btn_MeGusta"
                                 Style="{StaticResource MaterialDesignIconButton}"
-                                ToolTip="Siguiente"
-                                Background="#1a1a1a"> 
-                                    <materialDesign:PackIcon Kind="Heart" Foreground="White" />
+                                ToolTip="Me gusta"
+                                Background="#1a1a1a" Click="btn_MeGusta_Click">
+                                    <materialDesign:PackIcon Kind="HeartOutline"  x:Name="icon_MeGusta"/>
                                 </Button>
                             </Grid>
                         </Grid>

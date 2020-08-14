@@ -16,5 +16,6 @@ namespace Cliente_MusiCloud.cancion.dominio
         public BitmapImage imagenPortadaCancion { get; set; }
         public Genero genero { get; set; }
         public Album album { get; set; }
+        public bool meGusta { get; set; }
     }
 }
