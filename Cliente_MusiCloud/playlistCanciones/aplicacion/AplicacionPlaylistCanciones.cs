@@ -1,9 +1,7 @@
 ﻿using Cliente_MusiCloud.playlistCanciones.dominio;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net.Http;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Cliente_MusiCloud.playlistCanciones.aplicacion

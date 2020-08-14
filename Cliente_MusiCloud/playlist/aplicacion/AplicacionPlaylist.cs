@@ -4,7 +4,6 @@ using System;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
-using System.Web.Configuration;
 using System.Windows.Media.Imaging;
 
 namespace Cliente_MusiCloud.playlist.aplicacion

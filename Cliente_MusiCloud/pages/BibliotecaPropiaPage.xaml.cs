@@ -9,9 +9,8 @@ using System;
 using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
-
 using System.Windows.Navigation;
-using System.Windows.Shapes;
+
 
 namespace Cliente_MusiCloud.pages
 {

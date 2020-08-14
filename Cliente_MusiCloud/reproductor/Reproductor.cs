@@ -1,5 +1,4 @@
 ﻿using Cliente_MusiCloud.cancion.dominio;
-using Cliente_MusiCloud.cuenta.Dominio;
 using Cliente_MusiCloud.historial.aplicacion;
 using Cliente_MusiCloud.utilidades;
 using NAudio.Wave;
@@ -7,7 +6,6 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 
 namespace Cliente_MusiCloud.reproductor

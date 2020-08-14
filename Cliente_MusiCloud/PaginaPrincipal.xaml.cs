@@ -1,18 +1,12 @@
-﻿
-using Cliente_MusiCloud.album.aplicacion;
-using Cliente_MusiCloud.artista.aplicacion;
-using Cliente_MusiCloud.cancion.dominio;
+﻿using Cliente_MusiCloud.cancion.dominio;
 using Cliente_MusiCloud.cuenta.Dominio;
 using Cliente_MusiCloud.pages;
 using Cliente_MusiCloud.playlist.aplicacion;
 using Cliente_MusiCloud.reproductor;
 using Cliente_MusiCloud.utilidades;
 using System;
-using System.Runtime.CompilerServices;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Navigation;
 using System.Windows.Threading;
 
 namespace Cliente_MusiCloud
