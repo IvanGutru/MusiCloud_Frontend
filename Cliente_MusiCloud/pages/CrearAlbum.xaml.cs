@@ -76,6 +76,7 @@ namespace Cliente_MusiCloud.pages
                         var archivo = ObtenerBytesArchivo(cancion.archivo);
                         cancion.duracion = ObtenerDuracionCancion(archivo);
                         cancion.archivo = random.Next().ToString();
+                        cancion.portada = albumRecuperado.portada;
                         AudioCancion audioCancion = new AudioCancion
                         {
                             Audio = archivo,

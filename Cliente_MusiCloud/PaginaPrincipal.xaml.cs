@@ -2,10 +2,14 @@
 using Cliente_MusiCloud.album.aplicacion;
 using Cliente_MusiCloud.artista.aplicacion;
 using Cliente_MusiCloud.cancion.dominio;
+using Cliente_MusiCloud.cuenta.Dominio;
 using Cliente_MusiCloud.pages;
+using Cliente_MusiCloud.playlist.aplicacion;
 using Cliente_MusiCloud.reproductor;
 using Cliente_MusiCloud.utilidades;
 using System;
+using System.Runtime.CompilerServices;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Navigation;
@@ -18,7 +22,9 @@ namespace Cliente_MusiCloud
     /// </summary>
     public partial class PaginaPrincipal : Window
     {
+        Cuentas cuenta = SingletonCuenta.GetSingletonCuenta();
         DispatcherTimer loadProgressTrackTimer;
+        Cancion cancionRecibida;
         public PaginaPrincipal()
         {
             InitializeComponent();
@@ -35,30 +41,9 @@ namespace Cliente_MusiCloud
             loadProgressTrackTimer = new DispatcherTimer();
             loadProgressTrackTimer.Tick += new EventHandler(PrintProgress);
             loadProgressTrackTimer.Interval = new TimeSpan(0, 0, 0, 1);
- 
-        }
-     
-        private void ButtonCloseMenu_Click(object sender, RoutedEventArgs e)
-        {
-            ButtonCloseMenu.Visibility = Visibility.Collapsed;
-            ButtonOpenMenu.Visibility = Visibility.Visible;
+
         }
 
-        private void ButtonOpenMenu_Click(object sender, RoutedEventArgs e)
-        {
-            ButtonCloseMenu.Visibility = Visibility.Visible;
-            ButtonOpenMenu.Visibility = Visibility.Collapsed;
-        }
-
-        private void Button_account_Click(object sender, RoutedEventArgs e)
-        {
-            centralFrame.Navigate(new ModificarCuenta());
-        }
-
-        private void Button_signout_Click(object sender, RoutedEventArgs e)
-        {
-            Salir();
-        }
 
         private void ListViewMenu_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -97,7 +82,7 @@ namespace Cliente_MusiCloud
             PararCancion();
             main.Show();
             this.Close();
-        
+
         }
         private void ValidarEsCreadorContenido()
         {
@@ -135,7 +120,7 @@ namespace Cliente_MusiCloud
                 loadProgressTrackTimer.Stop();
             }
         }
-  
+
 
         private void PrintProgress(object sender, EventArgs e)
         {
@@ -165,7 +150,7 @@ namespace Cliente_MusiCloud
         private void btn_siguiente_Click(object sender, RoutedEventArgs e)
         {
             SiguienteCancion();
-            
+
         }
         public async void SiguienteCancion()
         {
@@ -184,11 +169,84 @@ namespace Cliente_MusiCloud
                 loadProgressTrackTimer.Start();
             }
         }
-        public async void CargarInformacionAsync(Cancion cancion)
+        public void CargarInformacionAsync(Cancion cancion)
         {
             txt_Nombre.Text = cancion.nombre;
-            PortadaCancion.Source = await AplicacionAlbum.ObtenerImagenAlbum(cancion.portada);
+            PortadaCancion.Source = cancion.imagenPortadaCancion;
+            this.cancionRecibida = cancion;
+            ValidarEstadoBotonMeGusta(cancion);
             ContinuarReproduccion();
         }
+        private void ValidarEstadoBotonMeGusta(Cancion cancion)
+        {
+            if (cancion.meGusta)
+            {
+                icon_MeGusta.Kind = (MaterialDesignThemes.Wpf.PackIconKind)Enum.Parse(typeof(MaterialDesignThemes.Wpf.PackIconKind), "SuitHearts");
+            }
+            else
+            {
+                icon_MeGusta.Kind = (MaterialDesignThemes.Wpf.PackIconKind)Enum.Parse(typeof(MaterialDesignThemes.Wpf.PackIconKind), "HeartOutline");
+            }
+        }
+
+        private void btn_MeGusta_Click(object sender, RoutedEventArgs e)
+        {
+            if (cancionRecibida!=null)
+            {
+                MeGustaAsync();
+            }
+ 
+        }
+
+        private async void MeGustaAsync()
+        {
+            try
+            {
+                if (!await AplicacionPlaylist.ValidarCancionEnMeGusta(cancionRecibida.idCancion, cuenta.idCuenta))
+                {
+                    if (await AplicacionPlaylist.AgregarMeGusta(cancionRecibida.idCancion, cuenta.idCuenta))
+                    {
+                        cancionRecibida.meGusta = true;
+                        MessageBox.Show("Canción añadida a me gusta", "Realizado", MessageBoxButton.OK);
+                    }
+                }
+                else
+                {
+                    if (await AplicacionPlaylist.EliminarDeMeGusta(cancionRecibida.idCancion, cuenta.idCuenta))
+                    {
+                        cancionRecibida.meGusta = false;
+                        MessageBox.Show("Canción eliminada de Me gusta", "Realizado", MessageBoxButton.OK);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Ocurrió un error", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
+            ValidarEstadoBotonMeGusta(cancionRecibida);
+        }
+
+        private void ButtonCloseMenu_Click(object sender, RoutedEventArgs e)
+        {
+            ButtonCloseMenu.Visibility = Visibility.Collapsed;
+            ButtonOpenMenu.Visibility = Visibility.Visible;
+        }
+
+        private void ButtonOpenMenu_Click(object sender, RoutedEventArgs e)
+        {
+            ButtonCloseMenu.Visibility = Visibility.Visible;
+            ButtonOpenMenu.Visibility = Visibility.Collapsed;
+        }
+
+        private void Button_account_Click(object sender, RoutedEventArgs e)
+        {
+            centralFrame.Navigate(new ModificarCuenta());
+        }
+
+        private void Button_signout_Click(object sender, RoutedEventArgs e)
+        {
+            Salir();
+        }
+
     }
 }

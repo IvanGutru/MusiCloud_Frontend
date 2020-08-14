@@ -2,6 +2,7 @@
 using Cliente_MusiCloud.album.dominio;
 using Cliente_MusiCloud.artista.aplicacion;
 using Cliente_MusiCloud.artista.Dominio;
+using Cliente_MusiCloud.genero.aplicacion;
 using Cliente_MusiCloud.utilidades;
 using System;
 using System.Collections.Generic;
@@ -37,6 +38,7 @@ namespace Cliente_MusiCloud.pages
                 foreach (var albumEnLista in listaAlbumes)
                 {
                     albumEnLista.imagenPortadaAlbum = await AplicacionAlbum.ObtenerImagenAlbum(albumEnLista.portada);
+                    albumEnLista.genero = await AplicacionGenero.ObtenerGeneroPorId(albumEnLista.idGenero);
                 }
                 listView_Albumes.ItemsSource = listaAlbumes;
             }

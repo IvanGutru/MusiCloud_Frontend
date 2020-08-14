@@ -2,7 +2,9 @@
 using Cliente_MusiCloud.album.dominio;
 using Cliente_MusiCloud.cancion.aplicacion;
 using Cliente_MusiCloud.cancion.dominio;
+using Cliente_MusiCloud.cuenta.Dominio;
 using Cliente_MusiCloud.genero.aplicacion;
+using Cliente_MusiCloud.playlist.aplicacion;
 using Cliente_MusiCloud.reproductor;
 using Cliente_MusiCloud.utilidades;
 using System;
@@ -21,6 +23,8 @@ namespace Cliente_MusiCloud.pages
     public partial class MostrarAlbumes : Page
     {
         List<Cancion> listaCanciones;
+        Album album;
+        Cuentas cuenta = SingletonCuenta.GetSingletonCuenta();
 
         public MostrarAlbumes()
         {
@@ -64,7 +68,7 @@ namespace Cliente_MusiCloud.pages
 
         private void listViewAlbumes_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            Album album = (Album)listViewAlbumes.SelectedItem;
+            album = (Album)listViewAlbumes.SelectedItem;
             if (listViewAlbumes.SelectedItems.Count>0)
             {
                 CargarCancionesDeAlbum(album);
@@ -80,6 +84,7 @@ namespace Cliente_MusiCloud.pages
                 {
                     cancion.imagenPortadaCancion = await AplicacionAlbum.ObtenerImagenAlbum(cancion.portada);
                     cancion.genero = albumRecibido.genero;
+                    cancion.meGusta = await AplicacionPlaylist.ValidarCancionEnMeGusta(cancion.idCancion,cuenta.idCuenta);
                 }
                 listView_Canciones.ItemsSource = listaCanciones;
             }
@@ -121,14 +126,67 @@ namespace Cliente_MusiCloud.pages
 
         private void btn_generarRadio_Click(object sender, RoutedEventArgs e)
         {
-
+            Button button = sender as Button;
+            Cancion cancion = button.DataContext as Cancion;
+            GenerarRadio(cancion);
         }
+        private async void GenerarRadio(Cancion cancion)
+        {
+            List<Album> listaAlbumes;
+            try
+            {
+                List<Cancion> listaCancionesParaRadio = new List<Cancion>();
+                listaAlbumes = await AplicacionGenero.ObtenerAlbumesPorGenero(cancion.genero.idGenero);
 
+                foreach (var albumDelista in listaAlbumes)
+                {
+                    listaCancionesParaRadio.AddRange(await AplicacionCancion.ObtenerCancionesPorIdAlbumAsync(albumDelista.idAlbum));
+
+                }
+                foreach (var cancionDeLista in listaCancionesParaRadio)
+                {
+                    cancionDeLista.imagenPortadaCancion = await AplicacionAlbum.ObtenerImagenAlbum(cancionDeLista.portada);
+                    cancionDeLista.genero = album.genero;
+                }
+                Reproductor.ColaCanciones.Clear();
+                Reproductor.AgregarListaCancionesACola(listaCancionesParaRadio);
+                SingletonReproductor.GetPaginaPrincipal().SiguienteCancion();
+                MessageBox.Show("Se ha generado tu radio y se ha agregado a la cola de reporducción", "Acción completada", MessageBoxButton.OK);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Ocurrió un error", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
+        }
         private void Btn_AgregarTodasLasCanciones_Click(object sender, RoutedEventArgs e)
         {
             Reproductor.ColaCanciones.Clear();
             Reproductor.AgregarListaCancionesACola(listaCanciones);
             SingletonReproductor.GetPaginaPrincipal().SiguienteCancion();
+        }
+        private async void btn_AñadirMegusta_Click(object sender, RoutedEventArgs e)
+        {
+            Button button = sender as Button;
+            Cancion cancion = button.DataContext as Cancion;
+            try
+            {
+                if (!await AplicacionPlaylist.ValidarCancionEnMeGusta(cancion.idCancion, cuenta.idCuenta))
+                {
+                    if (await AplicacionPlaylist.AgregarMeGusta(cancion.idCancion, cuenta.idCuenta))
+                    {
+                        cancion.meGusta = true;
+                        MessageBox.Show("Canción añadida a tus Me gusta", "Realizado", MessageBoxButton.OK);
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("La canción seleccionada ya se encuentra en tus Me gusta", "Ocurrió un error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Ocurrió un error", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
         }
     }
 }

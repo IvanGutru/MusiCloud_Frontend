@@ -10,7 +10,7 @@ using System.IO;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-
+using System.Windows.Controls.Primitives;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 
@@ -47,7 +47,8 @@ namespace Cliente_MusiCloud.pages
             {
                 if (await GuardaCancionServidorAsync())
                 {
-                    MessageBox.Show("Registro éxitoso", "Registro éxitoso", MessageBoxButton.OK);
+                    MessageBox.Show("Registro éxitoso", "Registro éxitoso", MessageBoxButton.OK,MessageBoxImage.Information);
+                    LimpiarCampos();
                 }
 
             }
@@ -140,6 +141,13 @@ namespace Cliente_MusiCloud.pages
             string duracion = string.Format("{0}:{1}", timeSpan.Duration().Minutes, timeSpan.Duration().Seconds);
             return duracion;
 
+        }
+        private void LimpiarCampos()
+        {
+            txt_NombreAlbum.Text = string.Empty;
+            txt_NombreCancion.Text = string.Empty;
+            txt_Genero.Text = string.Empty;
+            txt_NombreArchivo.Text = string.Empty;
         }
 
         private void Btn_Regresar_Click(object sender, RoutedEventArgs e)
