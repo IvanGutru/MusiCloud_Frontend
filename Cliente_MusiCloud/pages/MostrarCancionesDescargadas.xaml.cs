@@ -1,93 +1,130 @@
 ﻿using Cliente_MusiCloud.album.aplicacion;
 using Cliente_MusiCloud.album.dominio;
-using Cliente_MusiCloud.artista.Dominio;
 using Cliente_MusiCloud.cancion.aplicacion;
 using Cliente_MusiCloud.cancion.dominio;
 using Cliente_MusiCloud.cuenta.Dominio;
-using Cliente_MusiCloud.descargar;
 using Cliente_MusiCloud.genero.aplicacion;
 using Cliente_MusiCloud.playlist.aplicacion;
+using Cliente_MusiCloud.playlist.dominio;
+using Cliente_MusiCloud.playlistCanciones.aplicacion;
+using Cliente_MusiCloud.playlistCanciones.dominio;
 using Cliente_MusiCloud.reproductor;
 using Cliente_MusiCloud.utilidades;
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
+using System.Windows.Shapes;
 
 namespace Cliente_MusiCloud.pages
 {
     /// <summary>
-    /// Lógica de interacción para MostrarCanciones.xaml
+    /// Lógica de interacción para MostrarCancionesDescargadas.xaml
     /// </summary>
-    public partial class MostrarCanciones : Page
+    public partial class MostrarCancionesDescargadas : Page
     {
-        Album album;
-        Artista artista;
-        List<Cancion> listaCanciones;
+        Playlist playlist;
         Cuentas cuenta = SingletonCuenta.GetSingletonCuenta();
-        public MostrarCanciones(Album album, Artista artista)
+        List<Cancion> listaCanciones;
+        List<PlaylistCanciones> listaPlaylistCanciones;
+        public MostrarCancionesDescargadas(Playlist playlistRecibida)
         {
-            this.album = album;
-            this.artista = artista;
             InitializeComponent();
-            CargarCanciones();
-            CargarCamposAlbum();
-            Btn_RegresarAHome.Visibility = Visibility.Hidden;
+            this.playlist = playlistRecibida;
+            CargarInformacionPlaylist();
+            CargarCancionesPlaylistAsync();
+            this.listaCanciones = new List<Cancion>();
+        }
 
-        }
-        public MostrarCanciones(Album album)
-        {
-            InitializeComponent();
-            this.album = album;
-            CargarCanciones();
-            CargarCamposDesdeHome();
-            Btn_Regresar.Visibility = Visibility.Hidden;
-        }
-       
-        private async void CargarCanciones()
+        private async void CargarCancionesPlaylistAsync()
         {
             try
             {
-                listaCanciones = await AplicacionCancion.ObtenerCancionesPorIdAlbumAsync(album.idAlbum);
-                foreach (var cancionDeLista in listaCanciones)
-                {
-                    cancionDeLista.imagenPortadaCancion = await AplicacionAlbum.ObtenerImagenAlbum(cancionDeLista.portada);
-                    cancionDeLista.genero = album.genero;
-                    cancionDeLista.meGusta = await AplicacionPlaylist.ValidarCancionEnMeGusta(cancionDeLista.idCancion,cuenta.idCuenta);
-                }
+                listaCanciones = await ObtenerCancionesPlaylistAsync();
+                listaCanciones = await ObtenerCancionesAlbumGeneroAsync(listaCanciones);
                 listView_Canciones.ItemsSource = listaCanciones;
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Ocurrió un error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
-
         }
-        private void CargarCamposAlbum()
+        private async Task<List<Cancion>> ObtenerCancionesPlaylistAsync()
         {
-            txt_NombreAlbum.Text = album.nombre;
-            txt_NombreCompania.Text = album.compania;
-            txt_NombreArtista.Text = artista.nombre;
-            portadaAlbum.Source = album.imagenPortadaAlbum;
+            listaPlaylistCanciones = await ObtenerPlaylistCanciones();
+            if (listaPlaylistCanciones != null)
+            {
+                foreach (var playlistCancionDeLista in listaPlaylistCanciones)
+                {
+                    Cancion cancionObtenida = await AplicacionCancion.ObtenerCancionPorId(playlistCancionDeLista.idCancion);
+                    listaCanciones.Add(cancionObtenida);
+                }
+                foreach (var cancionDeLista in listaCanciones)
+                {
+                    cancionDeLista.imagenPortadaCancion = await AplicacionAlbum.ObtenerImagenAlbum(cancionDeLista.portada);
+                    cancionDeLista.meGusta = await AplicacionPlaylist.ValidarCancionEnMeGusta(cancionDeLista.idCancion, cuenta.idCuenta);
+                }
+            }
+            return listaCanciones;
         }
-        private void CargarCamposDesdeHome()
+        private async Task<List<PlaylistCanciones>> ObtenerPlaylistCanciones()
         {
-            txt_NombreAlbum.Text = album.nombre;
-            txt_NombreCompania.Text = album.compania;
-            txt_NombreArtista.Text = album.artista.nombre;
-            portadaAlbum.Source = album.imagenPortadaAlbum;
+            try
+            {
+                List<PlaylistCanciones> lista = await AplicacionPlaylistCanciones.ObtenerPlaylistCanciones(playlist.idPlaylist);
+                return lista;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
+            return null;
         }
-        private void Btn_Regresar_Click(object sender, RoutedEventArgs e)
+        private async Task<List<Cancion>> ObtenerCancionesAlbumGeneroAsync(List<Cancion> listaCanciones)
         {
-            NavigationService.Navigate(new MostrarArtistas());
+            foreach (var cancionDelista in listaCanciones)
+            {
+                cancionDelista.album = await AplicacionAlbum.ObtenerAlbumPorId(cancionDelista.idAlbum);
+                cancionDelista.genero = await AplicacionGenero.ObtenerGeneroPorId(cancionDelista.album.idGenero);
+            }
+            return listaCanciones;
         }
-
+        private void CargarInformacionPlaylist()
+        {
+            txt_NombreCreador.Text = cuenta.nombreUsuario;
+            txt_NombrePlaylist.Text = playlist.nombre;
+            txt_TipoPlaylist.Text = ObtenerTipoPlaylist();
+            portadaAlbum.Source = playlist.imagenPortada;
+        }
+        private string ObtenerTipoPlaylist()
+        {
+            if (playlist.publica)
+            {
+                return "Publica";
+            }
+            return "Privada";
+        }
         private async void btn_Reproducir_Click(object sender, RoutedEventArgs e)
         {
             Button button = sender as Button;
             Cancion cancion = button.DataContext as Cancion;
-            await Reproductor.Reproducir(cancion);
+            if (ServidorReproduccion.ServidorReproduccion.client !=null)
+            {
+                await Reproductor.Reproducir(cancion);
+            }
+            else
+            {
+                await Reproductor.ReproducirOffline(cancion);
+            }
             SingletonReproductor.GetPaginaPrincipal().CargarInformacionAsync(cancion);
         }
 
@@ -122,12 +159,10 @@ namespace Cliente_MusiCloud.pages
         }
         private async void GenerarRadio(Cancion cancion)
         {
-            List<Album> listaAlbumes;
             try
             {
+                List<Album> listaAlbumes = await ObtenerAlbumesAsync(cancion);
                 List<Cancion> listaCancionesParaRadio = new List<Cancion>();
-                listaAlbumes = await AplicacionGenero.ObtenerAlbumesPorGenero(cancion.genero.idGenero);
-
                 foreach (var albumDelista in listaAlbumes)
                 {
                     listaCancionesParaRadio.AddRange(await AplicacionCancion.ObtenerCancionesPorIdAlbumAsync(albumDelista.idAlbum));
@@ -136,20 +171,27 @@ namespace Cliente_MusiCloud.pages
                 foreach (var cancionDeLista in listaCancionesParaRadio)
                 {
                     cancionDeLista.imagenPortadaCancion = await AplicacionAlbum.ObtenerImagenAlbum(cancionDeLista.portada);
-                    cancionDeLista.genero = album.genero;
-                    cancionDeLista.meGusta = await AplicacionPlaylist.ValidarCancionEnMeGusta(cancionDeLista.idCancion,cuenta.idCuenta);
+                    cancionDeLista.meGusta = await AplicacionPlaylist.ValidarCancionEnMeGusta(cancionDeLista.idCancion, cuenta.idCuenta);
                 }
-                Reproductor.ColaCanciones.Clear();
-                Reproductor.AgregarListaCancionesACola(listaCancionesParaRadio);
-                SingletonReproductor.GetPaginaPrincipal().SiguienteCancion();
-                MessageBox.Show("Se ha generado tu radio y se ha agregado a la cola de reproducción", "Acción completada", MessageBoxButton.OK);
+                IniciarRadio(listaCancionesParaRadio);
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Ocurrió un error", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
         }
-
+        private async Task<List<Album>> ObtenerAlbumesAsync(Cancion cancion)
+        {
+            List<Album> listaAlbumes = await AplicacionGenero.ObtenerAlbumesPorGenero(cancion.genero.idGenero);
+            return listaAlbumes;
+        }
+        private void IniciarRadio(List<Cancion> listaCanciones)
+        {
+            Reproductor.ColaCanciones.Clear();
+            Reproductor.AgregarListaCancionesACola(listaCanciones);
+            SingletonReproductor.GetPaginaPrincipal().SiguienteCancion();
+            MessageBox.Show("Se ha generado tu radio y se ha agregado a la cola de reporducción", "Acción completada", MessageBoxButton.OK);
+        }
         private void Btn_AgregarTodasLasCanciones_Click(object sender, RoutedEventArgs e)
         {
             Reproductor.ColaCanciones.Clear();
@@ -180,30 +222,11 @@ namespace Cliente_MusiCloud.pages
                 MessageBox.Show(ex.Message, "Ocurrió un error", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
         }
-        private async void btn_descargarCancion_Click(object sender, RoutedEventArgs e)
+
+        private void Btn_Regresar_Click(object sender, RoutedEventArgs e)
         {
-            Button button = sender as Button;
-            Cancion cancion = button.DataContext as Cancion;
-            if (!await DescargarCancion.ValidarCancionDescargada(cancion, cuenta))
-            {
-                if (await DescargarCancion.Descargar(cancion, cuenta))
-                {
-                    MessageBox.Show(cancion.nombre + " se agregó a tu lista de descargas", "Realizado", MessageBoxButton.OK);
-                }
-                else
-                {
-                    MessageBox.Show("No hay conexión con el servidor", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
-                }
-            }
-            else
-            {
-                MessageBox.Show("La canción ya ha sido descargada anteriormente", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
-            }
+            NavigationService.Navigate(new Biblioteca());
         }
 
-        private void Btn_RegresarAHome_Click(object sender, RoutedEventArgs e)
-        {
-            NavigationService.Navigate(new Home());
-        }
     }
 }

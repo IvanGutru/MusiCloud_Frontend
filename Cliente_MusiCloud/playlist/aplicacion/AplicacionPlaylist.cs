@@ -161,5 +161,45 @@ namespace Cliente_MusiCloud.playlist.aplicacion
                 }
             }
         }
+        public static async Task<bool> AgregarADescargas(string idCancion, string idCuenta)
+        {
+            string path = "Playlist/Descargas/" + idCancion + "/" + idCuenta;
+            using (HttpResponseMessage respuesta = await ConexionApi.ApiCliente.PostAsync(path, null))
+            {
+                if (respuesta.IsSuccessStatusCode)
+                {
+                    return true;
+                }
+                else
+                {
+                    dynamic error = await respuesta.Content.ReadAsAsync<dynamic>();
+                    string mensaje = error.error;
+                    throw new Exception(mensaje);
+                }
+            }
+        }
+        public static async Task<bool> ValidarCancionEnDescargas(string idCancion, string idCuenta)
+        {
+            string path = "Playlist/Descargas/" + idCancion + "/" + idCuenta;
+            string estadoOk = "OK";
+            using (HttpResponseMessage respuesta = await ConexionApi.ApiCliente.GetAsync(path))
+            {
+                if (respuesta.IsSuccessStatusCode)
+                {
+                    string estado = respuesta.StatusCode.ToString();
+                    if (estado == estadoOk)
+                    {
+                        return true;
+                    }
+                    return false;
+                }
+                else
+                {
+                    dynamic error = await respuesta.Content.ReadAsAsync<dynamic>();
+                    string mensaje = error.error;
+                    throw new Exception(mensaje);
+                }
+            }
+        }
     }
 }

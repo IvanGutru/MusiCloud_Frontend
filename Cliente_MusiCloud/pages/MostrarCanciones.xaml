@@ -72,6 +72,7 @@
                                                 <Button x:Name="btn_agregarSiguiente" Content="Agregar a siguiente" Click="btn_agregarSiguiente_Click"  />
                                                 <Button x:Name="btn_agregarAPlaylist" Content="Agregar a playlist" Click="btn_agregarAPlaylist_Click"/>
                                                 <Button x:Name="btn_generarRadio" Content="Generar Radio" Click="btn_generarRadio_Click"/>
+                                                <Button x:Name="btn_descargarCancion" Content="Descargar canción" Click="btn_descargarCancion_Click" />
                                             </StackPanel>
                                         </materialDesign:PopupBox>
                                     </StackPanel>
