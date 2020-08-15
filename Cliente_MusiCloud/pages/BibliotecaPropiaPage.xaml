@@ -68,11 +68,6 @@
                                         </materialDesign:PopupBox>
                                     </StackPanel>
                                     <StackPanel Margin="5,15,0,0">
-                                        <Button Name="btn_AñadirMegusta"
-                                             Style="{StaticResource MaterialDesignIconButton}"
-                                             ToolTip="Me gusta" Background="{DynamicResource MaterialDesignTextFieldBoxBackground}">
-                                            <materialDesign:PackIcon Kind="Heart" Foreground="White" />
-                                        </Button>
                                     </StackPanel>
                                     <StackPanel Margin="5,15,0,0">
                                         <Button x:Name="btn_Reproducir"

@@ -1,7 +1,5 @@
 ﻿using Cliente_MusiCloud.artista.Dominio;
-using Cliente_MusiCloud.artista.aplicacion;
 using Cliente_MusiCloud.cuenta.LoginRR;
-using Cliente_MusiCloud.Cuenta;
 using Cliente_MusiCloud.cuentaArtista.aplicacion;
 using Cliente_MusiCloud.cuentaArtista.dominio;
 using Cliente_MusiCloud.utilidades;

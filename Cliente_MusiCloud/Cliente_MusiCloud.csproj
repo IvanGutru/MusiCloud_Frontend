@@ -108,12 +108,14 @@
     <Compile Include="artista\Dominio\Artista.cs" />
     <Compile Include="bibliotecaPropia\aplicacion\AplicacionBibliotecaPropia.cs" />
     <Compile Include="bibliotecaPropia\dominio\BibliotecaPropia.cs" />
+    <Compile Include="cancionDescarga\AplicacionCancionDescargada.cs" />
     <Compile Include="cancion\aplicacion\AplicacionCancion.cs" />
     <Compile Include="cancion\dominio\Cancion.cs" />
     <Compile Include="cuentaArtista\aplicacion\AplicacionCuentaArtista.cs" />
     <Compile Include="cuentaArtista\dominio\CuentaArtista.cs" />
     <Compile Include="cuenta\Dominio\CreadorRequest.cs" />
     <Compile Include="cuenta\Dominio\Cuentas.cs" />
+    <Compile Include="descargar\DescargarCancion.cs" />
     <Compile Include="gen-netstd\AudioCancion.cs" />
     <Compile Include="gen-netstd\ServicioReproduccion.cs" />
     <Compile Include="genero\aplicacion\AplicacionGenero.cs" />
@@ -158,6 +160,9 @@
     </Compile>
     <Compile Include="pages\MostrarCanciones.xaml.cs">
       <DependentUpon>MostrarCanciones.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="pages\MostrarCancionesDescargadas.xaml.cs">
+      <DependentUpon>MostrarCancionesDescargadas.xaml</DependentUpon>
     </Compile>
     <Compile Include="pages\MostrarCancionesDesdeArtista.xaml.cs">
       <DependentUpon>MostrarCancionesDesdeArtista.xaml</DependentUpon>
@@ -246,6 +251,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="pages\MostrarCanciones.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="pages\MostrarCancionesDescargadas.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

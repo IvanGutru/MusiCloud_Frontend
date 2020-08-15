@@ -2,13 +2,16 @@
 using Cliente_MusiCloud.album.dominio;
 using Cliente_MusiCloud.cancion.aplicacion;
 using Cliente_MusiCloud.cancion.dominio;
+using Cliente_MusiCloud.cancionDescarga;
 using Cliente_MusiCloud.cuenta.Dominio;
+using Cliente_MusiCloud.descargar;
 using Cliente_MusiCloud.genero.aplicacion;
 using Cliente_MusiCloud.playlist.aplicacion;
 using Cliente_MusiCloud.reproductor;
 using Cliente_MusiCloud.utilidades;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Navigation;
@@ -40,7 +43,7 @@ namespace Cliente_MusiCloud.pages
             portadaAlbum.Source = album.imagenPortadaAlbum;
         }
 
-   
+
         private async void CargarCanciones()
         {
             if (album != null)
@@ -112,7 +115,7 @@ namespace Cliente_MusiCloud.pages
             {
                 List<Cancion> listaCancionesParaRadio = new List<Cancion>();
                 listaAlbumes = await AplicacionGenero.ObtenerAlbumesPorGenero(cancion.genero.idGenero);
-             
+
                 foreach (var albumDelista in listaAlbumes)
                 {
                     listaCancionesParaRadio.AddRange(await AplicacionCancion.ObtenerCancionesPorIdAlbumAsync(albumDelista.idAlbum));
@@ -164,5 +167,27 @@ namespace Cliente_MusiCloud.pages
                 MessageBox.Show(ex.Message, "Ocurrió un error", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
         }
+
+        private async void btn_descargarCancion_Click(object sender, RoutedEventArgs e)
+        {
+            Button button = sender as Button;
+            Cancion cancion = button.DataContext as Cancion;
+            if (!await DescargarCancion.ValidarCancionDescargada(cancion, cuenta))
+            {
+                if (await DescargarCancion.Descargar(cancion, cuenta))
+                {
+                    MessageBox.Show(cancion.nombre + " se agregó a tu lista de descargas", "Realizado", MessageBoxButton.OK);
+                }
+                else
+                {
+                    MessageBox.Show("No hay conexión con el servidor", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                }
+            }
+            else
+            {
+                MessageBox.Show("La canción ya ha sido descargada anteriormente", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
+        }
+
     }
 }

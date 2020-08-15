@@ -1,5 +1,4 @@
 ﻿using Cliente_MusiCloud.cancion.dominio;
-using Cliente_MusiCloud.cuenta.Dominio;
 using Cliente_MusiCloud.historial.aplicacion;
 using Cliente_MusiCloud.utilidades;
 using NAudio.Wave;
@@ -7,13 +6,13 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 
 namespace Cliente_MusiCloud.reproductor
 {
     class Reproductor
     {
+        private const string PATH = "C:/Users/IvanGutru/Documents/0.-IngenieriaSoftware/SextoSemestre/";
         public static WaveOutEvent waveOutEvent { set; get; }
         public static WaveStream waveStream { set; get; }
         public static bool cancionLista { get; set; }
@@ -50,6 +49,27 @@ namespace Cliente_MusiCloud.reproductor
                 Console.WriteLine(ex);
                 return false;
             }
+        }
+        public static async Task<bool> ReproducirOffline(Cancion cancion)
+        {
+            try
+            {
+                var audioCancion = File.ReadAllBytes(PATH + cancion.nombre+".mp3");
+                Reproductor.PararReproduccion();
+                Mp3FileReader mp3Reader = new Mp3FileReader(new MemoryStream(audioCancion));
+                waveStream = new WaveChannel32(mp3Reader);
+                waveOutEvent.Init(waveStream);
+                cancionLista = true;
+                await AplicacionHistorial.AñadirCancionAHistorial(cancion.idCancion, SingletonCuenta.GetSingletonCuenta().idCuenta);
+                Reproductor.ComenzarReproduccion();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+                return false;
+            }
+
         }
         public static bool ComenzarReproduccion()
         {
@@ -120,15 +140,18 @@ namespace Cliente_MusiCloud.reproductor
                 PararReproduccion();
                 Cancion cancion = ColaCanciones.Dequeue();
                 cancionLista = false;
-                if (await Reproducir(cancion))
+                if (ValidarConexionCliente())
                 {
-                    return cancion;
+                    if (await Reproducir(cancion))
+                        return cancion;
+                    return null;
                 }
                 else
                 {
+                    if (await ReproducirOffline(cancion))
+                        return cancion;
                     return null;
                 }
-
             }
             else
             {
@@ -179,6 +202,15 @@ namespace Cliente_MusiCloud.reproductor
             {
                 ColaCanciones.Enqueue(item);
             }
+        }
+
+        public static bool ValidarConexionCliente()
+        {
+            if (ServidorReproduccion.ServidorReproduccion.client !=null)
+            {
+                return true;
+            }
+            return false;
         }
 
     }

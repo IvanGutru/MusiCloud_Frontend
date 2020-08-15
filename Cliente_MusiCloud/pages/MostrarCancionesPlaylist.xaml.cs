@@ -3,6 +3,7 @@ using Cliente_MusiCloud.album.dominio;
 using Cliente_MusiCloud.cancion.aplicacion;
 using Cliente_MusiCloud.cancion.dominio;
 using Cliente_MusiCloud.cuenta.Dominio;
+using Cliente_MusiCloud.descargar;
 using Cliente_MusiCloud.genero.aplicacion;
 using Cliente_MusiCloud.playlist.aplicacion;
 using Cliente_MusiCloud.playlist.dominio;
@@ -123,10 +124,17 @@ namespace Cliente_MusiCloud.pages
         {
             Button button = sender as Button;
             Cancion cancion = button.DataContext as Cancion;
-            await Reproductor.Reproducir(cancion);
+            if (Reproductor.ValidarConexionCliente())
+            {
+                await Reproductor.Reproducir(cancion);
+            }
+            else
+            {
+                await Reproductor.ReproducirOffline(cancion);
+
+            }
             SingletonReproductor.GetPaginaPrincipal().CargarInformacionAsync(cancion);
         }
-
 
         private void btn_agregarCola_Click(object sender, RoutedEventArgs e)
         {
@@ -225,6 +233,26 @@ namespace Cliente_MusiCloud.pages
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Ocurrió un error", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
+        }
+        private async void btn_descargarCancion_Click(object sender, RoutedEventArgs e)
+        {
+            Button button = sender as Button;
+            Cancion cancion = button.DataContext as Cancion;
+            if (!await DescargarCancion.ValidarCancionDescargada(cancion, cuenta))
+            {
+                if (await DescargarCancion.Descargar(cancion, cuenta))
+                {
+                    MessageBox.Show(cancion.nombre + " se agregó a tu lista de descargas", "Realizado", MessageBoxButton.OK);
+                }
+                else
+                {
+                    MessageBox.Show("No hay conexión con el servidor", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                }
+            }
+            else
+            {
+                MessageBox.Show("La canción ya ha sido descargada anteriormente", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
         }
         private void Btn_Regresar_Click(object sender, RoutedEventArgs e)
