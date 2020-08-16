@@ -7,7 +7,7 @@ namespace Cliente_MusiCloud
     {
         public static HttpClient ApiCliente { get; set; }
         private const String PUERTO = "5000/";
-        private const String DIRECCION = "http://127.0.0.1";
+        private const String DIRECCION = "http://localhost";
         private ConexionApi() { }
 
         public static void Initialize()
