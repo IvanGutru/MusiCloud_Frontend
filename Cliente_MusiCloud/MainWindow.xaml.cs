@@ -24,7 +24,6 @@ namespace Cliente_MusiCloud
             ConexionApi.Initialize();
             ServidorReproduccion.ServidorReproduccion.Conectar();
             Reproductor.Initialize();
-            
         }
 
         private async void btn_iniciarSesion_Click(object sender, RoutedEventArgs e)

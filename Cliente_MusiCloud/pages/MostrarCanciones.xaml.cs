@@ -87,8 +87,17 @@ namespace Cliente_MusiCloud.pages
         {
             Button button = sender as Button;
             Cancion cancion = button.DataContext as Cancion;
-            await Reproductor.Reproducir(cancion);
-            SingletonReproductor.GetPaginaPrincipal().CargarInformacionAsync(cancion);
+            if (Reproductor.ValidarConexionCliente())
+            {
+                if(await Reproductor.Reproducir(cancion))
+                {
+                    SingletonReproductor.GetPaginaPrincipal().CargarInformacionAsync(cancion);
+                }
+            }
+            else
+            {
+                MessageBox.Show("No ha conexión con el cliente de Reproducción", "Advertencia", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
         }
 
 
@@ -153,8 +162,15 @@ namespace Cliente_MusiCloud.pages
         private void Btn_AgregarTodasLasCanciones_Click(object sender, RoutedEventArgs e)
         {
             Reproductor.ColaCanciones.Clear();
-            Reproductor.AgregarListaCancionesACola(listaCanciones);
-            SingletonReproductor.GetPaginaPrincipal().SiguienteCancion();
+            if (Reproductor.ValidarConexionCliente())
+            {
+                Reproductor.AgregarListaCancionesACola(listaCanciones);
+                SingletonReproductor.GetPaginaPrincipal().SiguienteCancion();
+            }
+            else
+            {
+                MessageBox.Show("No ha conexión con el cliente de Reproducción", "Advertencia", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
         }
         private async void btn_AñadirMegusta_Click(object sender, RoutedEventArgs e)
         {

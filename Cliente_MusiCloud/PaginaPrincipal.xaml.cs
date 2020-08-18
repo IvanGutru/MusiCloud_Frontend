@@ -3,6 +3,7 @@ using Cliente_MusiCloud.cuenta.Dominio;
 using Cliente_MusiCloud.pages;
 using Cliente_MusiCloud.playlist.aplicacion;
 using Cliente_MusiCloud.reproductor;
+using Cliente_MusiCloud.ServidorReproduccion;
 using Cliente_MusiCloud.utilidades;
 using System;
 using System.Windows;
@@ -55,7 +56,8 @@ namespace Cliente_MusiCloud
                 case "ItemBiblioteca":
                     centralFrame.Navigate(new Biblioteca());
                     break;
-                case "ItemGeneros":
+                case "ItemPlaylist":
+                    centralFrame.Navigate(new MostrarPlaylist());
                     break;
                 case "ItemModuloArtista":
                     centralFrame.Navigate(new GestionArtista());
@@ -72,8 +74,9 @@ namespace Cliente_MusiCloud
         {
             SingletonCuenta.SetCuenta(null);
             SingletonArtista.SetArtista(null);
-            MainWindow main = new MainWindow();
             PararCancion();
+            ServidorReproduccion.ServidorReproduccion.Desconectar();
+            MainWindow main = new MainWindow();
             main.Show();
             this.Close();
 
@@ -242,5 +245,9 @@ namespace Cliente_MusiCloud
             Salir();
         }
 
+        private void btn_Anterior_Click(object sender, RoutedEventArgs e)
+        {
+            Reproductor.ReiniciarCancion();
+        }
     }
 }

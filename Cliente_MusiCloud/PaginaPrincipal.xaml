@@ -92,7 +92,7 @@
                                 <Button Margin="0,2,0,0" Name="btn_Anterior"
                                 Style="{StaticResource MaterialDesignIconButton}"
                                 ToolTip="Anterior"
-                                Background="#1a1a1a">
+                                Background="#1a1a1a" Click="btn_Anterior_Click">
                                     <materialDesign:PackIcon Kind="SkipPrevious" />
                                 </Button>
                             </Grid>
@@ -189,6 +189,12 @@
                             <TextBlock Text="Artista" VerticalAlignment="Center"  Margin="20 10"/>
                         </StackPanel>
                     </ListViewItem>
+                    <ListViewItem x:Name="ItemPlaylist" Height="60">
+                        <StackPanel Orientation="Horizontal" ToolTip="Artista">
+                            <materialDesign:PackIcon Kind="PlaylistMusic" Height="25" Width="25" Margin="10"/>
+                            <TextBlock Text="Playlist" VerticalAlignment="Center"  Margin="20 10"/>
+                        </StackPanel>
+                    </ListViewItem>
                     <ListViewItem x:Name="ItemBiblioteca" Height="60" ToolTip="Biblioteca">
                         <StackPanel Orientation="Horizontal">
                             <materialDesign:PackIcon Kind="LibraryMusic" Height="25" Width="25" Margin="10"/>
@@ -207,9 +213,7 @@
                             <TextBlock Text="Géneros" VerticalAlignment="Center"  Margin="20 10"/>
                         </StackPanel>
                     </ListViewItem>
-                    <ListViewItem x:Name="Item" Height="60">
                    
-                    </ListViewItem>
                     <ListViewItem x:Name="Itm" Height="60">
 
                     </ListViewItem>

@@ -26,5 +26,16 @@ namespace Cliente_MusiCloud.ServidorReproduccion
 
             }
         }
+        public static void Desconectar()
+        {
+            try
+            {
+                client = null;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+        }
     }
 }

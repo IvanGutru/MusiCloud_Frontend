@@ -13,5 +13,6 @@ namespace Cliente_MusiCloud.playlist.dominio
         public string idCuenta { get; set; }
         public int idTipoPlaylist { get; set; }
         public BitmapImage imagenPortada { get; set; }
+        public string fechaPublicacion { get; set; }
     }
 }

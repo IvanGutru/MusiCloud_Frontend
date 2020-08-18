@@ -5,6 +5,7 @@ using Cliente_MusiCloud.artista.Dominio;
 using Cliente_MusiCloud.genero.aplicacion;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -24,6 +25,7 @@ namespace Cliente_MusiCloud.pages
             InitializeComponent();
             txt_textoAlbumes.Visibility = Visibility.Hidden;
             txt_nombreArtista.Visibility = Visibility.Hidden;
+            CargarArtistasInicio();
         }
 
 
@@ -38,7 +40,7 @@ namespace Cliente_MusiCloud.pages
             }
             else
             {
-                MessageBox.Show("Favor de ingresar un nombre de artista");
+                CargarArtistasInicio();
             }
 
 
@@ -54,6 +56,22 @@ namespace Cliente_MusiCloud.pages
                     artistalista.genero = await AplicacionGenero.ObtenerGeneroPorId(artistalista.idGenero);
                 }
                 listViewArtistas.ItemsSource = listaArtistas;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Ocurrió un error", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
+        }
+        private async void CargarArtistasInicio()
+        {
+            try
+            {
+                listaArtistas = await Aplicacion.ObtenerArtistaHome();
+                foreach (var artistasHome in listaArtistas)
+                {
+                    artistasHome.imagenPortadaArtista = await Aplicacion.ObtenerImagenArtista(artistasHome.portada);
+                }
+                listViewArtistas.ItemsSource = listaArtistas.OrderBy(artista => artista.nombre);
             }
             catch (Exception ex)
             {

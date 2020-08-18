@@ -27,6 +27,40 @@ namespace Cliente_MusiCloud.playlist.aplicacion
                 }
             }
         }
+        public static async Task<bool> EliminarPlaylistById(int idPlaylist)
+        {
+            string path = "Playlist/Eliminar/" + idPlaylist;
+            using (HttpResponseMessage respuesta = await ConexionApi.ApiCliente.DeleteAsync(path))
+            {
+                if (respuesta.IsSuccessStatusCode)
+                {
+                    return true;
+                }
+                else
+                {
+                    dynamic error = await respuesta.Content.ReadAsAsync<dynamic>();
+                    string mensaje = error.error;
+                    throw new Exception(mensaje);
+                }
+            }
+        }
+        public static async Task<bool> EliminarCancionDePlaylist(int idPlaylist, string idCancion)
+        {
+            string path = "Playlist/Eliminar/" + idPlaylist+"/"+idCancion;
+            using (HttpResponseMessage respuesta = await ConexionApi.ApiCliente.DeleteAsync(path))
+            {
+                if (respuesta.IsSuccessStatusCode)
+                {
+                    return true;
+                }
+                else
+                {
+                    dynamic error = await respuesta.Content.ReadAsAsync<dynamic>();
+                    string mensaje = error.error;
+                    throw new Exception(mensaje);
+                }
+            }
+        }
         public static async Task<List<Playlist>> ObtenerPlaylistSistema()
         {
             List<Playlist> listaPlaylist;
@@ -192,6 +226,44 @@ namespace Cliente_MusiCloud.playlist.aplicacion
                         return true;
                     }
                     return false;
+                }
+                else
+                {
+                    dynamic error = await respuesta.Content.ReadAsAsync<dynamic>();
+                    string mensaje = error.error;
+                    throw new Exception(mensaje);
+                }
+            }
+        }
+        public static async Task<List<Playlist>> ObtenerPlaylistPorNombre(string nombre)
+        {
+            List<Playlist> listaPlaylist;
+            string path = "Playlist/Publicas/"+nombre;
+            using (HttpResponseMessage respuesta = await ConexionApi.ApiCliente.GetAsync(path))
+            {
+                if (respuesta.IsSuccessStatusCode)
+                {
+                    listaPlaylist = await respuesta.Content.ReadAsAsync<List<Playlist>>();
+                    return listaPlaylist;
+                }
+                else
+                {
+                    dynamic error = await respuesta.Content.ReadAsAsync<dynamic>();
+                    string mensaje = error.error;
+                    throw new Exception(mensaje);
+                }
+            }
+        }
+        public static async Task<List<Playlist>> ObtenerPlaylistInicio()
+        {
+            List<Playlist> listaPlaylist;
+            string path = "Playlist/Inicio";
+            using (HttpResponseMessage respuesta = await ConexionApi.ApiCliente.GetAsync(path))
+            {
+                if (respuesta.IsSuccessStatusCode)
+                {
+                    listaPlaylist = await respuesta.Content.ReadAsAsync<List<Playlist>>();
+                    return listaPlaylist;
                 }
                 else
                 {

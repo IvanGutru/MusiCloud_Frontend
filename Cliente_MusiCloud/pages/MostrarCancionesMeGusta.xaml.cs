@@ -21,34 +21,22 @@ using System.Windows.Navigation;
 namespace Cliente_MusiCloud.pages
 {
     /// <summary>
-    /// Lógica de interacción para MostrarCancionesPlaylist.xaml
+    /// Lógica de interacción para MostrarCancionesMeGusta.xaml
     /// </summary>
-    public partial class MostrarCancionesPlaylist : Page
+    public partial class MostrarCancionesMeGusta : Page
     {
         Playlist playlist;
         Cuentas cuenta = SingletonCuenta.GetSingletonCuenta();
         List<Cancion> listaCanciones;
         List<PlaylistCanciones> listaPlaylistCanciones;
-        public MostrarCancionesPlaylist(Playlist playlistRecibida)
-        {
-            InitializeComponent();
-            this.playlist = playlistRecibida;
-            CargarInformacionPlaylist();
-            CargarCancionesPlaylistAsync();
-            this.listaCanciones = new List<Cancion>();
-            Btn_RegresarAHome.Visibility = Visibility.Hidden;
-
-        }
-        public MostrarCancionesPlaylist(Playlist playlist, int tipoPlaylist)
+        public MostrarCancionesMeGusta(Playlist playlist)
         {
             InitializeComponent();
             this.playlist = playlist;
             this.listaCanciones = new List<Cancion>();
-            CargarInformacionPlaylist();
             CargarCancionesPlaylistAsync();
-            OcultarCamposParaHome();
+            CargarInformacionPlaylist();
         }
-
         private async void CargarCancionesPlaylistAsync()
         {
             try
@@ -89,7 +77,6 @@ namespace Cliente_MusiCloud.pages
             }
             return listaCanciones;
         }
-
         private async Task<List<PlaylistCanciones>> ObtenerPlaylistCanciones()
         {
             try
@@ -103,23 +90,6 @@ namespace Cliente_MusiCloud.pages
             }
             return null;
         }
-
-        private void CargarInformacionPlaylist()
-        {
-            txt_NombreCreador.Text = cuenta.nombreUsuario;
-            txt_NombrePlaylist.Text = playlist.nombre;
-            txt_TipoPlaylist.Text = ObtenerTipoPlaylist();
-            portadaAlbum.Source = playlist.imagenPortada;
-        }
-        private string ObtenerTipoPlaylist()
-        {
-            if (playlist.publica)
-            {
-                return "Publica";
-            }
-            return "Privada";
-        }
-
         private async void btn_Reproducir_Click(object sender, RoutedEventArgs e)
         {
             Button button = sender as Button;
@@ -134,6 +104,22 @@ namespace Cliente_MusiCloud.pages
                 MessageBox.Show("No ha conexión con el cliente de Reproducción", "Advertencia", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
 
+        }
+      
+        private void CargarInformacionPlaylist()
+        {
+            txt_NombreCreador.Text = cuenta.nombreUsuario;
+            txt_NombrePlaylist.Text = playlist.nombre;
+            txt_TipoPlaylist.Text = ObtenerTipoPlaylist();
+            portadaAlbum.Source = playlist.imagenPortada;
+        }
+        private string ObtenerTipoPlaylist()
+        {
+            if (playlist.publica)
+            {
+                return "Publica";
+            }
+            return "Privada";
         }
 
         private void btn_agregarCola_Click(object sender, RoutedEventArgs e)
@@ -212,36 +198,6 @@ namespace Cliente_MusiCloud.pages
                 MessageBox.Show("No ha conexión con el cliente de Reproducción", "Advertencia", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
         }
-
-        private void Btn_RegresarAHome_Click(object sender, RoutedEventArgs e)
-        {
-            NavigationService.Navigate(new Home());
-        }
-
-        private async void btn_AñadirMegusta_Click(object sender, RoutedEventArgs e)
-        {
-            Button button = sender as Button;
-            Cancion cancion = button.DataContext as Cancion;
-            try
-            {
-                if (!await AplicacionPlaylist.ValidarCancionEnMeGusta(cancion.idCancion, cuenta.idCuenta))
-                {
-                    if (await AplicacionPlaylist.AgregarMeGusta(cancion.idCancion, cuenta.idCuenta))
-                    {
-                        cancion.meGusta = true;
-                        MessageBox.Show("Canción añadida a tus Me gusta", "Realizado", MessageBoxButton.OK);
-                    }
-                }
-                else
-                {
-                    MessageBox.Show("La canción seleccionada ya se encuentra en tus Me gusta", "Ocurrió un error", MessageBoxButton.OK, MessageBoxImage.Warning);
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Ocurrió un error", MessageBoxButton.OK, MessageBoxImage.Warning);
-            }
-        }
         private async void btn_descargarCancion_Click(object sender, RoutedEventArgs e)
         {
             Button button = sender as Button;
@@ -266,83 +222,5 @@ namespace Cliente_MusiCloud.pages
         {
             NavigationService.Navigate(new Biblioteca());
         }
-
-        private async void Btn_EliminarPlaylist_Click(object sender, RoutedEventArgs e)
-        {
-            MessageBoxResult messageBoxResult = MessageBox.Show("¿Está seguro de eliminar la playlist?", "Eliminar Playlist", MessageBoxButton.OKCancel);
-            if (messageBoxResult == MessageBoxResult.OK)
-            {
-                if (await EliminarPlaylist())
-                {
-                    MessageBox.Show("Playlist Eliminada con éxito", "Realizado");
-                    NavigationService.Navigate(new Biblioteca());
-                }
-
-            }
-        }
-        private async Task<bool> EliminarPlaylist()
-        {
-            try
-            {
-                if (await AplicacionPlaylist.EliminarPlaylistById(playlist.idPlaylist))
-                {
-                    return true;
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Ocurrió un error", MessageBoxButton.OK, MessageBoxImage.Warning);
-            }
-
-            return false;
-        }
-
-        private async void btn_eliminarDePlaylist_Click(object sender, RoutedEventArgs e)
-        {
-            
-            MessageBoxResult messageBoxResult = MessageBox.Show("¿Está seguro de eliminar la cancion de "+playlist.nombre+"?", "Eliminar Canción", MessageBoxButton.OKCancel);
-            if (messageBoxResult == MessageBoxResult.OK)
-            {
-                Cancion cancion = ObtenerCancionSeleccionada();
-                if (cancion !=null)
-                {
-                    if (await ElimnarCancionDePlaylist(cancion.idCancion))
-                    {
-                        MessageBox.Show("Canción eliminada con éxito", "Realizado");
-                        NavigationService.Navigate(new MostrarCancionesPlaylist(playlist));
-                    }
-                }
-                else
-                {
-                    MessageBox.Show("Debe seleccionar una canción de la lista", "Realizado");
-                }
-            }
-
-        }
-        private async Task<bool> ElimnarCancionDePlaylist(string idCancion)
-        {
-            try
-            {
-                return await AplicacionPlaylist.EliminarCancionDePlaylist(playlist.idPlaylist,idCancion);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Ocurrió un error", MessageBoxButton.OK, MessageBoxImage.Warning);
-            }
-            return false;
-        }
-        private Cancion ObtenerCancionSeleccionada()
-        {
-            Cancion cancionSeleccionda = (Cancion)listView_Canciones.SelectedItem;
-            return cancionSeleccionda;
-        }
-
-        private void OcultarCamposParaHome()
-        {
-            Btn_Regresar.Visibility = Visibility.Hidden;
-            Btn_EliminarPlaylist.Visibility = Visibility.Hidden;
-            Btn_EliminarCancionDePlaylist.Visibility = Visibility.Hidden;
-        }
     }
 }
-
