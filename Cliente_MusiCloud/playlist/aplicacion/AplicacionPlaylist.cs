@@ -23,7 +23,7 @@ namespace Cliente_MusiCloud.playlist.aplicacion
                 {
                     dynamic error = await respuesta.Content.ReadAsAsync<dynamic>();
                     string mensaje = error.error;
-                    throw new Exception(mensaje);
+                    throw new FormatException(mensaje);
                 }
             }
         }
@@ -40,7 +40,7 @@ namespace Cliente_MusiCloud.playlist.aplicacion
                 {
                     dynamic error = await respuesta.Content.ReadAsAsync<dynamic>();
                     string mensaje = error.error;
-                    throw new Exception(mensaje);
+                    throw new FormatException(mensaje);
                 }
             }
         }
@@ -57,7 +57,7 @@ namespace Cliente_MusiCloud.playlist.aplicacion
                 {
                     dynamic error = await respuesta.Content.ReadAsAsync<dynamic>();
                     string mensaje = error.error;
-                    throw new Exception(mensaje);
+                    throw new FormatException(mensaje);
                 }
             }
         }
@@ -76,7 +76,7 @@ namespace Cliente_MusiCloud.playlist.aplicacion
                 {
                     dynamic error = await respuesta.Content.ReadAsAsync<dynamic>();
                     string mensaje = error.error;
-                    throw new Exception(mensaje);
+                    throw new FormatException(mensaje);
                 }
             }
         }
@@ -95,7 +95,7 @@ namespace Cliente_MusiCloud.playlist.aplicacion
                 {
                     dynamic error = await respuesta.Content.ReadAsAsync<dynamic>();
                     string mensaje = error.error;
-                    throw new Exception(mensaje);
+                    throw new FormatException(mensaje);
                 }
             }
         }
@@ -114,7 +114,7 @@ namespace Cliente_MusiCloud.playlist.aplicacion
                 {
                     dynamic error = await respuesta.Content.ReadAsAsync<dynamic>();
                     string mensaje = error.error;
-                    throw new Exception(mensaje);
+                    throw new FormatException(mensaje);
                 }
             }
         }
@@ -134,7 +134,7 @@ namespace Cliente_MusiCloud.playlist.aplicacion
                 {
                     dynamic error = await respuesta.Content.ReadAsAsync<dynamic>();
                     string mensaje = error.error;
-                    throw new Exception(mensaje);
+                    throw new FormatException(mensaje);
                 }
             }
         }
@@ -157,7 +157,7 @@ namespace Cliente_MusiCloud.playlist.aplicacion
                 {
                     dynamic error = await respuesta.Content.ReadAsAsync<dynamic>();
                     string mensaje = error.error;
-                    throw new Exception(mensaje);
+                    throw new FormatException(mensaje);
                 }
             }
         }
@@ -174,7 +174,7 @@ namespace Cliente_MusiCloud.playlist.aplicacion
                 {
                     dynamic error = await respuesta.Content.ReadAsAsync<dynamic>();
                     string mensaje = error.error;
-                    throw new Exception(mensaje);
+                    throw new FormatException(mensaje);
                 }
             }
         }
@@ -191,7 +191,7 @@ namespace Cliente_MusiCloud.playlist.aplicacion
                 {
                     dynamic error = await respuesta.Content.ReadAsAsync<dynamic>();
                     string mensaje = error.error;
-                    throw new Exception(mensaje);
+                    throw new FormatException(mensaje);
                 }
             }
         }
@@ -208,7 +208,7 @@ namespace Cliente_MusiCloud.playlist.aplicacion
                 {
                     dynamic error = await respuesta.Content.ReadAsAsync<dynamic>();
                     string mensaje = error.error;
-                    throw new Exception(mensaje);
+                    throw new FormatException(mensaje);
                 }
             }
         }
@@ -231,7 +231,7 @@ namespace Cliente_MusiCloud.playlist.aplicacion
                 {
                     dynamic error = await respuesta.Content.ReadAsAsync<dynamic>();
                     string mensaje = error.error;
-                    throw new Exception(mensaje);
+                    throw new FormatException(mensaje);
                 }
             }
         }
@@ -250,7 +250,7 @@ namespace Cliente_MusiCloud.playlist.aplicacion
                 {
                     dynamic error = await respuesta.Content.ReadAsAsync<dynamic>();
                     string mensaje = error.error;
-                    throw new Exception(mensaje);
+                    throw new FormatException(mensaje);
                 }
             }
         }
@@ -269,7 +269,7 @@ namespace Cliente_MusiCloud.playlist.aplicacion
                 {
                     dynamic error = await respuesta.Content.ReadAsAsync<dynamic>();
                     string mensaje = error.error;
-                    throw new Exception(mensaje);
+                    throw new FormatException(mensaje);
                 }
             }
         }

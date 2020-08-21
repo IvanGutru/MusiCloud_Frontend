@@ -23,7 +23,7 @@ namespace Cliente_MusiCloud.Cuenta
                 {
                     dynamic error = await response.Content.ReadAsAsync<dynamic>();
                     string mensaje = error.error;
-                    throw new Exception(mensaje);
+                    throw new FormatException(mensaje);
                 }
 
             }
@@ -41,7 +41,7 @@ namespace Cliente_MusiCloud.Cuenta
                 {
                     dynamic error = await response.Content.ReadAsAsync<dynamic>();
                     string mensaje = error.error;
-                    throw new Exception(mensaje);
+                    throw new FormatException(mensaje);
 
                 }
             }

@@ -30,7 +30,7 @@ namespace Cliente_MusiCloud
                         bool respuesta = await Aplicacion.CrearCuenta(cuenta);
                         if (respuesta)
                         {
-                            MessageBox.Show("Se ha realizado el registro con éxtio");
+                            MessageBox.Show("Se ha realizado el registro con éxito");
                             MainWindow mainWindow = new MainWindow();
                             mainWindow.Show();
                             this.Close();

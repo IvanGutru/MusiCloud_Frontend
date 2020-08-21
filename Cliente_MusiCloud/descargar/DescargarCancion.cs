@@ -3,12 +3,8 @@ using Cliente_MusiCloud.cuenta.Dominio;
 using Cliente_MusiCloud.playlist.aplicacion;
 using Cliente_MusiCloud.reproductor;
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-using System.Windows;
 
 namespace Cliente_MusiCloud.descargar
 {

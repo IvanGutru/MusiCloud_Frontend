@@ -33,9 +33,9 @@ namespace Cliente_MusiCloud.reproductor
         {
             try
             {
-                var trackAudio = await ServidorReproduccion.ServidorReproduccion.client.ObtenerCancionAsync(cancion.archivo);
+                var audioCancion = await ServidorReproduccion.ServidorReproduccion.client.ObtenerCancionAsync(cancion.archivo);
                 Reproductor.PararReproduccion();
-                Mp3FileReader mp3Reader = new Mp3FileReader(new MemoryStream(trackAudio.Audio));
+                Mp3FileReader mp3Reader = new Mp3FileReader(new MemoryStream(audioCancion.Audio));
                 waveStream = new WaveChannel32(mp3Reader);
                 waveOutEvent.Init(waveStream);
                 cancionLista = true;
