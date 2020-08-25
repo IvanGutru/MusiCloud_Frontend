@@ -28,14 +28,19 @@ namespace Cliente_MusiCloud.reproductor
             ColaCanciones = new Queue<Cancion>();
             ServidorReproduccion.ServidorReproduccion.Conectar(); 
         }
-
+        /// <summary>
+        /// Obtiene el archivo de audio del servidor de reproducción
+        /// E inicia la reproducción del archivo mp3
+        /// </summary>
+        /// <param name="cancion"> canción que se seleccionó para reproducirse</param>
+        /// <returns> true si la canción comenzó a reproducirse y false si ocurrió un error</returns>
         public static async Task<bool> Reproducir(Cancion cancion)
         {
             try
             {
-                var trackAudio = await ServidorReproduccion.ServidorReproduccion.client.ObtenerCancionAsync(cancion.archivo);
+                var audioCancion = await ServidorReproduccion.ServidorReproduccion.client.ObtenerCancionAsync(cancion.archivo);
                 Reproductor.PararReproduccion();
-                Mp3FileReader mp3Reader = new Mp3FileReader(new MemoryStream(trackAudio.Audio));
+                Mp3FileReader mp3Reader = new Mp3FileReader(new MemoryStream(audioCancion.Audio));
                 waveStream = new WaveChannel32(mp3Reader);
                 waveOutEvent.Init(waveStream);
                 cancionLista = true;
@@ -50,6 +55,11 @@ namespace Cliente_MusiCloud.reproductor
                 return false;
             }
         }
+        /// <summary>
+        /// Obtiene el archivo que se ha guardado localmente para su reproducción
+        /// </summary>
+        /// <param name="cancion"> Que ha sido seleccionada para reproducirse</param>
+        /// <returns>true si la cnación comeó a reproducirse y fasle si oucrrió un error</returns>
         public static async Task<bool> ReproducirOffline(Cancion cancion)
         {
             try

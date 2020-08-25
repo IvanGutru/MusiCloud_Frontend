@@ -118,6 +118,18 @@
                             ToolTip="Reproducir todas las canciones" Click="Btn_AgregarTodasLasCanciones_Click" >
                         <materialDesign:PackIcon Kind="MusicNoteAdd" Height="24" Width="24" />
                     </Button>
+                    <Button x:Name="Btn_EliminarCancionDePlaylist" 
+                            VerticalAlignment="Top" Margin="0,98,0,0" Background="#262626"  BorderBrush="#34f7c3"
+                            Style="{StaticResource MaterialDesignFloatingActionAccentButton}"
+                            ToolTip="Elimnar canción de playlist" Click="btn_eliminarDePlaylist_Click"  >
+                        <materialDesign:PackIcon Kind="TrashCanOutline" Height="24" Width="24" />
+                    </Button>
+                    <Button x:Name="Btn_EliminarPlaylist" 
+                            VerticalAlignment="Top" Margin="0,358,0,0" Background="#262626"  BorderBrush="#34f7c3"
+                            Style="{StaticResource MaterialDesignFloatingActionAccentButton}"
+                            ToolTip="Elimnar playlist" Click="Btn_EliminarPlaylist_Click"  >
+                        <materialDesign:PackIcon Kind="Trash" Height="24" Width="24" />
+                    </Button>
                 </Grid>
 
             </Grid>

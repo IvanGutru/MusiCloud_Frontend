@@ -73,8 +73,15 @@ namespace Cliente_MusiCloud.pages
             Button button = sender as Button;
             BibliotecaPropia bibliotecaPropia = button.DataContext as BibliotecaPropia;
             Cancion cancion = CrearCancion(bibliotecaPropia);
-            await Reproductor.Reproducir(cancion);
-            SingletonReproductor.GetPaginaPrincipal().CargarInformacionAsync(cancion);
+            if (Reproductor.ValidarConexionCliente())
+            {
+                await Reproductor.Reproducir(cancion);
+                SingletonReproductor.GetPaginaPrincipal().CargarInformacionAsync(cancion);
+            }
+            else
+            {
+                MessageBox.Show("No ha conexión con el cliente de Reproducción", "Advertencia", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
         }
 
 
@@ -107,15 +114,32 @@ namespace Cliente_MusiCloud.pages
 
         private void Btn_AgregarTodasLasCanciones_Click(object sender, RoutedEventArgs e)
         {
-            Reproductor.ColaCanciones.Clear();
-            List<Cancion> listaCanciones = new List<Cancion>();
-            foreach (var cancionBiblioteca in listaCancionesBiblioteca)
+            try
             {
-                Cancion cancion = CrearCancion(cancionBiblioteca);
-                listaCanciones.Add(cancion);
+                Reproductor.ColaCanciones.Clear();
+                if (Reproductor.ValidarConexionCliente())
+                {
+                    List<Cancion> listaCanciones = new List<Cancion>();
+                    foreach (var cancionBiblioteca in listaCancionesBiblioteca)
+                    {
+                        Cancion cancion = CrearCancion(cancionBiblioteca);
+                        listaCanciones.Add(cancion);
+                    }
+                    Reproductor.AgregarListaCancionesACola(listaCanciones);
+                    SingletonReproductor.GetPaginaPrincipal().SiguienteCancion();
+                }
+                else
+                {
+                    MessageBox.Show("No ha conexión con el cliente de Reproducción", "Advertencia", MessageBoxButton.OK, MessageBoxImage.Warning);
+                }
+                
             }
-            Reproductor.AgregarListaCancionesACola(listaCanciones);
-            SingletonReproductor.GetPaginaPrincipal().SiguienteCancion();
+            catch (Exception ex)
+            {
+                MessageBox.Show("No hay canciones agregadas","Advertencia",MessageBoxButton.OK,MessageBoxImage.Warning);
+                Console.WriteLine(ex.Message);
+            }
+           
         }
     }
 }

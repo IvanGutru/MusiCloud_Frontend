@@ -61,7 +61,7 @@ namespace Cliente_MusiCloud.pages
         private Playlist CrearPlaylistIngresada()
         {
 
-            Playlist playlist = new Playlist
+            Playlist nuevaPlaylist = new Playlist
             {
                 nombre = txt_NombrePlaylist.Text,
                 publica = EsPlaylistPublica(),
@@ -71,7 +71,7 @@ namespace Cliente_MusiCloud.pages
                 idTipoPlaylist = ObtenerValorTipoPlaylist()
                
             };
-            return playlist;
+            return nuevaPlaylist;
         }
 
         private int ObtenerValorTipoPlaylist()
@@ -84,12 +84,11 @@ namespace Cliente_MusiCloud.pages
         }
         private String ObtenerPortada()
         {
-            string portadaPlaylist;
             if (pathAbsolutoImagen !=null)
             { 
-              return portadaPlaylist = CodificacionImagenes.CodificarBase64(pathAbsolutoImagen);     
+              return  CodificacionImagenes.CodificarBase64(pathAbsolutoImagen);     
             }
-                return portadaPlaylist ="";
+              return "";
         }
         private bool ValidarNombrePlaylist()
         {

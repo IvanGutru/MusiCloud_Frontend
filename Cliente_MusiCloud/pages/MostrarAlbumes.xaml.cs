@@ -1,5 +1,6 @@
 ﻿using Cliente_MusiCloud.album.aplicacion;
 using Cliente_MusiCloud.album.dominio;
+using Cliente_MusiCloud.artista.aplicacion;
 using Cliente_MusiCloud.cancion.aplicacion;
 using Cliente_MusiCloud.cancion.dominio;
 using Cliente_MusiCloud.cuenta.Dominio;
@@ -10,6 +11,7 @@ using Cliente_MusiCloud.reproductor;
 using Cliente_MusiCloud.utilidades;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -22,37 +24,65 @@ namespace Cliente_MusiCloud.pages
     public partial class MostrarAlbumes : Page
     {
         List<Cancion> listaCanciones;
+        List<Album> listaAlbumes;
         Album album;
         Cuentas cuenta = SingletonCuenta.GetSingletonCuenta();
 
         public MostrarAlbumes()
         {
             InitializeComponent();
+            CargarAlbumesInicio();
         }
 
-        private async void Btn_Buscar_Click(object sender, RoutedEventArgs e)
+        private void Btn_Buscar_Click(object sender, RoutedEventArgs e)
         {
             if (ValidarCampoVacio())
             {
-                try
-                {
-                    string nombreAlbum = txt_NombreAlbum.Text;
-                    List<Album> listaAlbumes = await AplicacionAlbum.ObtenerAlbumPorNombre(nombreAlbum);
-                    foreach (var albumes in listaAlbumes)
-                    {
-                        albumes.imagenPortadaAlbum = await AplicacionAlbum.ObtenerImagenAlbum(albumes.portada);
-                        albumes.fechalanzamiento = albumes.fechaRegistro.ToShortDateString();
-                        albumes.genero = await AplicacionGenero.ObtenerGeneroPorId(albumes.idGenero);
-                        
-                    }
-                    listViewAlbumes.ItemsSource = listaAlbumes;
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message, "Ocurrió un error", MessageBoxButton.OK, MessageBoxImage.Warning);
-                }
+                string nombreAlbum = txt_NombreAlbum.Text;
+                CargarAlbumesPorNombre(nombreAlbum);
+            }
+            else
+            {
+                CargarAlbumesInicio();
             }
    
+        }
+        private async void CargarAlbumesPorNombre(string nombre)
+        {
+            try
+            {
+                listaAlbumes = await AplicacionAlbum.ObtenerAlbumPorNombre(nombre);
+                foreach (var albumes in listaAlbumes)
+                {
+                    albumes.imagenPortadaAlbum = await AplicacionAlbum.ObtenerImagenAlbum(albumes.portada);
+                    albumes.fechalanzamiento = albumes.fechaRegistro.ToShortDateString();
+                    albumes.genero = await AplicacionGenero.ObtenerGeneroPorId(albumes.idGenero);
+
+                }
+                listViewAlbumes.ItemsSource = listaAlbumes;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Ocurrió un error", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
+        }
+        private async void CargarAlbumesInicio()
+        {
+            try
+            {
+                listaAlbumes = await AplicacionAlbum.ObtenerAlbumHome();
+                foreach (var albumHome in listaAlbumes)
+                {
+                    albumHome.imagenPortadaAlbum = await Aplicacion.ObtenerImagenArtista(albumHome.portada);
+                    albumHome.fechalanzamiento = albumHome.fechaRegistro.ToShortDateString();
+                    albumHome.genero = await AplicacionGenero.ObtenerGeneroPorId(albumHome.idGenero);
+                }
+                listViewAlbumes.ItemsSource = listaAlbumes.OrderBy(album => album.nombre);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Ocurrió un error", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
         }
 
         private bool ValidarCampoVacio()
@@ -96,8 +126,15 @@ namespace Cliente_MusiCloud.pages
         {
             Button button = sender as Button;
             Cancion cancion = button.DataContext as Cancion;
-            await Reproductor.Reproducir(cancion);
-            SingletonReproductor.GetPaginaPrincipal().CargarInformacionAsync(cancion);
+            if (Reproductor.ValidarConexionCliente())
+            {
+                await Reproductor.Reproducir(cancion);
+                SingletonReproductor.GetPaginaPrincipal().CargarInformacionAsync(cancion);
+            }
+            else
+            {
+                MessageBox.Show("No ha conexión con el cliente de Reproducción", "Advertencia", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
         }
 
 
@@ -160,8 +197,16 @@ namespace Cliente_MusiCloud.pages
         private void Btn_AgregarTodasLasCanciones_Click(object sender, RoutedEventArgs e)
         {
             Reproductor.ColaCanciones.Clear();
-            Reproductor.AgregarListaCancionesACola(listaCanciones);
-            SingletonReproductor.GetPaginaPrincipal().SiguienteCancion();
+            if (Reproductor.ValidarConexionCliente())
+            {
+                Reproductor.AgregarListaCancionesACola(listaCanciones);
+                SingletonReproductor.GetPaginaPrincipal().SiguienteCancion();
+            }
+            else
+            {
+                MessageBox.Show("No ha conexión con el cliente de Reproducción", "Advertencia", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
+            
         }
         private async void btn_AñadirMegusta_Click(object sender, RoutedEventArgs e)
         {

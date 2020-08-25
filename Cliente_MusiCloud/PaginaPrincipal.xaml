@@ -92,7 +92,7 @@
                                 <Button Margin="0,2,0,0" Name="btn_Anterior"
                                 Style="{StaticResource MaterialDesignIconButton}"
                                 ToolTip="Anterior"
-                                Background="#1a1a1a">
+                                Background="#1a1a1a" Click="btn_Anterior_Click">
                                     <materialDesign:PackIcon Kind="SkipPrevious" />
                                 </Button>
                             </Grid>
@@ -171,7 +171,7 @@
                 </Grid>
 
                 <ListView x:Name="ListViewMenu" Foreground="#34f7c3" ScrollViewer.HorizontalScrollBarVisibility="Disabled" SelectionChanged="ListViewMenu_SelectionChanged"  >
-                    <ListViewItem x:Name="ItemHome" Height="60" Background="{x:Null}" Selected="ItemHome_Selected">
+                    <ListViewItem x:Name="ItemHome" Height="60" Background="{x:Null}">
                         <StackPanel Orientation="Horizontal">
                             <materialDesign:PackIcon Kind="Home" Height="25" Width="25" Margin="10" ToolTip="Inicio"/>
                             <TextBlock Text="Inicio" VerticalAlignment="Center" Margin="20 10"/>
@@ -189,7 +189,13 @@
                             <TextBlock Text="Artista" VerticalAlignment="Center"  Margin="20 10"/>
                         </StackPanel>
                     </ListViewItem>
-                    <ListViewItem x:Name="ItemBiblioteca" Height="60" ToolTip="Biblioteca" Selected="ItemBiblioteca_Selected">
+                    <ListViewItem x:Name="ItemPlaylist" Height="60">
+                        <StackPanel Orientation="Horizontal" ToolTip="Artista">
+                            <materialDesign:PackIcon Kind="PlaylistMusic" Height="25" Width="25" Margin="10"/>
+                            <TextBlock Text="Playlist" VerticalAlignment="Center"  Margin="20 10"/>
+                        </StackPanel>
+                    </ListViewItem>
+                    <ListViewItem x:Name="ItemBiblioteca" Height="60" ToolTip="Biblioteca">
                         <StackPanel Orientation="Horizontal">
                             <materialDesign:PackIcon Kind="LibraryMusic" Height="25" Width="25" Margin="10"/>
                             <TextBlock Text="Biblioteca" VerticalAlignment="Center"  Margin="20 10"/>
@@ -207,9 +213,7 @@
                             <TextBlock Text="Géneros" VerticalAlignment="Center"  Margin="20 10"/>
                         </StackPanel>
                     </ListViewItem>
-                    <ListViewItem x:Name="Item" Height="60">
                    
-                    </ListViewItem>
                     <ListViewItem x:Name="Itm" Height="60">
 
                     </ListViewItem>
@@ -223,10 +227,12 @@
                         </StackPanel>
                     </ListViewItem>
                     <ListViewItem x:Name="ItemM" Height="60">
-
+                       
                     </ListViewItem>
                 </ListView>
             </StackPanel>
         </Grid>
+        
+
     </Grid>
 </Window>

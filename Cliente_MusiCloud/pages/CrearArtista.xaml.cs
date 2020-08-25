@@ -146,7 +146,7 @@ namespace Cliente_MusiCloud.pages
 
         private async Task<Artista> ObtenerInformacionArtistaAsync()
         {
-            Artista artista = new Artista
+            Artista nuevoArtista = new Artista
             {
                 nombre = txt_NombreArtista.Text,
                 descripcion = txt_DescripcionArtista.Text,
@@ -154,7 +154,7 @@ namespace Cliente_MusiCloud.pages
                 portada = ObtenerPortada(),
                 idGenero = await ObtenerIdGeneroAsync()
             };
-            return artista;
+            return nuevoArtista;
     
         }
 

@@ -10,7 +10,9 @@ namespace Cliente_MusiCloud.ServidorReproduccion
         public static ServicioReproduccion.Client client;
 
         public ServidorReproduccion() { }
-
+        /// <summary>
+        /// Inicializa la conexión con nuestro servidor de reproducción
+        /// </summary>
         public static void Conectar()
         {
             try
@@ -24,6 +26,20 @@ namespace Cliente_MusiCloud.ServidorReproduccion
             {
                 Console.WriteLine(ex.Message);
 
+            }
+        }
+        /// <summary>
+        /// Cierra la conexión con nuestro servidor de reproducción
+        /// </summary>
+        public static void Desconectar()
+        {
+            try
+            {
+                client = null;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
             }
         }
     }

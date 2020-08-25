@@ -32,6 +32,7 @@ namespace Cliente_MusiCloud.pages
         private List<Cancion> listaCancionesHistorial;
         private const int BIBLIOTECAPROPIA = 5;
         private const int MUSICADESCARGADA = 4;
+        private const int MEGUSTA = 3;
 
         public Biblioteca()
         {
@@ -72,7 +73,6 @@ namespace Cliente_MusiCloud.pages
                         cancionDeHistorial.genero = await AplicacionGenero.ObtenerGeneroPorId(cancionDeHistorial.album.idGenero);
                         cancionDeHistorial.meGusta = await AplicacionPlaylist.ValidarCancionEnMeGusta(cancionDeHistorial.idCancion,cuenta.idCuenta);
                         listaCancionesHistorial.Add(cancionDeHistorial);
-                        
                     }
                     foreach (var cancionDeLista in listaCancionesHistorial)
                     {
@@ -108,17 +108,33 @@ namespace Cliente_MusiCloud.pages
         {
             Button button = sender as Button;
             Cancion cancion = button.DataContext as Cancion;
-            await Reproductor.Reproducir(cancion);
-            SingletonReproductor.GetPaginaPrincipal().CargarInformacionAsync(cancion);
+            if (Reproductor.ValidarConexionCliente())
+            {
+                await Reproductor.Reproducir(cancion);
+                SingletonReproductor.GetPaginaPrincipal().CargarInformacionAsync(cancion);
+            }
+            else
+            {
+                MessageBox.Show("No ha conexión con el cliente de Reproducción", "Advertencia", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
+           
         }
 
 
         private void btn_agregarCola_Click(object sender, RoutedEventArgs e)
         {
-            Button button = sender as Button;
-            Cancion cancion = button.DataContext as Cancion;
-            Reproductor.AgregarCancionACola(cancion);
-            NavigationService.Refresh();
+            try
+            {
+                Button button = sender as Button;
+                Cancion cancion = button.DataContext as Cancion;
+                Reproductor.AgregarCancionACola(cancion);
+                NavigationService.Refresh();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+
         }
 
         private void btn_agregarSiguiente_Click(object sender, RoutedEventArgs e)
@@ -126,6 +142,7 @@ namespace Cliente_MusiCloud.pages
             Button button = sender as Button;
             Cancion cancion = button.DataContext as Cancion;
             Reproductor.AgregarSiguienteACola(cancion);
+            
         }
 
         private void btn_agregarAPlaylist_Click(object sender, RoutedEventArgs e)
@@ -163,6 +180,7 @@ namespace Cliente_MusiCloud.pages
                 Reproductor.AgregarListaCancionesACola(listaCancionesParaRadio);
                 SingletonReproductor.GetPaginaPrincipal().SiguienteCancion();
                 MessageBox.Show("Se ha generado tu radio y se ha agregado a la cola de reproducción", "Acción completada", MessageBoxButton.OK);
+                NavigationService.Refresh();
             }
             catch (Exception ex)
             {
@@ -173,19 +191,26 @@ namespace Cliente_MusiCloud.pages
         private void listViewMisPlaylist_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             Playlist playlistSeleccionada = (Playlist)listViewMisPlaylist.SelectedItem;
-
-            if (playlistSeleccionada.idTipoPlaylist == BIBLIOTECAPROPIA)
+            if (playlistSeleccionada !=null)
             {
-                NavigationService.Navigate(new BibliotecaPropiaPage(playlistSeleccionada));
+                if (playlistSeleccionada.idTipoPlaylist == BIBLIOTECAPROPIA)
+                {
+                    NavigationService.Navigate(new BibliotecaPropiaPage(playlistSeleccionada));
+                }
+                else if (playlistSeleccionada.idTipoPlaylist == MUSICADESCARGADA)
+                {
+                    NavigationService.Navigate(new MostrarCancionesDescargadas(playlistSeleccionada));
+                }
+                else if(playlistSeleccionada.idPlaylist == MEGUSTA)
+                {
+                    NavigationService.Navigate(new MostrarCancionesMeGusta(playlistSeleccionada));
+                }
+                else
+                {
+                    NavigationService.Navigate(new MostrarCancionesPlaylist(playlistSeleccionada));
+                }
             }
-            else if(playlistSeleccionada.idTipoPlaylist == MUSICADESCARGADA)
-            {
-                NavigationService.Navigate(new MostrarCancionesDescargadas(playlistSeleccionada));
-            }
-            else
-            {
-                NavigationService.Navigate(new MostrarCancionesPlaylist(playlistSeleccionada));
-            }
+          
         }
         private async void btn_AñadirMegusta_Click(object sender, RoutedEventArgs e)
         {

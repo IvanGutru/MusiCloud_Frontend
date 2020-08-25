@@ -5,6 +5,7 @@ using Cliente_MusiCloud.artista.Dominio;
 using Cliente_MusiCloud.genero.aplicacion;
 using Cliente_MusiCloud.playlist.aplicacion;
 using Cliente_MusiCloud.playlist.dominio;
+using Cliente_MusiCloud.ServidorReproduccion;
 using System;
 using System.Collections.Generic;
 using System.Windows;
@@ -27,6 +28,7 @@ namespace Cliente_MusiCloud.pages
             CargarPlaylistSistemaAsync();
             CargarArtistas();
             CargarAlbumes();
+            ServidorReproduccion.ServidorReproduccion.Conectar();
         }
 
         private async void CargarPlaylistSistemaAsync()
@@ -89,23 +91,37 @@ namespace Cliente_MusiCloud.pages
         private async void listViewAlbum_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
             Album albumSeleccionado = (Album)listViewAlbum.SelectedItem;
-            try
+            if (albumSeleccionado!=null)
             {
-                Artista artista = await Aplicacion.ObtenerArtistaPorId(albumSeleccionado.idArtista);
-                albumSeleccionado.artista = artista;
-                NavigationService.Navigate(new MostrarCanciones(albumSeleccionado));
+                try
+                {
+                    Artista artista = await Aplicacion.ObtenerArtistaPorId(albumSeleccionado.idArtista);
+                    albumSeleccionado.artista = artista;
+                    NavigationService.Navigate(new MostrarCanciones(albumSeleccionado));
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "Ocurrió un error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                }
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Ocurrió un error", MessageBoxButton.OK, MessageBoxImage.Warning);
-            }
-           
         }
 
         private void listViewPlaylistSistema_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
             Playlist playlistSeleccionda = (Playlist)listViewPlaylistSistema.SelectedItem;
-            NavigationService.Navigate(new MostrarCancionesPlaylist(playlistSeleccionda,playlistSeleccionda.idTipoPlaylist));
+            if (playlistSeleccionda != null)
+            {
+                NavigationService.Navigate(new MostrarCancionesPlaylist(playlistSeleccionda, playlistSeleccionda.idTipoPlaylist));
+            }
+        }
+
+        private void listViewArtistas_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            Artista artistaSeleccionado = (Artista)listViewArtistas.SelectedItem;
+            if (listViewArtistas.SelectedItems.Count>0)
+            {
+                NavigationService.Navigate(new MostrarArtista(artistaSeleccionado));
+            }
         }
     }
 }

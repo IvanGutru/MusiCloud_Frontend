@@ -84,11 +84,11 @@ namespace Cliente_MusiCloud.pages
 
         private async Task<BibliotecaPropia> GuardarBibliotecaPropia()
         {
-            BibliotecaPropia bibliotecaPropia = ObtenerBibliotecaFormulario();
+            BibliotecaPropia nuevaBibliotecaPropia = ObtenerBibliotecaFormulario();
             BibliotecaPropia bibliotecaPropiaGuardada = null;
             try
             {
-                bibliotecaPropiaGuardada = await AplicacionBibliotecaPropia.GuardarBibliotecaPropia(bibliotecaPropia);
+                bibliotecaPropiaGuardada = await AplicacionBibliotecaPropia.GuardarBibliotecaPropia(nuevaBibliotecaPropia);
                 return bibliotecaPropiaGuardada;
             }
             catch (Exception ex)

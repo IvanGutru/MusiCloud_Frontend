@@ -1,5 +1,6 @@
 ﻿using Cliente_MusiCloud.album.aplicacion;
 using Cliente_MusiCloud.album.dominio;
+using Cliente_MusiCloud.artista.Dominio;
 using Cliente_MusiCloud.cancion.aplicacion;
 using Cliente_MusiCloud.cancion.dominio;
 using Cliente_MusiCloud.cancionDescarga;
@@ -24,6 +25,7 @@ namespace Cliente_MusiCloud.pages
     public partial class MostrarCancionesDesdeArtista : Page
     {
         Album album;
+        Artista artista;
         List<Cancion> listaCanciones;
         Cuentas cuenta = SingletonCuenta.GetSingletonCuenta();
         public MostrarCancionesDesdeArtista(Album album)
@@ -32,7 +34,17 @@ namespace Cliente_MusiCloud.pages
             this.album = album;
             CargarInformacionAlbum();
             CargarCanciones();
+            Btn_RegresarArtista.Visibility = Visibility.Hidden;
 
+        }
+        public MostrarCancionesDesdeArtista(Artista artista, Album album)
+        {
+            InitializeComponent();
+            this.album = album;
+            this.artista = artista;
+            CargarCanciones();
+            CargarInformacionAlbumArtista();
+            Btn_Regresar.Visibility = Visibility.Hidden;
         }
 
         private void CargarInformacionAlbum()
@@ -42,6 +54,15 @@ namespace Cliente_MusiCloud.pages
             txt_NombreArtista.Text = SingletonArtista.GetArtista().nombre;
             portadaAlbum.Source = album.imagenPortadaAlbum;
         }
+
+        private void CargarInformacionAlbumArtista()
+        {
+            txt_NombreAlbum.Text = album.nombre;
+            txt_NombreCompania.Text = album.compania;
+            txt_NombreArtista.Text = artista.nombre;
+            portadaAlbum.Source = album.imagenPortadaAlbum;
+        }
+
 
 
         private async void CargarCanciones()
@@ -74,8 +95,17 @@ namespace Cliente_MusiCloud.pages
         {
             Button button = sender as Button;
             Cancion cancion = button.DataContext as Cancion;
-            await Reproductor.Reproducir(cancion);
-            SingletonReproductor.GetPaginaPrincipal().CargarInformacionAsync(cancion);
+            if (Reproductor.ValidarConexionCliente())
+            {
+                if(await Reproductor.Reproducir(cancion))
+                {
+                    SingletonReproductor.GetPaginaPrincipal().CargarInformacionAsync(cancion);
+                }               
+            }
+            else
+            {
+                MessageBox.Show("No ha conexión con el cliente de Reproducción", "Advertencia", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
         }
 
 
@@ -140,8 +170,15 @@ namespace Cliente_MusiCloud.pages
         private void Btn_AgregarTodasLasCanciones_Click(object sender, RoutedEventArgs e)
         {
             Reproductor.ColaCanciones.Clear();
-            Reproductor.AgregarListaCancionesACola(listaCanciones);
-            SingletonReproductor.GetPaginaPrincipal().SiguienteCancion();
+            if (Reproductor.ValidarConexionCliente())
+            {
+                Reproductor.AgregarListaCancionesACola(listaCanciones);
+                SingletonReproductor.GetPaginaPrincipal().SiguienteCancion();
+            }
+            else
+            {
+                MessageBox.Show("No ha conexión con el cliente de Reproducción", "Advertencia", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
         }
         private async void btn_AñadirMegusta_Click(object sender, RoutedEventArgs e)
         {
@@ -189,5 +226,9 @@ namespace Cliente_MusiCloud.pages
             }
         }
 
+        private void Btn_RegresarArtista_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new MostrarArtista(artista));
+        }
     }
 }
