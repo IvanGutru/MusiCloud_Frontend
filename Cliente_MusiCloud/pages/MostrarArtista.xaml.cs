@@ -61,6 +61,7 @@ namespace Cliente_MusiCloud.pages
             }
         }
 
+
         private void Btn_Regresar_Click(object sender, RoutedEventArgs e)
         {
             NavigationService.Navigate(new Home());

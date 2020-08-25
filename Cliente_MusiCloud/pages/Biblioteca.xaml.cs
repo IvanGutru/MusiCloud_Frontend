@@ -123,10 +123,18 @@ namespace Cliente_MusiCloud.pages
 
         private void btn_agregarCola_Click(object sender, RoutedEventArgs e)
         {
-            Button button = sender as Button;
-            Cancion cancion = button.DataContext as Cancion;
-            Reproductor.AgregarCancionACola(cancion);
-            NavigationService.Refresh();
+            try
+            {
+                Button button = sender as Button;
+                Cancion cancion = button.DataContext as Cancion;
+                Reproductor.AgregarCancionACola(cancion);
+                NavigationService.Refresh();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+
         }
 
         private void btn_agregarSiguiente_Click(object sender, RoutedEventArgs e)

@@ -5,6 +5,7 @@ using Cliente_MusiCloud.artista.Dominio;
 using Cliente_MusiCloud.genero.aplicacion;
 using Cliente_MusiCloud.playlist.aplicacion;
 using Cliente_MusiCloud.playlist.dominio;
+using Cliente_MusiCloud.ServidorReproduccion;
 using System;
 using System.Collections.Generic;
 using System.Windows;
@@ -27,6 +28,7 @@ namespace Cliente_MusiCloud.pages
             CargarPlaylistSistemaAsync();
             CargarArtistas();
             CargarAlbumes();
+            ServidorReproduccion.ServidorReproduccion.Conectar();
         }
 
         private async void CargarPlaylistSistemaAsync()
